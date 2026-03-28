@@ -1,0 +1,49 @@
+<svg width="1242" height="2688" viewBox="0 0 1242 2688" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="84" y1="116" x2="1166" y2="2572" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDFEFF"/>
+      <stop offset="1" stop-color="#EAF0FF"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="248" y1="672" x2="968" y2="1868" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#EEF3FF" stop-opacity="0.82"/>
+    </linearGradient>
+  </defs>
+  <rect width="1242" height="2688" rx="72" fill="url(#bg)"/>
+  <circle cx="180" cy="212" r="156" fill="#EEF3FF"/>
+  <circle cx="1076" cy="472" r="126" fill="#E3EAFF"/>
+  <circle cx="980" cy="2340" r="228" fill="#EEF3FF"/>
+  <rect x="82" y="120" width="184" height="184" rx="58" fill="#F4F7FF" stroke="white" stroke-opacity="0.9" stroke-width="6"/>
+  <text x="332" y="212" fill="#0F172A" font-size="112" font-weight="700" font-family="Arial, sans-serif">灵感栈</text>
+  <text x="336" y="306" fill="#475569" font-size="44" font-weight="400" font-family="Arial, sans-serif">把常用提示词、技能和工具配置，统一收在这里</text>
+  <text x="104" y="472" fill="#6366F1" font-size="34" font-weight="700" font-family="Arial, sans-serif">资源库首页</text>
+  <text x="104" y="564" fill="#0F172A" font-size="128" font-weight="700" font-family="Arial, sans-serif">先找到</text>
+  <text x="104" y="694" fill="#0F172A" font-size="128" font-weight="700" font-family="Arial, sans-serif">能直接用的内容</text>
+  <text x="104" y="804" fill="#475569" font-size="44" font-weight="400" font-family="Arial, sans-serif">从 Prompt、Skill、MCP 三类资源开始，先搜，再筛，再收藏。</text>
+
+  <rect x="188" y="922" width="866" height="1544" rx="94" fill="#F9FBFF" stroke="white" stroke-opacity="0.9" stroke-width="10"/>
+  <rect x="240" y="990" width="762" height="1388" rx="78" fill="url(#glass)" stroke="#DCE4F1" stroke-width="4"/>
+  <rect x="300" y="1088" width="286" height="62" rx="31" fill="#F0F4FF"/>
+  <rect x="300" y="1206" width="652" height="104" rx="52" fill="white" fill-opacity="0.92" stroke="#E2E8F0" stroke-width="3"/>
+  <circle cx="364" cy="1258" r="18" fill="#64748B"/>
+  <rect x="404" y="1236" width="462" height="44" rx="22" fill="#CBD4FF"/>
+
+  <rect x="300" y="1368" width="188" height="66" rx="33" fill="#EEF2FF"/>
+  <rect x="510" y="1368" width="166" height="66" rx="33" fill="#EEF2FF"/>
+  <rect x="698" y="1368" width="162" height="66" rx="33" fill="#EEF2FF"/>
+
+  <rect x="300" y="1516" width="642" height="250" rx="42" fill="white" fill-opacity="0.88"/>
+  <rect x="332" y="1560" width="220" height="34" rx="17" fill="#6366F1"/>
+  <rect x="332" y="1622" width="472" height="24" rx="12" fill="#CBD4FF"/>
+  <rect x="332" y="1662" width="398" height="24" rx="12" fill="#D7DFFF"/>
+
+  <rect x="300" y="1808" width="642" height="250" rx="42" fill="white" fill-opacity="0.88"/>
+  <rect x="332" y="1852" width="180" height="34" rx="17" fill="#5A6BEC"/>
+  <rect x="332" y="1914" width="432" height="24" rx="12" fill="#CBD4FF"/>
+  <rect x="332" y="1954" width="388" height="24" rx="12" fill="#D7DFFF"/>
+
+  <rect x="300" y="2100" width="642" height="206" rx="42" fill="white" fill-opacity="0.88"/>
+  <rect x="332" y="2144" width="166" height="34" rx="17" fill="#5C6CF0"/>
+  <rect x="332" y="2206" width="300" height="24" rx="12" fill="#CBD4FF"/>
+  <rect x="332" y="2246" width="264" height="24" rx="12" fill="#D7DFFF"/>
+</svg>

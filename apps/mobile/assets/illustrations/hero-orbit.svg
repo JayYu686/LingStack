@@ -1,0 +1,36 @@
+<svg width="960" height="640" viewBox="0 0 960 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="panel" x1="214" y1="94" x2="714" y2="536" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity="0.98"/>
+      <stop offset="1" stop-color="#EDF2FF" stop-opacity="0.76"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="298" y1="164" x2="662" y2="474" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#90A0FF"/>
+      <stop offset="1" stop-color="#5C6CF0"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" rx="40" fill="#F6F8FB"/>
+  <circle cx="170" cy="172" r="84" fill="#EEF3FF"/>
+  <circle cx="824" cy="112" r="52" fill="#E4ECFF"/>
+  <circle cx="802" cy="530" r="110" fill="#EDF3FF"/>
+  <g>
+    <rect x="222" y="90" width="514" height="444" rx="44" fill="url(#panel)" fill-opacity="0.96"/>
+    <rect x="222.75" y="90.75" width="512.5" height="442.5" rx="43.25" stroke="white" stroke-opacity="0.88" stroke-width="1.5"/>
+    <rect x="280" y="146" width="246" height="256" rx="34" fill="url(#accent)"/>
+    <path d="M410 146L526 262H452C429.909 262 412 244.091 412 222V146H410Z" fill="#BCC8FF"/>
+    <rect x="336" y="298" width="130" height="16" rx="8" fill="white" fill-opacity="0.94"/>
+    <rect x="336" y="342" width="154" height="16" rx="8" fill="white" fill-opacity="0.8"/>
+    <rect x="558" y="152" width="112" height="104" rx="26" fill="#F7F9FF"/>
+    <path d="M594 206L612 174L625 192L641 180L626 232H610L617 210L605 217L594 206Z" fill="#5769EB"/>
+    <rect x="558" y="284" width="112" height="104" rx="26" fill="#F7F9FF"/>
+    <circle cx="612" cy="336" r="17" fill="#5A6BEC"/>
+    <circle cx="650" cy="318" r="11" fill="#93A4FF"/>
+    <circle cx="652" cy="356" r="11" fill="#93A4FF"/>
+    <circle cx="577" cy="360" r="11" fill="#93A4FF"/>
+    <path d="M624 329L643 320" stroke="#5A6BEC" stroke-width="7" stroke-linecap="round"/>
+    <path d="M623 345L642 354" stroke="#5A6BEC" stroke-width="7" stroke-linecap="round"/>
+    <path d="M599 347L585 356" stroke="#5A6BEC" stroke-width="7" stroke-linecap="round"/>
+    <path d="M176 428C254 362 340 334 434 344C526 354 610 322 686 248" stroke="#C4D0FF" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 22"/>
+    <path d="M746 146L757 174L786 185L757 196L746 224L735 196L706 185L735 174L746 146Z" fill="#6171F1"/>
+  </g>
+</svg>

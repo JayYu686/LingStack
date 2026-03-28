@@ -1,0 +1,710 @@
+openapi: 3.1.0
+info:
+  title: AI Developer Sync API
+  version: 0.1.0
+  description: >
+    Local-first sync and remote MCP helper API for the AI Developer mobile app.
+servers:
+  - url: http://localhost:8080
+paths:
+  /healthz:
+    get:
+      summary: Health check
+      operationId: healthz
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /v1/catalog/bootstrap:
+    get:
+      summary: Fetch the current official catalog bootstrap payload.
+      operationId: getCatalogBootstrap
+      responses:
+        '200':
+          description: Full official catalog payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogBootstrap'
+  /v1/catalog/resources:
+    get:
+      summary: List official catalog resources.
+      operationId: listCatalogResources
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum: [prompt, skill, mcp]
+        - in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Filtered resource list.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [resources]
+                properties:
+                  resources:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CatalogResource'
+  /v1/catalog/resources/{id}:
+    get:
+      summary: Get an official catalog resource with typed detail payload.
+      operationId: getCatalogResource
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resource detail envelope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResourceEnvelope'
+        '404':
+          description: Resource not found.
+  /v1/catalog/collections:
+    get:
+      summary: List official catalog collections.
+      operationId: listCatalogCollections
+      responses:
+        '200':
+          description: Collection list.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [collections]
+                properties:
+                  collections:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CatalogCollection'
+  /v1/sync/push:
+    post:
+      summary: Push local changes to the sync service.
+      operationId: pushChanges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushRequest'
+      responses:
+        '200':
+          description: Push result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PushResponse'
+  /v1/sync/pull:
+    post:
+      summary: Pull remote changes from the sync service.
+      operationId: pullChanges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PullRequest'
+      responses:
+        '200':
+          description: Pull result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullResponse'
+  /v1/mcp/probe:
+    post:
+      summary: Probe a remote Streamable HTTP MCP server.
+      operationId: probeMcpServer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpProbeRequest'
+      responses:
+        '200':
+          description: Probe result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/McpProbeResponse'
+  /v1/mcp/invoke-test:
+    post:
+      summary: Send a JSON-RPC test call to a remote MCP server.
+      operationId: invokeMcpTest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpInvokeTestRequest'
+      responses:
+        '200':
+          description: Invocation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/McpInvokeTestResponse'
+  /v1/ai/summarize-snippet:
+    post:
+      summary: Create an AI-style summary suggestion for a code snippet.
+      operationId: summarizeSnippet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AISummarizeSnippetRequest'
+      responses:
+        '200':
+          description: AI task with generated suggestion.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AITaskResponse'
+  /v1/ai/classify-asset:
+    post:
+      summary: Create AI-style tags and summary for an asset.
+      operationId: classifyAsset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIClassifyAssetRequest'
+      responses:
+        '200':
+          description: AI task with generated suggestion.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AITaskResponse'
+components:
+  schemas:
+    SyncChange:
+      type: object
+      required:
+        - entityType
+        - entityId
+        - revisionId
+        - baseRevisionId
+        - operation
+        - updatedAt
+        - deviceId
+        - payload
+      properties:
+        entityType:
+          type: string
+        entityId:
+          type: string
+        revisionId:
+          type: string
+        baseRevisionId:
+          type: string
+        operation:
+          type: string
+          enum: [upsert, delete]
+        updatedAt:
+          type: string
+          format: date-time
+        deviceId:
+          type: string
+        payload:
+          type: object
+          additionalProperties: true
+    SyncConflict:
+      type: object
+      required:
+        - entityType
+        - entityId
+        - revisionId
+        - expectedBaseRevisionId
+        - actualBaseRevisionId
+      properties:
+        entityType:
+          type: string
+        entityId:
+          type: string
+        revisionId:
+          type: string
+        expectedBaseRevisionId:
+          type: string
+        actualBaseRevisionId:
+          type: string
+    PushRequest:
+      type: object
+      required:
+        - deviceId
+        - changes
+      properties:
+        deviceId:
+          type: string
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyncChange'
+    PushResponse:
+      type: object
+      required:
+        - accepted
+        - conflicts
+        - latestCursor
+      properties:
+        accepted:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyncChange'
+        conflicts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyncConflict'
+        latestCursor:
+          type: integer
+    PullRequest:
+      type: object
+      required:
+        - deviceId
+      properties:
+        deviceId:
+          type: string
+        cursor:
+          type: integer
+          default: 0
+        limit:
+          type: integer
+          default: 50
+    PullResponse:
+      type: object
+      required:
+        - changes
+        - nextCursor
+        - hasMore
+      properties:
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyncChange'
+        nextCursor:
+          type: integer
+        hasMore:
+          type: boolean
+    McpProbeRequest:
+      type: object
+      required:
+        - baseUrl
+      properties:
+        baseUrl:
+          type: string
+          format: uri
+        transport:
+          type: string
+          default: streamable_http
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+        bearerToken:
+          type: string
+    McpProbeResponse:
+      type: object
+      required:
+        - healthy
+        - statusCode
+      properties:
+        healthy:
+          type: boolean
+        statusCode:
+          type: integer
+        bodyPreview:
+          type: string
+        capabilities:
+          type: object
+          additionalProperties: true
+        error:
+          type: string
+    McpInvokeTestRequest:
+      type: object
+      required:
+        - baseUrl
+        - method
+      properties:
+        baseUrl:
+          type: string
+          format: uri
+        transport:
+          type: string
+          default: streamable_http
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+        bearerToken:
+          type: string
+        method:
+          type: string
+        params:
+          type: object
+          additionalProperties: true
+    McpInvokeTestResponse:
+      type: object
+      required:
+        - statusCode
+      properties:
+        statusCode:
+          type: integer
+        body:
+          type: object
+          additionalProperties: true
+        error:
+          type: string
+    AISummarizeSnippetRequest:
+      type: object
+      required:
+        - deviceId
+        - language
+        - content
+      properties:
+        deviceId:
+          type: string
+        language:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        existingTags:
+          type: array
+          items:
+            type: string
+    AIClassifyAssetRequest:
+      type: object
+      required:
+        - deviceId
+        - assetType
+        - content
+      properties:
+        deviceId:
+          type: string
+        assetType:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+    AISuggestion:
+      type: object
+      required:
+        - summary
+        - tags
+        - confidence
+      properties:
+        summary:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        confidence:
+          type: number
+          format: float
+    AITaskResponse:
+      type: object
+      required:
+        - id
+        - kind
+        - status
+        - createdAt
+        - inputPayload
+        - outputPayload
+      properties:
+        id:
+          type: string
+        kind:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        inputPayload:
+          type: object
+          additionalProperties: true
+        outputPayload:
+          type: object
+          additionalProperties: true
+    CatalogBootstrap:
+      type: object
+      required:
+        - version
+        - generatedAt
+        - resources
+        - promptDetails
+        - skillDetails
+        - mcpDetails
+        - collections
+        - collectionItems
+      properties:
+        version:
+          type: string
+        generatedAt:
+          type: string
+          format: date-time
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogResource'
+        promptDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptResourceDetail'
+        skillDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkillResourceDetail'
+        mcpDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/MCPResourceDetail'
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogCollection'
+        collectionItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionItem'
+    CatalogResource:
+      type: object
+      required:
+        - id
+        - type
+        - title
+        - summary
+        - scenario
+        - primaryCategory
+        - difficulty
+        - tags
+        - primaryActionLabel
+        - isFeatured
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [prompt, skill, mcp]
+        title:
+          type: string
+        summary:
+          type: string
+        scenario:
+          type: string
+        primaryCategory:
+          type: string
+          enum: [development, office, writing, content, learning, career, growth, life, other]
+        difficulty:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        tags:
+          type: array
+          items:
+            type: string
+        primaryActionLabel:
+          type: string
+        isFeatured:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    PromptVariable:
+      type: object
+      required: [name, type, description, defaultValue, options]
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        defaultValue:
+          type: string
+        options:
+          type: array
+          items:
+            type: string
+    PromptResourceDetail:
+      type: object
+      required:
+        - resourceId
+        - templateBody
+        - variables
+        - whenToUse
+        - avoidWhen
+        - exampleInput
+        - exampleOutput
+        - supportedModels
+      properties:
+        resourceId:
+          type: string
+        templateBody:
+          type: string
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptVariable'
+        whenToUse:
+          type: string
+        avoidWhen:
+          type: string
+        exampleInput:
+          type: string
+        exampleOutput:
+          type: string
+        supportedModels:
+          type: array
+          items:
+            type: string
+    SkillResourceDetail:
+      type: object
+      required:
+        - resourceId
+        - capabilitySummary
+        - inputRequirements
+        - usageSteps
+        - supportedModels
+        - copyPayload
+        - rawSchema
+        - providerAdapters
+        - exampleCode
+        - exampleLanguage
+      properties:
+        resourceId:
+          type: string
+        capabilitySummary:
+          type: string
+        inputRequirements:
+          type: array
+          items:
+            type: string
+        usageSteps:
+          type: array
+          items:
+            type: string
+        supportedModels:
+          type: array
+          items:
+            type: string
+        copyPayload:
+          type: string
+        rawSchema:
+          type: object
+          additionalProperties: true
+        providerAdapters:
+          type: object
+          additionalProperties: true
+        exampleCode:
+          type: string
+        exampleLanguage:
+          type: string
+    MCPResourceDetail:
+      type: object
+      required:
+        - resourceId
+        - capabilitiesSummary
+        - supportedClients
+        - requiredEnvVars
+        - setupSteps
+        - configTemplate
+        - safetyNotes
+        - transport
+        - baseUrl
+      properties:
+        resourceId:
+          type: string
+        capabilitiesSummary:
+          type: string
+        supportedClients:
+          type: array
+          items:
+            type: string
+        requiredEnvVars:
+          type: array
+          items:
+            type: string
+        setupSteps:
+          type: array
+          items:
+            type: string
+        configTemplate:
+          type: string
+        safetyNotes:
+          type: string
+        transport:
+          type: string
+        baseUrl:
+          type: string
+          format: uri
+    CatalogCollection:
+      type: object
+      required: [id, title, subtitle, description, iconKey, sortOrder]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+        description:
+          type: string
+        iconKey:
+          type: string
+        sortOrder:
+          type: integer
+    CollectionItem:
+      type: object
+      required: [collectionId, resourceId, sortOrder]
+      properties:
+        collectionId:
+          type: string
+        resourceId:
+          type: string
+        sortOrder:
+          type: integer
+    CatalogResourceEnvelope:
+      type: object
+      required: [resource]
+      properties:
+        resource:
+          $ref: '#/components/schemas/CatalogResource'
+        promptDetail:
+          $ref: '#/components/schemas/PromptResourceDetail'
+        skillDetail:
+          $ref: '#/components/schemas/SkillResourceDetail'
+        mcpDetail:
+          $ref: '#/components/schemas/MCPResourceDetail'

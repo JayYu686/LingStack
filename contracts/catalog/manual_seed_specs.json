@@ -1,0 +1,1606 @@
+{
+  "prompts": [
+    {
+      "id": "prompt-adr-draft",
+      "title": "ADR 初稿生成",
+      "category": "development",
+      "tags": [
+        "架构",
+        "ADR",
+        "技术方案"
+      ]
+    },
+    {
+      "id": "prompt-tech-solution-review",
+      "title": "技术方案评审意见",
+      "category": "development",
+      "tags": [
+        "方案评审",
+        "风险",
+        "架构"
+      ]
+    },
+    {
+      "id": "prompt-tech-debt-backlog",
+      "title": "技术债清单梳理",
+      "category": "development",
+      "tags": [
+        "技术债",
+        "排期",
+        "维护"
+      ]
+    },
+    {
+      "id": "prompt-dependency-upgrade-review",
+      "title": "依赖升级影响评估",
+      "category": "development",
+      "tags": [
+        "依赖升级",
+        "兼容性",
+        "迁移"
+      ]
+    },
+    {
+      "id": "prompt-config-risk-check",
+      "title": "配置变更风险检查",
+      "category": "development",
+      "tags": [
+        "配置",
+        "上线",
+        "风险"
+      ]
+    },
+    {
+      "id": "prompt-data-migration-checklist",
+      "title": "数据迁移检查清单",
+      "category": "development",
+      "tags": [
+        "数据库",
+        "迁移",
+        "上线"
+      ]
+    },
+    {
+      "id": "prompt-release-notes",
+      "title": "发布说明生成",
+      "category": "development",
+      "tags": [
+        "发布",
+        "变更说明",
+        "版本"
+      ]
+    },
+    {
+      "id": "prompt-rollback-plan",
+      "title": "回滚预案草稿",
+      "category": "development",
+      "tags": [
+        "回滚",
+        "应急",
+        "上线"
+      ]
+    },
+    {
+      "id": "prompt-api-compatibility",
+      "title": "接口兼容性检查",
+      "category": "development",
+      "tags": [
+        "API",
+        "兼容性",
+        "接口"
+      ]
+    },
+    {
+      "id": "prompt-error-code-guide",
+      "title": "错误码规范整理",
+      "category": "development",
+      "tags": [
+        "错误码",
+        "规范",
+        "后端"
+      ]
+    },
+    {
+      "id": "prompt-log-sampling-plan",
+      "title": "日志采样策略设计",
+      "category": "development",
+      "tags": [
+        "日志",
+        "可观测性",
+        "成本"
+      ]
+    },
+    {
+      "id": "prompt-cache-strategy",
+      "title": "Redis 缓存策略建议",
+      "category": "development",
+      "tags": [
+        "Redis",
+        "缓存",
+        "性能"
+      ]
+    },
+    {
+      "id": "prompt-dockerfile-audit",
+      "title": "Dockerfile 审核",
+      "category": "development",
+      "tags": [
+        "Docker",
+        "安全",
+        "构建"
+      ]
+    },
+    {
+      "id": "prompt-ci-failure-diagnosis",
+      "title": "CI 失败定位",
+      "category": "development",
+      "tags": [
+        "CI",
+        "构建",
+        "排障"
+      ]
+    },
+    {
+      "id": "prompt-canary-plan",
+      "title": "灰度发布方案",
+      "category": "development",
+      "tags": [
+        "灰度",
+        "发布",
+        "监控"
+      ]
+    },
+    {
+      "id": "prompt-tracking-review",
+      "title": "埋点方案审查",
+      "category": "development",
+      "tags": [
+        "埋点",
+        "分析",
+        "数据"
+      ]
+    },
+    {
+      "id": "prompt-permission-model",
+      "title": "权限模型梳理",
+      "category": "development",
+      "tags": [
+        "权限",
+        "角色",
+        "安全"
+      ]
+    },
+    {
+      "id": "prompt-alert-thresholds",
+      "title": "监控告警阈值建议",
+      "category": "development",
+      "tags": [
+        "监控",
+        "告警",
+        "可观测性"
+      ]
+    },
+    {
+      "id": "prompt-compensation-plan",
+      "title": "异步任务补偿方案",
+      "category": "development",
+      "tags": [
+        "异步任务",
+        "重试",
+        "补偿"
+      ]
+    },
+    {
+      "id": "prompt-load-test-plan",
+      "title": "性能压测计划",
+      "category": "development",
+      "tags": [
+        "压测",
+        "性能",
+        "容量"
+      ]
+    },
+    {
+      "id": "prompt-weekly-host-script",
+      "title": "周会主持稿",
+      "category": "office",
+      "tags": [
+        "周会",
+        "主持",
+        "会议"
+      ]
+    },
+    {
+      "id": "prompt-retrospective-summary",
+      "title": "项目复盘总结",
+      "category": "office",
+      "tags": [
+        "复盘",
+        "总结",
+        "项目管理"
+      ]
+    },
+    {
+      "id": "prompt-email-tone-polish",
+      "title": "邮件礼貌改写",
+      "category": "writing",
+      "tags": [
+        "邮件",
+        "改写",
+        "沟通"
+      ]
+    },
+    {
+      "id": "prompt-agenda-builder",
+      "title": "会议议程整理",
+      "category": "office",
+      "tags": [
+        "会议",
+        "议程",
+        "协作"
+      ]
+    },
+    {
+      "id": "prompt-option-comparison",
+      "title": "方案比选说明",
+      "category": "office",
+      "tags": [
+        "方案对比",
+        "决策",
+        "汇报"
+      ]
+    },
+    {
+      "id": "prompt-presentation-opening",
+      "title": "汇报开场白",
+      "category": "writing",
+      "tags": [
+        "汇报",
+        "表达",
+        "演讲"
+      ]
+    },
+    {
+      "id": "prompt-decision-summary",
+      "title": "决策结论整理",
+      "category": "office",
+      "tags": [
+        "决策",
+        "整理",
+        "会议"
+      ]
+    },
+    {
+      "id": "prompt-priority-sorter",
+      "title": "待办优先级排序",
+      "category": "office",
+      "tags": [
+        "待办",
+        "优先级",
+        "排期"
+      ]
+    },
+    {
+      "id": "prompt-clarifying-questions",
+      "title": "需求澄清问题清单",
+      "category": "office",
+      "tags": [
+        "需求",
+        "澄清",
+        "沟通"
+      ]
+    },
+    {
+      "id": "prompt-sop-optimization",
+      "title": "SOP 优化建议",
+      "category": "office",
+      "tags": [
+        "SOP",
+        "流程",
+        "优化"
+      ]
+    },
+    {
+      "id": "prompt-interview-outline",
+      "title": "访谈提纲生成",
+      "category": "learning",
+      "tags": [
+        "访谈",
+        "研究",
+        "提纲"
+      ]
+    },
+    {
+      "id": "prompt-training-script",
+      "title": "培训讲稿提纲",
+      "category": "office",
+      "tags": [
+        "培训",
+        "提纲",
+        "讲稿"
+      ]
+    },
+    {
+      "id": "prompt-public-title-ideas",
+      "title": "公众号标题备选",
+      "category": "content",
+      "tags": [
+        "标题",
+        "公众号",
+        "内容"
+      ]
+    },
+    {
+      "id": "prompt-opening-rewrite",
+      "title": "文章开头重写",
+      "category": "writing",
+      "tags": [
+        "文章",
+        "开头",
+        "改写"
+      ]
+    },
+    {
+      "id": "prompt-longform-restructure",
+      "title": "长文结构重组",
+      "category": "writing",
+      "tags": [
+        "长文",
+        "结构",
+        "编辑"
+      ]
+    },
+    {
+      "id": "prompt-knowledge-cards",
+      "title": "知识卡片生成",
+      "category": "learning",
+      "tags": [
+        "知识卡片",
+        "整理",
+        "学习"
+      ]
+    },
+    {
+      "id": "prompt-faq-builder",
+      "title": "FAQ 整理",
+      "category": "office",
+      "tags": [
+        "FAQ",
+        "整理",
+        "客服"
+      ]
+    },
+    {
+      "id": "prompt-case-study-draft",
+      "title": "案例拆解文章",
+      "category": "content",
+      "tags": [
+        "案例",
+        "文章",
+        "复盘"
+      ]
+    },
+    {
+      "id": "prompt-brand-voice",
+      "title": "品牌语气统一",
+      "category": "content",
+      "tags": [
+        "品牌",
+        "语气",
+        "文案"
+      ]
+    },
+    {
+      "id": "prompt-value-to-user-language",
+      "title": "产品卖点转用户语言",
+      "category": "content",
+      "tags": [
+        "卖点",
+        "转化",
+        "表达"
+      ]
+    },
+    {
+      "id": "prompt-cover-copy",
+      "title": "短视频封面文案",
+      "category": "content",
+      "tags": [
+        "短视频",
+        "封面",
+        "文案"
+      ]
+    },
+    {
+      "id": "prompt-storyboard-draft",
+      "title": "视频分镜草稿",
+      "category": "content",
+      "tags": [
+        "视频",
+        "分镜",
+        "脚本"
+      ]
+    },
+    {
+      "id": "prompt-event-promo-copy",
+      "title": "社群活动宣传文案",
+      "category": "growth",
+      "tags": [
+        "活动",
+        "宣传",
+        "社群"
+      ]
+    },
+    {
+      "id": "prompt-ab-title-test",
+      "title": "A/B 标题对比",
+      "category": "growth",
+      "tags": [
+        "A/B 测试",
+        "标题",
+        "转化"
+      ]
+    },
+    {
+      "id": "prompt-topic-expansion",
+      "title": "内容选题池扩展",
+      "category": "content",
+      "tags": [
+        "选题",
+        "内容规划",
+        "创作"
+      ]
+    },
+    {
+      "id": "prompt-live-cue-cards",
+      "title": "直播提词卡",
+      "category": "content",
+      "tags": [
+        "直播",
+        "提词",
+        "口播"
+      ]
+    },
+    {
+      "id": "prompt-comment-reply",
+      "title": "评论区高情商回复",
+      "category": "content",
+      "tags": [
+        "评论回复",
+        "社媒",
+        "互动"
+      ]
+    },
+    {
+      "id": "prompt-customer-care",
+      "title": "客诉安抚回复",
+      "category": "growth",
+      "tags": [
+        "客服",
+        "安抚",
+        "回复"
+      ]
+    },
+    {
+      "id": "prompt-jd-polish",
+      "title": "招聘 JD 优化",
+      "category": "career",
+      "tags": [
+        "招聘",
+        "JD",
+        "岗位"
+      ]
+    },
+    {
+      "id": "prompt-cover-letter-optimize",
+      "title": "自荐信优化",
+      "category": "career",
+      "tags": [
+        "自荐信",
+        "求职",
+        "改写"
+      ]
+    },
+    {
+      "id": "prompt-research-question",
+      "title": "论文研究问题提炼",
+      "category": "learning",
+      "tags": [
+        "论文",
+        "研究",
+        "提炼"
+      ]
+    },
+    {
+      "id": "prompt-book-chapter-summary",
+      "title": "书籍章节速读",
+      "category": "learning",
+      "tags": [
+        "读书",
+        "摘要",
+        "学习"
+      ]
+    },
+    {
+      "id": "prompt-course-notes",
+      "title": "课程笔记结构化",
+      "category": "learning",
+      "tags": [
+        "课程",
+        "笔记",
+        "整理"
+      ]
+    },
+    {
+      "id": "prompt-quiz-generator",
+      "title": "知识点测验题生成",
+      "category": "learning",
+      "tags": [
+        "测验",
+        "题目",
+        "学习"
+      ]
+    },
+    {
+      "id": "prompt-explain-to-beginner",
+      "title": "概念讲给小白",
+      "category": "learning",
+      "tags": [
+        "解释",
+        "入门",
+        "科普"
+      ]
+    },
+    {
+      "id": "prompt-jargon-guide",
+      "title": "行业术语解释",
+      "category": "learning",
+      "tags": [
+        "术语",
+        "解释",
+        "行业"
+      ]
+    },
+    {
+      "id": "prompt-interview-simulation",
+      "title": "面试问题模拟",
+      "category": "career",
+      "tags": [
+        "面试",
+        "模拟",
+        "求职"
+      ]
+    },
+    {
+      "id": "prompt-star-case",
+      "title": "STAR 案例补强",
+      "category": "career",
+      "tags": [
+        "STAR",
+        "面试",
+        "案例"
+      ]
+    },
+    {
+      "id": "prompt-resume-quantify",
+      "title": "简历项目量化",
+      "category": "career",
+      "tags": [
+        "简历",
+        "量化",
+        "项目经历"
+      ]
+    },
+    {
+      "id": "prompt-career-roadmap",
+      "title": "职业发展路线图",
+      "category": "career",
+      "tags": [
+        "职业规划",
+        "成长",
+        "路线图"
+      ]
+    },
+    {
+      "id": "prompt-persona-sketch",
+      "title": "用户画像速写",
+      "category": "growth",
+      "tags": [
+        "用户画像",
+        "增长",
+        "产品"
+      ]
+    },
+    {
+      "id": "prompt-competitor-diff",
+      "title": "竞品差异总结",
+      "category": "growth",
+      "tags": [
+        "竞品",
+        "差异",
+        "定位"
+      ]
+    },
+    {
+      "id": "prompt-user-insight",
+      "title": "用户访谈洞察",
+      "category": "growth",
+      "tags": [
+        "访谈",
+        "洞察",
+        "研究"
+      ]
+    },
+    {
+      "id": "prompt-sales-objection",
+      "title": "销售异议应对",
+      "category": "growth",
+      "tags": [
+        "销售",
+        "异议",
+        "转化"
+      ]
+    },
+    {
+      "id": "prompt-pricing-discussion",
+      "title": "价格策略讨论",
+      "category": "growth",
+      "tags": [
+        "定价",
+        "商业化",
+        "策略"
+      ]
+    },
+    {
+      "id": "prompt-campaign-retro",
+      "title": "活动复盘",
+      "category": "growth",
+      "tags": [
+        "活动",
+        "复盘",
+        "运营"
+      ]
+    },
+    {
+      "id": "prompt-travel-plan",
+      "title": "出行计划整理",
+      "category": "life",
+      "tags": [
+        "出行",
+        "计划",
+        "生活"
+      ]
+    },
+    {
+      "id": "prompt-fitness-plan",
+      "title": "健身计划提醒",
+      "category": "life",
+      "tags": [
+        "健身",
+        "计划",
+        "生活"
+      ]
+    },
+    {
+      "id": "prompt-budget-draft",
+      "title": "家庭预算草案",
+      "category": "life",
+      "tags": [
+        "预算",
+        "家庭",
+        "生活"
+      ]
+    },
+    {
+      "id": "prompt-daily-priority",
+      "title": "每日优先事项清单",
+      "category": "life",
+      "tags": [
+        "效率",
+        "计划",
+        "清单"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "find-skills",
+      "title": "技能搜索与匹配",
+      "category": "development",
+      "tags": [
+        "目录",
+        "技能",
+        "检索"
+      ]
+    },
+    {
+      "id": "vercel-react-best-practices",
+      "title": "Vercel React 最佳实践",
+      "category": "development",
+      "tags": [
+        "React",
+        "Vercel",
+        "前端"
+      ]
+    },
+    {
+      "id": "frontend-design",
+      "title": "前端设计审校",
+      "category": "content",
+      "tags": [
+        "设计",
+        "前端",
+        "界面"
+      ]
+    },
+    {
+      "id": "web-design-guidelines",
+      "title": "Web 设计规范",
+      "category": "content",
+      "tags": [
+        "网页",
+        "设计",
+        "规范"
+      ]
+    },
+    {
+      "id": "remotion-best-practices",
+      "title": "Remotion 最佳实践",
+      "category": "content",
+      "tags": [
+        "Remotion",
+        "视频",
+        "前端"
+      ]
+    },
+    {
+      "id": "azure-ai",
+      "title": "Azure AI 接入",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "AI",
+        "云平台"
+      ]
+    },
+    {
+      "id": "azure-deploy",
+      "title": "Azure 部署流程",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "部署",
+        "云平台"
+      ]
+    },
+    {
+      "id": "azure-storage",
+      "title": "Azure 存储实践",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "存储",
+        "云平台"
+      ]
+    },
+    {
+      "id": "azure-cost-optimization",
+      "title": "Azure 成本优化",
+      "category": "growth",
+      "tags": [
+        "Azure",
+        "成本",
+        "优化"
+      ]
+    },
+    {
+      "id": "azure-diagnostics",
+      "title": "Azure 故障诊断",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "排障",
+        "监控"
+      ]
+    },
+    {
+      "id": "entra-app-registration",
+      "title": "Entra 应用注册",
+      "category": "development",
+      "tags": [
+        "身份认证",
+        "Entra",
+        "Azure"
+      ]
+    },
+    {
+      "id": "azure-compliance",
+      "title": "Azure 合规检查",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "合规",
+        "安全"
+      ]
+    },
+    {
+      "id": "appinsights-instrumentation",
+      "title": "App Insights 埋点实践",
+      "category": "development",
+      "tags": [
+        "监控",
+        "埋点",
+        "Azure"
+      ]
+    },
+    {
+      "id": "azure-prepare",
+      "title": "Azure 上云准备",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "准备",
+        "上线"
+      ]
+    },
+    {
+      "id": "azure-rbac",
+      "title": "Azure RBAC 权限配置",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "权限",
+        "RBAC"
+      ]
+    },
+    {
+      "id": "azure-resource-visualizer",
+      "title": "Azure 资源可视化",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "资源",
+        "架构"
+      ]
+    },
+    {
+      "id": "azure-aigateway",
+      "title": "Azure AI Gateway 规划",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "AI Gateway",
+        "架构"
+      ]
+    },
+    {
+      "id": "azure-validate",
+      "title": "Azure 配置校验",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "校验",
+        "部署"
+      ]
+    },
+    {
+      "id": "azure-kusto",
+      "title": "Azure Kusto 查询",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "Kusto",
+        "日志"
+      ]
+    },
+    {
+      "id": "azure-resource-lookup",
+      "title": "Azure 资源检索",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "资源查询",
+        "云平台"
+      ]
+    },
+    {
+      "id": "microsoft-foundry",
+      "title": "Microsoft Foundry 工作流",
+      "category": "development",
+      "tags": [
+        "Foundry",
+        "AI",
+        "平台"
+      ]
+    },
+    {
+      "id": "agent-browser",
+      "title": "Agent 浏览器操作",
+      "category": "development",
+      "tags": [
+        "Agent",
+        "浏览器",
+        "自动化"
+      ]
+    },
+    {
+      "id": "azure-messaging",
+      "title": "Azure 消息链路",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "消息队列",
+        "架构"
+      ]
+    },
+    {
+      "id": "azure-observability",
+      "title": "Azure 可观测性",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "可观测性",
+        "监控"
+      ]
+    },
+    {
+      "id": "ai-image-generation",
+      "title": "AI 图片生成",
+      "category": "content",
+      "tags": [
+        "图片",
+        "生成",
+        "创作"
+      ]
+    },
+    {
+      "id": "ai-video-generation",
+      "title": "AI 视频生成",
+      "category": "content",
+      "tags": [
+        "视频",
+        "生成",
+        "创作"
+      ]
+    },
+    {
+      "id": "nano-banana",
+      "title": "Nano Banana 图片玩法",
+      "category": "content",
+      "tags": [
+        "图片",
+        "创意",
+        "生成"
+      ]
+    },
+    {
+      "id": "nano-banana-2",
+      "title": "Nano Banana 进阶玩法",
+      "category": "content",
+      "tags": [
+        "图片",
+        "进阶",
+        "生成"
+      ]
+    },
+    {
+      "id": "twitter-automation",
+      "title": "X 平台自动化",
+      "category": "growth",
+      "tags": [
+        "社媒",
+        "自动化",
+        "运营"
+      ]
+    },
+    {
+      "id": "agent-tools",
+      "title": "Agent 工具组合",
+      "category": "development",
+      "tags": [
+        "Agent",
+        "工具",
+        "工作流"
+      ]
+    },
+    {
+      "id": "remotion-render",
+      "title": "Remotion 渲染流程",
+      "category": "content",
+      "tags": [
+        "视频",
+        "渲染",
+        "Remotion"
+      ]
+    },
+    {
+      "id": "qwen-image-2",
+      "title": "Qwen Image 2 出图",
+      "category": "content",
+      "tags": [
+        "图片",
+        "Qwen",
+        "生成"
+      ]
+    },
+    {
+      "id": "qwen-image-2-pro",
+      "title": "Qwen Image 2 Pro 出图",
+      "category": "content",
+      "tags": [
+        "图片",
+        "Qwen",
+        "进阶"
+      ]
+    },
+    {
+      "id": "p-video",
+      "title": "P 视频生成工作流",
+      "category": "content",
+      "tags": [
+        "视频",
+        "生成",
+        "工作流"
+      ]
+    },
+    {
+      "id": "p-image",
+      "title": "P 图片生成工作流",
+      "category": "content",
+      "tags": [
+        "图片",
+        "生成",
+        "工作流"
+      ]
+    },
+    {
+      "id": "infsh-cli",
+      "title": "Infsh 命令行工作流",
+      "category": "development",
+      "tags": [
+        "CLI",
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "id": "vercel-composition-patterns",
+      "title": "Vercel 组合模式",
+      "category": "development",
+      "tags": [
+        "Vercel",
+        "架构",
+        "前端"
+      ]
+    },
+    {
+      "id": "ui-ux-pro-max",
+      "title": "UI / UX Pro Max",
+      "category": "content",
+      "tags": [
+        "UI",
+        "UX",
+        "设计"
+      ]
+    },
+    {
+      "id": "brainstorming",
+      "title": "系统化头脑风暴",
+      "category": "office",
+      "tags": [
+        "创意",
+        "讨论",
+        "方案"
+      ]
+    },
+    {
+      "id": "seo-audit",
+      "title": "SEO 审计",
+      "category": "growth",
+      "tags": [
+        "SEO",
+        "审计",
+        "增长"
+      ]
+    },
+    {
+      "id": "browser-use",
+      "title": "Browser Use 实操",
+      "category": "development",
+      "tags": [
+        "浏览器",
+        "自动化",
+        "Agent"
+      ]
+    },
+    {
+      "id": "pdf",
+      "title": "PDF 结构化处理",
+      "category": "office",
+      "tags": [
+        "PDF",
+        "文档",
+        "整理"
+      ]
+    },
+    {
+      "id": "elevenlabs-tts",
+      "title": "ElevenLabs 语音生成",
+      "category": "content",
+      "tags": [
+        "语音",
+        "TTS",
+        "创作"
+      ]
+    },
+    {
+      "id": "elevenlabs-music",
+      "title": "ElevenLabs 音乐生成",
+      "category": "content",
+      "tags": [
+        "音乐",
+        "生成",
+        "创作"
+      ]
+    },
+    {
+      "id": "copywriting",
+      "title": "高转化文案写作",
+      "category": "growth",
+      "tags": [
+        "文案",
+        "转化",
+        "营销"
+      ]
+    },
+    {
+      "id": "pptx",
+      "title": "PPT 文档处理",
+      "category": "office",
+      "tags": [
+        "PPT",
+        "演示",
+        "办公"
+      ]
+    },
+    {
+      "id": "shadcn",
+      "title": "shadcn/ui 组件落地",
+      "category": "development",
+      "tags": [
+        "shadcn/ui",
+        "前端",
+        "组件"
+      ]
+    },
+    {
+      "id": "next-best-practices",
+      "title": "Next.js 最佳实践",
+      "category": "development",
+      "tags": [
+        "Next.js",
+        "前端",
+        "实践"
+      ]
+    },
+    {
+      "id": "systematic-debugging",
+      "title": "系统化调试",
+      "category": "development",
+      "tags": [
+        "调试",
+        "排障",
+        "工程"
+      ]
+    },
+    {
+      "id": "docx",
+      "title": "Word 文档处理",
+      "category": "office",
+      "tags": [
+        "Word",
+        "文档",
+        "办公"
+      ]
+    },
+    {
+      "id": "writing-plans",
+      "title": "写作计划编排",
+      "category": "writing",
+      "tags": [
+        "写作",
+        "计划",
+        "表达"
+      ]
+    },
+    {
+      "id": "using-superpowers",
+      "title": "高阶工作法使用指南",
+      "category": "office",
+      "tags": [
+        "工作法",
+        "效率",
+        "方法"
+      ]
+    },
+    {
+      "id": "audit-website",
+      "title": "网站审查",
+      "category": "growth",
+      "tags": [
+        "网站",
+        "审查",
+        "优化"
+      ]
+    },
+    {
+      "id": "xlsx",
+      "title": "Excel 文档处理",
+      "category": "office",
+      "tags": [
+        "Excel",
+        "表格",
+        "办公"
+      ]
+    },
+    {
+      "id": "simple",
+      "title": "先做简单版本",
+      "category": "office",
+      "tags": [
+        "简化",
+        "执行",
+        "方法"
+      ]
+    },
+    {
+      "id": "marketing-psychology",
+      "title": "营销心理学应用",
+      "category": "growth",
+      "tags": [
+        "营销",
+        "心理学",
+        "转化"
+      ]
+    },
+    {
+      "id": "test-driven-development",
+      "title": "测试驱动开发",
+      "category": "development",
+      "tags": [
+        "测试",
+        "TDD",
+        "工程"
+      ]
+    },
+    {
+      "id": "azure-postgres",
+      "title": "Azure PostgreSQL 实践",
+      "category": "development",
+      "tags": [
+        "Azure",
+        "Postgres",
+        "数据库"
+      ]
+    },
+    {
+      "id": "requesting-code-review",
+      "title": "请求代码评审",
+      "category": "development",
+      "tags": [
+        "Code Review",
+        "协作",
+        "工程"
+      ]
+    },
+    {
+      "id": "executing-plans",
+      "title": "计划执行推进",
+      "category": "office",
+      "tags": [
+        "计划",
+        "执行",
+        "项目管理"
+      ]
+    },
+    {
+      "id": "content-strategy",
+      "title": "内容策略设计",
+      "category": "content",
+      "tags": [
+        "内容策略",
+        "选题",
+        "规划"
+      ]
+    },
+    {
+      "id": "programmatic-seo",
+      "title": "程序化 SEO",
+      "category": "growth",
+      "tags": [
+        "SEO",
+        "程序化",
+        "增长"
+      ]
+    },
+    {
+      "id": "polish",
+      "title": "界面与表达润色",
+      "category": "content",
+      "tags": [
+        "润色",
+        "设计",
+        "表达"
+      ]
+    },
+    {
+      "id": "social-content",
+      "title": "社媒内容生产",
+      "category": "content",
+      "tags": [
+        "社媒",
+        "内容",
+        "创作"
+      ]
+    },
+    {
+      "id": "critique",
+      "title": "结构化批评反馈",
+      "category": "office",
+      "tags": [
+        "反馈",
+        "评审",
+        "改进"
+      ]
+    },
+    {
+      "id": "adapt",
+      "title": "跨平台内容改编",
+      "category": "content",
+      "tags": [
+        "改编",
+        "平台",
+        "内容"
+      ]
+    },
+    {
+      "id": "audit",
+      "title": "方案审计",
+      "category": "office",
+      "tags": [
+        "审计",
+        "检查",
+        "评估"
+      ]
+    },
+    {
+      "id": "animate",
+      "title": "动效设计协作",
+      "category": "content",
+      "tags": [
+        "动效",
+        "设计",
+        "前端"
+      ]
+    },
+    {
+      "id": "teach-impeccable",
+      "title": "高标准设计讲解",
+      "category": "learning",
+      "tags": [
+        "设计",
+        "讲解",
+        "学习"
+      ]
+    },
+    {
+      "id": "clarify",
+      "title": "需求澄清",
+      "category": "office",
+      "tags": [
+        "需求",
+        "澄清",
+        "沟通"
+      ]
+    },
+    {
+      "id": "normalize",
+      "title": "内容规范化",
+      "category": "office",
+      "tags": [
+        "规范化",
+        "统一",
+        "整理"
+      ]
+    },
+    {
+      "id": "colorize",
+      "title": "配色优化",
+      "category": "content",
+      "tags": [
+        "配色",
+        "视觉",
+        "设计"
+      ]
+    },
+    {
+      "id": "optimize",
+      "title": "方案优化",
+      "category": "office",
+      "tags": [
+        "优化",
+        "方案",
+        "执行"
+      ]
+    },
+    {
+      "id": "sleek-design-mobile-apps",
+      "title": "简洁移动端设计",
+      "category": "content",
+      "tags": [
+        "移动端",
+        "设计",
+        "界面"
+      ]
+    },
+    {
+      "id": "bolder",
+      "title": "更有力量的表达",
+      "category": "writing",
+      "tags": [
+        "表达",
+        "风格",
+        "写作"
+      ]
+    },
+    {
+      "id": "product-marketing-context",
+      "title": "产品营销上下文",
+      "category": "growth",
+      "tags": [
+        "产品营销",
+        "定位",
+        "增长"
+      ]
+    },
+    {
+      "id": "delight",
+      "title": "细节体验打磨",
+      "category": "content",
+      "tags": [
+        "体验",
+        "细节",
+        "设计"
+      ]
+    },
+    {
+      "id": "extract",
+      "title": "信息抽取",
+      "category": "office",
+      "tags": [
+        "抽取",
+        "整理",
+        "结构化"
+      ]
+    },
+    {
+      "id": "marketing-ideas",
+      "title": "营销灵感生成",
+      "category": "growth",
+      "tags": [
+        "营销",
+        "创意",
+        "增长"
+      ]
+    },
+    {
+      "id": "distill",
+      "title": "长内容提炼",
+      "category": "writing",
+      "tags": [
+        "提炼",
+        "摘要",
+        "写作"
+      ]
+    },
+    {
+      "id": "harden",
+      "title": "方案加固",
+      "category": "development",
+      "tags": [
+        "加固",
+        "风险",
+        "工程"
+      ]
+    },
+    {
+      "id": "onboard",
+      "title": "新成员上手",
+      "category": "office",
+      "tags": [
+        "入门",
+        "上手",
+        "协作"
+      ]
+    },
+    {
+      "id": "quieter",
+      "title": "更克制的表达",
+      "category": "writing",
+      "tags": [
+        "表达",
+        "风格",
+        "写作"
+      ]
+    },
+    {
+      "id": "pricing-strategy",
+      "title": "定价策略",
+      "category": "growth",
+      "tags": [
+        "定价",
+        "商业化",
+        "增长"
+      ]
+    },
+    {
+      "id": "subagent-driven-development",
+      "title": "子代理驱动开发",
+      "category": "development",
+      "tags": [
+        "Agent",
+        "协作",
+        "开发"
+      ]
+    },
+    {
+      "id": "better-auth-best-practices",
+      "title": "Better Auth 最佳实践",
+      "category": "development",
+      "tags": [
+        "鉴权",
+        "Best Practice",
+        "开发"
+      ]
+    },
+    {
+      "id": "copy-editing",
+      "title": "文案精修",
+      "category": "writing",
+      "tags": [
+        "改稿",
+        "文案",
+        "表达"
+      ]
+    },
+    {
+      "id": "mcp-builder",
+      "title": "MCP Builder",
+      "category": "development",
+      "tags": [
+        "MCP",
+        "构建",
+        "工具"
+      ]
+    },
+    {
+      "id": "verification-before-completion",
+      "title": "完成前验证",
+      "category": "development",
+      "tags": [
+        "验证",
+        "交付",
+        "质量"
+      ]
+    },
+    {
+      "id": "page-cro",
+      "title": "页面转化优化",
+      "category": "growth",
+      "tags": [
+        "转化",
+        "页面",
+        "增长"
+      ]
+    }
+  ]
+}

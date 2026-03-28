@@ -1,0 +1,48 @@
+<svg width="1242" height="2688" viewBox="0 0 1242 2688" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="126" y1="96" x2="1168" y2="2530" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDFEFF"/>
+      <stop offset="1" stop-color="#EDF3FF"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="274" y1="930" x2="944" y2="2054" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity="0.98"/>
+      <stop offset="1" stop-color="#EEF2FF" stop-opacity="0.84"/>
+    </linearGradient>
+  </defs>
+  <rect width="1242" height="2688" rx="72" fill="url(#bg)"/>
+  <circle cx="1060" cy="214" r="138" fill="#EAF0FF"/>
+  <circle cx="172" cy="2210" r="184" fill="#EEF3FF"/>
+  <text x="104" y="290" fill="#6366F1" font-size="34" font-weight="700" font-family="Arial, sans-serif">工作流沉淀</text>
+  <text x="104" y="402" fill="#0F172A" font-size="122" font-weight="700" font-family="Arial, sans-serif">把会重复做的事</text>
+  <text x="104" y="530" fill="#0F172A" font-size="122" font-weight="700" font-family="Arial, sans-serif">整理成技能</text>
+  <text x="104" y="640" fill="#475569" font-size="44" font-weight="400" font-family="Arial, sans-serif">不是只存一条话，而是把输入、步骤、输出都固定下来。</text>
+
+  <rect x="220" y="824" width="802" height="1588" rx="104" fill="#F9FBFF" stroke="white" stroke-opacity="0.9" stroke-width="10"/>
+  <rect x="274" y="892" width="694" height="1452" rx="82" fill="url(#phone)" stroke="#DCE4F1" stroke-width="4"/>
+  <rect x="452" y="932" width="338" height="30" rx="15" fill="#E7EDFF"/>
+
+  <rect x="336" y="1048" width="570" height="240" rx="44" fill="white" fill-opacity="0.9"/>
+  <rect x="380" y="1098" width="132" height="132" rx="32" fill="#EEF2FF"/>
+  <path d="M426 1176L448 1130L466 1150L490 1136L468 1200H446L454 1176L438 1188L426 1176Z" fill="#5A6BEC"/>
+  <rect x="544" y="1106" width="244" height="28" rx="14" fill="#5E6EF0"/>
+  <rect x="544" y="1160" width="198" height="22" rx="11" fill="#CBD4FF"/>
+  <rect x="544" y="1200" width="166" height="22" rx="11" fill="#D7DFFF"/>
+
+  <rect x="336" y="1360" width="570" height="320" rx="44" fill="white" fill-opacity="0.9"/>
+  <rect x="380" y="1420" width="222" height="26" rx="13" fill="#0F172A"/>
+  <rect x="380" y="1478" width="452" height="22" rx="11" fill="#CBD4FF"/>
+  <rect x="380" y="1518" width="408" height="22" rx="11" fill="#D7DFFF"/>
+  <rect x="380" y="1570" width="198" height="56" rx="28" fill="#EEF2FF"/>
+  <rect x="600" y="1570" width="168" height="56" rx="28" fill="#EEF2FF"/>
+
+  <rect x="336" y="1736" width="570" height="480" rx="44" fill="white" fill-opacity="0.9"/>
+  <circle cx="450" cy="1886" r="42" fill="#5A6BEC"/>
+  <circle cx="450" cy="2026" r="42" fill="#8EA0FF"/>
+  <circle cx="450" cy="2166" r="42" fill="#C1CBFF"/>
+  <rect x="534" y="1864" width="254" height="22" rx="11" fill="#C8D2FF"/>
+  <rect x="534" y="1904" width="196" height="22" rx="11" fill="#D7DFFF"/>
+  <rect x="534" y="2004" width="288" height="22" rx="11" fill="#C8D2FF"/>
+  <rect x="534" y="2044" width="216" height="22" rx="11" fill="#D7DFFF"/>
+  <rect x="534" y="2144" width="240" height="22" rx="11" fill="#C8D2FF"/>
+  <rect x="534" y="2184" width="180" height="22" rx="11" fill="#D7DFFF"/>
+</svg>

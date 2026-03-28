@@ -1,0 +1,4 @@
+storeFile=../keystore/lingstack-upload.jks
+storePassword=replace-with-your-store-password
+keyAlias=lingstack-upload
+keyPassword=replace-with-your-key-password

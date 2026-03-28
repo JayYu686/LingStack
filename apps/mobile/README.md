@@ -1,17 +1,19 @@
-# mobile
+# LingStack Mobile
 
-A new Flutter project.
+Flutter 客户端，负责本地资源库、资源浏览、收藏、导入和 Android/iOS/Windows 端展示。
 
-## Getting Started
+更完整的项目说明请看仓库根目录：
 
-This project is a starting point for a Flutter application.
+```text
+README.md
+```
 
-A few resources to get you started if this is your first Flutter project:
+## 常用命令
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```powershell
+flutter pub get
+flutter analyze
+flutter test
+flutter run -d windows
+flutter build apk --release
+```

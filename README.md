@@ -67,6 +67,26 @@
 - 官方目录 JSON 位于 `contracts/catalog` 与 `services/sync-api/internal/catalog`
 - 品牌与商店素材位于 `docs/branding`
 
+## Android 发布信息
+
+- 正式包名：`com.jayyu.lingstack`
+- 应用名：`灵感栈`
+- 当前版本：`1.0.1+2`
+
+### Android 签名配置
+
+项目已经支持正式 release 签名，配置方式如下：
+
+- 示例配置文件：`apps/mobile/android/key.properties.example`
+- 本地实际配置：`apps/mobile/android/key.properties`
+- 本地 keystore：`apps/mobile/android/keystore/lingstack-upload.jks`
+
+说明：
+
+- `key.properties` 和 `*.jks` 已被 git 忽略，不会推送到公开仓库
+- release 构建会强校验签名配置，缺失时会直接失败，不会再偷偷退回 debug 签名
+- 你需要自行备份 `lingstack-upload.jks`，否则以后无法安全升级同一应用
+
 ## 仓库结构
 
 ```text

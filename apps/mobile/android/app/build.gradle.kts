@@ -1,12 +1,50 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    FileInputStream(keystorePropertiesFile).use(keystoreProperties::load)
+}
+
+fun releaseProperty(name: String): String? {
+    val fromFile = keystoreProperties.getProperty(name)?.trim().orEmpty()
+    if (fromFile.isNotEmpty()) {
+        return fromFile
+    }
+    return System.getenv("LINGSTACK_${name.uppercase()}")?.trim()?.takeIf { it.isNotEmpty() }
+}
+
+val releaseStoreFile = releaseProperty("storeFile")
+val releaseStorePassword = releaseProperty("storePassword")
+val releaseKeyAlias = releaseProperty("keyAlias")
+val releaseKeyPassword = releaseProperty("keyPassword")
+
+val hasReleaseSigning =
+    !releaseStoreFile.isNullOrBlank() &&
+        !releaseStorePassword.isNullOrBlank() &&
+        !releaseKeyAlias.isNullOrBlank() &&
+        !releaseKeyPassword.isNullOrBlank()
+
+val isReleaseBuildRequested = gradle.startParameter.taskNames.any {
+    it.contains("Release", ignoreCase = true) ||
+        it.contains("bundle", ignoreCase = true)
+}
+
+if (isReleaseBuildRequested && !hasReleaseSigning) {
+    throw GradleException(
+        "Missing Android release signing config. Copy android/key.properties.example to android/key.properties and provide a valid keystore.",
+    )
+}
+
 android {
-    namespace = "io.localfirstai.mobile"
+    namespace = "com.jayyu.lingstack"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -19,11 +57,21 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
+    signingConfigs {
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(releaseStoreFile!!)
+                storePassword = releaseStorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+                enableV1Signing = true
+                enableV2Signing = true
+            }
+        }
+    }
+
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "io.localfirstai.mobile"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        applicationId = "com.jayyu.lingstack"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -32,9 +80,11 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
+            isShrinkResources = false
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 }

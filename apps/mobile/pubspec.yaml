@@ -1,7 +1,7 @@
 name: mobile
 description: Local-first AI asset manager for prompts, snippets, tools, and MCP servers.
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ^3.11.4

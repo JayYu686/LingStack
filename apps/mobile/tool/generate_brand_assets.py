@@ -43,6 +43,9 @@ ANDROID_FOREGROUND_SIZES = {
     'mipmap-xxxhdpi': 432,
 }
 
+SUPER_SAMPLE = 4
+LEGACY_ICON_INSET_RATIO = 0.085
+
 ANDROID_SPLASH_SIZES = {
     'mipmap-mdpi': 80,
     'mipmap-hdpi': 120,
@@ -104,9 +107,81 @@ def svg_to_image(path: Path, width: int, height: int) -> Image.Image:
     return image
 
 
+def render_brand_mark(size: int) -> Image.Image:
+    render_size = size * SUPER_SAMPLE
+    image = _vertical_gradient(render_size, (68, 96, 255), (123, 142, 255))
+
+    glow = Image.new('RGBA', (render_size, render_size), (0, 0, 0, 0))
+    glow_draw = ImageDraw.Draw(glow)
+    glow_draw.ellipse(
+        (
+            int(render_size * 0.03),
+            int(render_size * 0.01),
+            int(render_size * 0.46),
+            int(render_size * 0.43),
+        ),
+        fill=(255, 255, 255, 86),
+    )
+    image.alpha_composite(glow)
+
+    panel = Image.new('RGBA', (render_size, render_size), (0, 0, 0, 0))
+    panel_draw = ImageDraw.Draw(panel)
+    panel_bounds = (
+        int(render_size * 0.13),
+        int(render_size * 0.13),
+        int(render_size * 0.87),
+        int(render_size * 0.87),
+    )
+    panel_draw.rounded_rectangle(
+        panel_bounds,
+        radius=int(render_size * 0.20),
+        fill=(255, 255, 255, 32),
+        outline=(255, 255, 255, 52),
+        width=max(4, render_size // 320),
+    )
+    image.alpha_composite(panel)
+
+    shadow = Image.new('RGBA', (render_size, render_size), (0, 0, 0, 0))
+    shadow_draw = ImageDraw.Draw(shadow)
+    shadow_color = (31, 42, 120, 44)
+    shape_color = (255, 255, 255, 255)
+    shadow_offset = int(render_size * 0.018)
+    blocks = [
+        (0.278, 0.288, 0.456, 0.736),
+        (0.504, 0.288, 0.736, 0.464),
+        (0.504, 0.520, 0.736, 0.736),
+    ]
+    radius = int(render_size * 0.062)
+    for left, top, right, bottom in blocks:
+        rect = (
+            int(render_size * left),
+            int(render_size * top) + shadow_offset,
+            int(render_size * right),
+            int(render_size * bottom) + shadow_offset,
+        )
+        shadow_draw.rounded_rectangle(rect, radius=radius, fill=shadow_color)
+    image.alpha_composite(shadow)
+
+    shapes = Image.new('RGBA', (render_size, render_size), (0, 0, 0, 0))
+    shapes_draw = ImageDraw.Draw(shapes)
+    for left, top, right, bottom in blocks:
+        rect = (
+            int(render_size * left),
+            int(render_size * top),
+            int(render_size * right),
+            int(render_size * bottom),
+        )
+        shapes_draw.rounded_rectangle(rect, radius=radius, fill=shape_color)
+    image.alpha_composite(shapes)
+
+    masked = Image.new('RGBA', (render_size, render_size), (0, 0, 0, 0))
+    masked.paste(image, (0, 0), _rounded_mask(render_size))
+    return _downsample(masked, (size, size))
+
+
 @lru_cache(maxsize=1)
 def _base_icon() -> Image.Image:
-    return svg_to_image(ICON_SOURCE, 1024, 1024)
+    return render_brand_mark(1024)
 
 
 def render_square_icon(size: int) -> Image.Image:
@@ -121,6 +196,12 @@ def _rounded_mask(size: int, radius: int | None = None) -> Image.Image:
     draw = ImageDraw.Draw(mask)
     draw.rounded_rectangle((0, 0, size, size), radius=radius, fill=255)
     return mask
+
+
+def _downsample(image: Image.Image, size: tuple[int, int]) -> Image.Image:
+    if image.size == size:
+        return image
+    return image.resize(size, Image.Resampling.LANCZOS)
 
 
 def _vertical_gradient(size: int, top_color: tuple[int, int, int], bottom_color: tuple[int, int, int]) -> Image.Image:
@@ -142,59 +223,68 @@ def _draw_launcher_glyph(size: int, color: tuple[int, int, int, int]) -> Image.I
     draw = ImageDraw.Draw(glyph)
     width = size
     height = size
-    card_radius = int(size * 0.085)
-    left = (int(width * 0.24), int(height * 0.28), int(width * 0.44), int(height * 0.72))
-    top_right = (int(width * 0.53), int(height * 0.28), int(width * 0.79), int(height * 0.45))
-    bottom_right = (int(width * 0.53), int(height * 0.50), int(width * 0.79), int(height * 0.72))
+    card_radius = int(size * 0.078)
+    left = (int(width * 0.29), int(height * 0.29), int(width * 0.45), int(height * 0.71))
+    top_right = (int(width * 0.53), int(height * 0.29), int(width * 0.73), int(height * 0.46))
+    bottom_right = (int(width * 0.53), int(height * 0.53), int(width * 0.73), int(height * 0.71))
     for rect in (left, top_right, bottom_right):
         draw.rounded_rectangle(rect, radius=card_radius, fill=color)
     return glyph
 
 
 def render_launcher_icon(size: int) -> Image.Image:
-    background = _vertical_gradient(size, (68, 96, 255), (107, 124, 255))
-    glow = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+    render_size = size * SUPER_SAMPLE
+    inset = int(render_size * LEGACY_ICON_INSET_RATIO)
+    panel_size = render_size - (inset * 2)
+
+    canvas = Image.new('RGBA', (render_size, render_size), (0, 0, 0, 0))
+    background = _vertical_gradient(panel_size, (68, 96, 255), (107, 124, 255))
+    glow = Image.new('RGBA', (panel_size, panel_size), (0, 0, 0, 0))
     glow_draw = ImageDraw.Draw(glow)
     glow_draw.ellipse(
         (
-            int(size * 0.06),
-            int(size * 0.02),
-            int(size * 0.60),
-            int(size * 0.56),
+            int(panel_size * 0.08),
+            int(panel_size * 0.04),
+            int(panel_size * 0.60),
+            int(panel_size * 0.56),
         ),
         fill=(255, 255, 255, 54),
     )
     background.alpha_composite(glow)
 
-    border = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+    border = Image.new('RGBA', (panel_size, panel_size), (0, 0, 0, 0))
     border_draw = ImageDraw.Draw(border)
     border_draw.rounded_rectangle(
-        (1, 1, size - 2, size - 2),
-        radius=int(size * 0.24),
+        (2, 2, panel_size - 3, panel_size - 3),
+        radius=int(panel_size * 0.24),
         outline=(255, 255, 255, 48),
-        width=max(1, size // 128),
+        width=max(2, panel_size // 160),
     )
     background.alpha_composite(border)
 
-    glyph = _draw_launcher_glyph(size, (255, 255, 255, 255))
-    shadow = _draw_launcher_glyph(size, (31, 42, 120, 48))
-    background.alpha_composite(shadow, (0, int(size * 0.02)))
+    glyph = _draw_launcher_glyph(panel_size, (255, 255, 255, 255))
+    shadow = _draw_launcher_glyph(panel_size, (31, 42, 120, 48))
+    background.alpha_composite(shadow, (0, int(panel_size * 0.018)))
     background.alpha_composite(glyph)
 
-    masked = Image.new('RGBA', (size, size), (0, 0, 0, 0))
-    masked.paste(background, (0, 0), _rounded_mask(size))
-    return masked
+    canvas.paste(background, (inset, inset), _rounded_mask(panel_size))
+    return _downsample(canvas, (size, size))
 
 
 def render_launcher_foreground(size: int) -> Image.Image:
-    foreground = _draw_launcher_glyph(size, (255, 255, 255, 255))
-    highlight = _draw_launcher_glyph(size, (255, 255, 255, 30))
-    foreground.alpha_composite(highlight, (0, -max(1, size // 72)))
-    return foreground
+    render_size = size * SUPER_SAMPLE
+    foreground = _draw_launcher_glyph(render_size, (255, 255, 255, 255))
+    highlight = _draw_launcher_glyph(render_size, (255, 255, 255, 30))
+    foreground.alpha_composite(highlight, (0, -max(1, render_size // 72)))
+    return _downsample(foreground, (size, size))
 
 
 def render_launcher_monochrome(size: int) -> Image.Image:
-    return _draw_launcher_glyph(size, (17, 24, 39, 255))
+    render_size = size * SUPER_SAMPLE
+    return _downsample(
+        _draw_launcher_glyph(render_size, (17, 24, 39, 255)),
+        (size, size),
+    )
 
 
 def render_launch_badge(canvas_width: int, canvas_height: int) -> Image.Image:
@@ -262,11 +352,17 @@ def build_brand_exports() -> None:
     DOCS_EXPORTS.mkdir(parents=True, exist_ok=True)
     save_png(render_launcher_icon(1024), DOCS_EXPORTS / 'lingstack-icon-1024.png')
     save_png(render_launch_badge(1440, 3120), DOCS_EXPORTS / 'launch-preview.png')
-    save_png(svg_to_image(ILLUSTRATIONS_DIR / 'hero-orbit.svg', 1600, 1066), DOCS_EXPORTS / 'hero-orbit-preview.png')
+    try:
+        save_png(
+            svg_to_image(ILLUSTRATIONS_DIR / 'hero-orbit.svg', 1600, 1066),
+            DOCS_EXPORTS / 'hero-orbit-preview.png',
+        )
 
-    for poster in POSTERS:
-        output_name = f'{poster.stem}.png'
-        save_png(svg_to_image(poster, 1242, 2688), DOCS_EXPORTS / output_name)
+        for poster in POSTERS:
+            output_name = f'{poster.stem}.png'
+            save_png(svg_to_image(poster, 1242, 2688), DOCS_EXPORTS / output_name)
+    except subprocess.CalledProcessError:
+        print('Skipped poster and illustration previews because the local SVG renderer was unavailable.')
 
 
 def main() -> None:

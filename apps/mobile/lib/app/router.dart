@@ -5,8 +5,10 @@ import '../features/collections/presentation/collection_detail_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/library/presentation/import_resource_screen.dart';
 import '../features/mcp/presentation/mcp_server_detail_screen.dart';
+import '../features/mcp/presentation/mcp_test_screen.dart';
 import '../features/prompts/presentation/prompt_detail_screen.dart';
 import '../features/skills/presentation/skill_detail_screen.dart';
+import '../features/skills/presentation/skill_editor_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -30,11 +32,25 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: 'skill/:id',
             builder: (context, state) =>
                 SkillDetailScreen(resourceId: state.pathParameters['id']!),
+            routes: [
+              GoRoute(
+                path: 'edit',
+                builder: (context, state) =>
+                    SkillEditorScreen(resourceId: state.pathParameters['id']!),
+              ),
+            ],
           ),
           GoRoute(
             path: 'mcp/:id',
             builder: (context, state) =>
                 McpServerDetailScreen(resourceId: state.pathParameters['id']!),
+            routes: [
+              GoRoute(
+                path: 'test',
+                builder: (context, state) =>
+                    McpTestScreen(resourceId: state.pathParameters['id']!),
+              ),
+            ],
           ),
           GoRoute(
             path: 'import',

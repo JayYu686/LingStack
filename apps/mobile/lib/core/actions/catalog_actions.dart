@@ -19,7 +19,7 @@ Future<void> toggleFavoriteAction(
   }
   ScaffoldMessenger.of(
     context,
-  ).showSnackBar(const SnackBar(content: Text('收藏状态已更新')));
+  ).showSnackBar(const SnackBar(content: Text('收藏状态已更新。')));
 }
 
 Future<void> copyTextAction(

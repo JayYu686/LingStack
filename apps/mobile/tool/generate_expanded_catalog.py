@@ -1,14 +1,28 @@
 from __future__ import annotations
 
+import csv
+import io
 import json
 import re
 import urllib.request
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parents[3]
 DB_DIR = ROOT / 'apps/mobile/lib/infrastructure/database'
 SPEC_SOURCE = ROOT / 'contracts/catalog/manual_seed_specs.json'
+PROMPT_TARGET = 220
+SKILL_TARGET = 190
+MCP_TARGET = 150
+PROMPT_SOURCE_URL = 'https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv'
+SKILL_SITEMAP_URL = 'https://skills.sh/sitemap.xml'
+MCP_SOURCE_URLS = [
+    'https://raw.githubusercontent.com/appcypher/awesome-mcp-servers/main/README.md',
+    'https://raw.githubusercontent.com/wong2/awesome-mcp-servers/main/README.md',
+    'https://raw.githubusercontent.com/subratadasGit/awesome-mcp-servers/main/README.md',
+    'https://raw.githubusercontent.com/Techiral/awesome-mcp-servers/main/README.md',
+]
 
 EXISTING_MCP_IDS = {
     'mcp-github',
@@ -83,28 +97,336 @@ def load_specs() -> tuple[list[tuple[str, str, str, list[str]]], list[tuple[str,
     return prompt_specs, skill_specs
 
 
+def extract_seed_ids(path: Path) -> set[str]:
+    text = path.read_text(encoding='utf-8')
+    return set(re.findall(r"id: '([^']+)'", text))
+
+
+def slugify(text: str) -> str:
+    return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
+
+
+def normalize_title(text: str) -> str:
+    return re.sub(r'\s+', ' ', text.strip().lower())
+
+
+def title_from_slug(slug: str) -> str:
+    acronyms = {
+        'ai': 'AI',
+        'api': 'API',
+        'cli': 'CLI',
+        'ci': 'CI',
+        'cd': 'CD',
+        'mcp': 'MCP',
+        'ui': 'UI',
+        'ux': 'UX',
+        'seo': 'SEO',
+        'pdf': 'PDF',
+        'pptx': 'PPTX',
+        'xlsx': 'XLSX',
+        'docx': 'DOCX',
+        'github': 'GitHub',
+        'gitlab': 'GitLab',
+        'aws': 'AWS',
+        'azure': 'Azure',
+        'sql': 'SQL',
+        'postgres': 'Postgres',
+        'mysql': 'MySQL',
+        'mongodb': 'MongoDB',
+        'redis': 'Redis',
+        'figma': 'Figma',
+        'nextjs': 'Next.js',
+        'react': 'React',
+        'nodejs': 'Node.js',
+        'openai': 'OpenAI',
+        'claude': 'Claude',
+        'gemini': 'Gemini',
+        'vercel': 'Vercel',
+        'json': 'JSON',
+        'xml': 'XML',
+        'http': 'HTTP',
+    }
+    parts = [part for part in slug.replace('_', '-').split('-') if part]
+    resolved = []
+    for part in parts:
+        lower = part.lower()
+        resolved.append(acronyms.get(lower, part.capitalize()))
+    return ' '.join(resolved)
+
+
+def unique_list(values: list[str]) -> list[str]:
+    result: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        cleaned = value.strip()
+        if not cleaned:
+            continue
+        key = cleaned.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(cleaned)
+    return result
+
+
+def prompt_category(title: str, prompt: str, for_devs: bool) -> str:
+    text = f'{title} {prompt}'.lower()
+    if for_devs or any(keyword in text for keyword in [
+        'developer', 'terminal', 'python', 'javascript', 'typescript', 'sql',
+        'linux', 'docker', 'kubernetes', 'cloud', 'api', 'code', 'debug',
+        'programmer', 'software', 'frontend', 'backend', 'devops',
+    ]):
+        return 'development'
+    if any(keyword in text for keyword in [
+        'resume', 'cv', 'job interview', 'interviewer', 'cover letter',
+        'linkedin', 'recruiter', 'career', 'job application',
+    ]):
+        return 'career'
+    if any(keyword in text for keyword in [
+        'research', 'teacher', 'tutor', 'quiz', 'study', 'learning',
+        'paper', 'book', 'academic', 'explain',
+    ]):
+        return 'learning'
+    if any(keyword in text for keyword in [
+        'marketing', 'sales', 'seo', 'customer', 'campaign', 'growth',
+        'ads', 'conversion', 'persona',
+    ]):
+        return 'growth'
+    if any(keyword in text for keyword in [
+        'youtube', 'video', 'script', 'podcast', 'social media', 'instagram',
+        'tiktok', 'content', 'storyteller', 'novelist', 'blog',
+    ]):
+        return 'content'
+    if any(keyword in text for keyword in [
+        'email', 'meeting', 'assistant', 'executive', 'powerpoint', 'excel',
+        'spreadsheet', 'agenda', 'presentation', 'summary', 'minutes',
+    ]):
+        return 'office'
+    if any(keyword in text for keyword in [
+        'writer', 'translator', 'proofreader', 'grammar', 'copywriter',
+        'writing', 'improver', 'editor',
+    ]):
+        return 'writing'
+    if any(keyword in text for keyword in [
+        'travel', 'chef', 'fitness', 'diet', 'planner', 'coach', 'life',
+    ]):
+        return 'life'
+    return 'office'
+
+
+def prompt_tags(title: str, prompt: str, category: str) -> list[str]:
+    text = f'{title} {prompt}'.lower()
+    tags = ['Prompt']
+    category_tags = {
+        'development': ['开发编程', '工程提效'],
+        'office': ['办公协作', '整理'],
+        'writing': ['写作表达', '润色'],
+        'content': ['内容创作', '创意'],
+        'learning': ['学习研究', '总结'],
+        'career': ['求职成长', '面试'],
+        'growth': ['运营增长', '转化'],
+        'life': ['生活效率', '计划'],
+    }
+    tags.extend(category_tags.get(category, ['其他']))
+    keyword_map = [
+        ('github', 'GitHub'),
+        ('sql', 'SQL'),
+        ('terminal', '命令行'),
+        ('linux', 'Linux'),
+        ('docker', 'Docker'),
+        ('meeting', '会议'),
+        ('email', '邮件'),
+        ('resume', '简历'),
+        ('interview', '面试'),
+        ('marketing', '营销'),
+        ('sales', '销售'),
+        ('seo', 'SEO'),
+        ('video', '视频'),
+        ('youtube', 'YouTube'),
+        ('prompt', '提示词'),
+        ('teacher', '教学'),
+        ('research', '研究'),
+        ('travel', '出行'),
+        ('fitness', '健身'),
+    ]
+    for keyword, tag in keyword_map:
+        if keyword in text:
+            tags.append(tag)
+    tags.append(title.strip())
+    return unique_list(tags[:6])
+
+
+def build_prompt_specs(
+    manual_specs: list[tuple[str, str, str, list[str]]],
+    target: int = PROMPT_TARGET,
+) -> list[tuple[str, str, str, list[str]]]:
+    csv.field_size_limit(10_000_000)
+    text = urllib.request.urlopen(PROMPT_SOURCE_URL, timeout=30).read().decode('utf-8')
+    rows = list(csv.DictReader(io.StringIO(text)))
+    specs = list(manual_specs)
+    seen_ids = {item[0] for item in specs}
+    seen_ids.update(extract_seed_ids(DB_DIR / 'catalog_seed_prompts_part1.dart'))
+    seen_ids.update(extract_seed_ids(DB_DIR / 'catalog_seed_prompts_part2.dart'))
+    seen_titles = {normalize_title(item[1]) for item in specs}
+
+    for row in rows:
+      title = (row.get('act') or '').strip()
+      prompt = (row.get('prompt') or '').strip()
+      if not title or not prompt:
+          continue
+      normalized_title = normalize_title(title)
+      if normalized_title in seen_titles:
+          continue
+      category = prompt_category(title, prompt, (row.get('for_devs') or '').upper() == 'TRUE')
+      base_id = f'prompt-open-source-{slugify(title)}'
+      resource_id = base_id
+      suffix = 2
+      while resource_id in seen_ids:
+          resource_id = f'{base_id}-{suffix}'
+          suffix += 1
+      tags = prompt_tags(title, prompt, category)
+      specs.append((resource_id, title, category, tags))
+      seen_ids.add(resource_id)
+      seen_titles.add(normalized_title)
+      if len(specs) >= target:
+          break
+
+    if len(specs) < target:
+        raise RuntimeError(f'Prompt specs only reached {len(specs)} < {target}')
+    return specs
+
+
+def skill_category(text: str) -> str:
+    lowered = text.lower()
+    if any(keyword in lowered for keyword in [
+        'react', 'next', 'vercel', 'azure', 'cloud', 'deploy', 'debug',
+        'mcp', 'agent', 'api', 'auth', 'database', 'browser', 'testing',
+        'cli', 'github', 'gitlab', 'docker', 'kubernetes', 'postgres',
+    ]):
+        return 'development'
+    if any(keyword in lowered for keyword in [
+        'seo', 'marketing', 'pricing', 'conversion', 'growth', 'sales',
+        'social', 'audit website',
+    ]):
+        return 'growth'
+    if any(keyword in lowered for keyword in [
+        'design', 'ui', 'ux', 'video', 'image', 'copywriting', 'content',
+        'social-content', 'remotion', 'delight', 'polish', 'colorize',
+    ]):
+        return 'content'
+    if any(keyword in lowered for keyword in [
+        'writing', 'copy-editing', 'bolder', 'quieter', 'distill',
+    ]):
+        return 'writing'
+    if any(keyword in lowered for keyword in [
+        'teach', 'learning', 'research',
+    ]):
+        return 'learning'
+    return 'office'
+
+
+def skill_tags(title: str, category: str, url: str) -> list[str]:
+    lowered = f'{title} {url}'.lower()
+    tags = ['Skill']
+    category_tags = {
+        'development': ['开发编程', '工作流'],
+        'office': ['办公协作', '复用'],
+        'writing': ['写作表达', '方法'],
+        'content': ['内容创作', '设计'],
+        'learning': ['学习研究', '方法'],
+        'growth': ['运营增长', '策略'],
+    }
+    tags.extend(category_tags.get(category, ['其他']))
+    keyword_map = [
+        ('react', 'React'),
+        ('next', 'Next.js'),
+        ('vercel', 'Vercel'),
+        ('azure', 'Azure'),
+        ('github', 'GitHub'),
+        ('mcp', 'MCP'),
+        ('agent', 'Agent'),
+        ('seo', 'SEO'),
+        ('design', '设计'),
+        ('video', '视频'),
+        ('image', '图片'),
+        ('browser', '浏览器'),
+        ('testing', '测试'),
+        ('auth', '鉴权'),
+    ]
+    for keyword, tag in keyword_map:
+        if keyword in lowered:
+            tags.append(tag)
+    tags.append(title)
+    return unique_list(tags[:6])
+
+
+def build_skill_specs(
+    manual_specs: list[tuple[str, str, str, list[str]]],
+    target: int = SKILL_TARGET,
+) -> list[tuple[str, str, str, list[str]]]:
+    text = urllib.request.urlopen(SKILL_SITEMAP_URL, timeout=30).read().decode('utf-8')
+    urls = re.findall(r'<loc>([^<]+)</loc>', text)
+    specs = list(manual_specs)
+    seen_ids = {item[0] for item in specs}
+    existing_resource_ids = extract_seed_ids(DB_DIR / 'catalog_seed_skills.dart')
+    existing_resource_ids.update({f"skill-{item[0]}" for item in specs})
+    seen_titles = {normalize_title(item[1]) for item in specs}
+
+    for url in urls:
+        parts = [part for part in urlparse(url).path.split('/') if part]
+        if len(parts) < 2:
+            continue
+        slug = parts[-1]
+        if slug in {'skills', 'agent-skills'}:
+            continue
+        title = title_from_slug(slug)
+        normalized_title = normalize_title(title)
+        if normalized_title in seen_titles:
+            continue
+        resource_id = slugify(slug)
+        if (
+            not resource_id
+            or resource_id in seen_ids
+            or f'skill-{resource_id}' in existing_resource_ids
+        ):
+            continue
+        category = skill_category(f'{title} {url}')
+        tags = skill_tags(title, category, url)
+        specs.append((resource_id, title, category, tags))
+        seen_ids.add(resource_id)
+        existing_resource_ids.add(f'skill-{resource_id}')
+        seen_titles.add(normalized_title)
+        if len(specs) >= target:
+            break
+
+    if len(specs) < target:
+        raise RuntimeError(f'Skill specs only reached {len(specs)} < {target}')
+    return specs
+
+
 def derive_mcps(limit: int = 100) -> list[tuple[str, str, str, str]]:
-    url = 'https://raw.githubusercontent.com/appcypher/awesome-mcp-servers/main/README.md'
-    text = urllib.request.urlopen(url, timeout=30).read().decode('utf-8', 'ignore')
-    items = re.findall(r'\[([^\]]+)\]\((https?://[^)]+)\)\s*-\s*([^\n]+)', text)
     results: list[tuple[str, str, str, str]] = []
     seen: set[str] = set()
 
-    for name, link, desc in items:
-        clean = name.strip('* ').strip()
-        slug = re.sub(r'[^a-z0-9]+', '-', clean.lower()).strip('-')
-        resource_id = f'mcp-{slug}'
-        if (
-            clean in SKIP_MCP_NAMES
-            or clean in SKIP_MCP_PROJECTS
-            or clean in seen
-            or resource_id in EXISTING_MCP_IDS
-        ):
-            continue
-        seen.add(clean)
-        results.append((clean, link, desc.strip(), resource_id))
-        if len(results) >= limit:
-            break
+    for source_url in MCP_SOURCE_URLS:
+        text = urllib.request.urlopen(source_url, timeout=30).read().decode('utf-8', 'ignore')
+        items = re.findall(r'\[([^\]]+)\]\((https?://[^)]+)\)\s*[-–]\s*([^\n]+)', text)
+
+        for name, link, desc in items:
+            clean = name.strip('* ').strip()
+            slug = re.sub(r'[^a-z0-9]+', '-', clean.lower()).strip('-')
+            resource_id = f'mcp-{slug}'
+            if (
+                clean in SKIP_MCP_NAMES
+                or clean in SKIP_MCP_PROJECTS
+                or clean in seen
+                or resource_id in EXISTING_MCP_IDS
+            ):
+                continue
+            seen.add(clean)
+            results.append((clean, link, desc.strip(), resource_id))
+            if len(results) >= limit:
+                return results
 
     return results
 
@@ -778,8 +1100,10 @@ String _mcpConfig(Map<String, dynamic> spec, List<String> envs) {{
 
 
 def main() -> None:
-    prompt_specs, skill_specs = load_specs()
-    mcp_entries = derive_mcps(100)
+    prompt_specs_seed, skill_specs_seed = load_specs()
+    prompt_specs = build_prompt_specs(prompt_specs_seed, PROMPT_TARGET)
+    skill_specs = build_skill_specs(skill_specs_seed, SKILL_TARGET)
+    mcp_entries = derive_mcps(MCP_TARGET)
 
     (DB_DIR / 'catalog_seed_prompts_expanded.dart').write_text(
         build_prompt_file(prompt_specs),
@@ -795,9 +1119,9 @@ def main() -> None:
     )
 
     summary = {
-        'prompts_added': len(prompt_specs),
-        'skills_added': len(skill_specs),
-        'mcps_added': len(mcp_entries),
+        'prompt_specs': len(prompt_specs),
+        'skill_specs': len(skill_specs),
+        'mcp_specs': len(mcp_entries),
     }
     print(json.dumps(summary, ensure_ascii=False))
 

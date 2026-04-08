@@ -8,6 +8,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3/sqlite3.dart' as sqlite3;
 
 import '../../domain/models.dart';
+import '../../domain/skill_editor_models.dart';
+import '../../domain/skill_schema_codec.dart';
 import 'catalog_seed.dart';
 import 'catalog_seed_types.dart';
 import 'schema_statements.dart';
@@ -52,7 +54,7 @@ class AppDatabase extends GeneratedDatabase {
   factory AppDatabase.memory() => AppDatabase._(NativeDatabase.memory());
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 6;
 
   @override
   Iterable<TableInfo<Table, Object?>> get allTables => const [];
@@ -75,7 +77,10 @@ class AppDatabase extends GeneratedDatabase {
       await customStatement(statement);
     }
     await _ensureCatalogResourceColumns();
+    await _ensurePromptDetailColumns();
     await _backfillPrimaryCategories();
+    await _backfillResourceQuality();
+    await _backfillPromptDetails();
 
     final officialCount = await _countOfficialResources();
     if (officialCount == 0) {
@@ -128,6 +133,58 @@ class AppDatabase extends GeneratedDatabase {
           "ALTER TABLE catalog_resources ADD COLUMN primary_category TEXT NOT NULL DEFAULT 'other'",
         );
       }
+      final hasOriginResourceID = columns.any(
+        (row) => row['name'] == 'origin_resource_id',
+      );
+      if (!hasOriginResourceID) {
+        database.execute(
+          'ALTER TABLE catalog_resources ADD COLUMN origin_resource_id TEXT',
+        );
+      }
+      final hasQualityTier = columns.any(
+        (row) => row['name'] == 'quality_tier',
+      );
+      if (!hasQualityTier) {
+        database.execute(
+          "ALTER TABLE catalog_resources ADD COLUMN quality_tier TEXT NOT NULL DEFAULT 'community'",
+        );
+      }
+      final hasQualityScore = columns.any(
+        (row) => row['name'] == 'quality_score',
+      );
+      if (!hasQualityScore) {
+        database.execute(
+          'ALTER TABLE catalog_resources ADD COLUMN quality_score INTEGER NOT NULL DEFAULT 60',
+        );
+      }
+      final hasQualityReasons = columns.any(
+        (row) => row['name'] == 'quality_reasons_json',
+      );
+      if (!hasQualityReasons) {
+        database.execute(
+          "ALTER TABLE catalog_resources ADD COLUMN quality_reasons_json TEXT NOT NULL DEFAULT '[]'",
+        );
+      }
+      final hasUseCases = columns.any((row) => row['name'] == 'use_cases_json');
+      if (!hasUseCases) {
+        database.execute(
+          "ALTER TABLE catalog_resources ADD COLUMN use_cases_json TEXT NOT NULL DEFAULT '[]'",
+        );
+      }
+      final hasAvoidCases = columns.any(
+        (row) => row['name'] == 'avoid_cases_json',
+      );
+      if (!hasAvoidCases) {
+        database.execute(
+          "ALTER TABLE catalog_resources ADD COLUMN avoid_cases_json TEXT NOT NULL DEFAULT '[]'",
+        );
+      }
+      final hasVerifiedAt = columns.any((row) => row['name'] == 'verified_at');
+      if (!hasVerifiedAt) {
+        database.execute(
+          'ALTER TABLE catalog_resources ADD COLUMN verified_at TEXT',
+        );
+      }
 
       final rows = database.select(
         'SELECT id, scenario, tags_json FROM catalog_resources',
@@ -174,15 +231,22 @@ class AppDatabase extends GeneratedDatabase {
     String query = '',
     ResourceCategory category = ResourceCategory.all,
     String tag = '',
+    ResourceQualityTier? qualityTier,
+    ResourceSortMode sortMode = ResourceSortMode.recommended,
     bool favoritesOnly = false,
     bool importedOnly = false,
     bool featuredOnly = false,
     int? limit,
   }) async {
     final sql = StringBuffer('''
-      SELECT r.*, CASE WHEN f.resource_id IS NULL THEN 0 ELSE 1 END AS is_favorite
+      SELECT
+        r.*,
+        CASE WHEN f.resource_id IS NULL THEN 0 ELSE 1 END AS is_favorite,
+        u.use_count AS prompt_use_count,
+        u.last_used_at AS prompt_last_used_at
       FROM catalog_resources r
       LEFT JOIN favorite_resources f ON f.resource_id = r.id
+      LEFT JOIN prompt_usage_records u ON u.resource_id = r.id
     ''');
 
     final conditions = <String>[];
@@ -209,6 +273,10 @@ class AppDatabase extends GeneratedDatabase {
     if (featuredOnly) {
       conditions.add('r.is_featured = 1');
     }
+    if (qualityTier != null) {
+      conditions.add('r.quality_tier = ?');
+      variables.add(Variable.withString(qualityTier.storageKey));
+    }
 
     final trimmedQuery = query.trim().toLowerCase();
     if (trimmedQuery.isNotEmpty) {
@@ -233,9 +301,26 @@ class AppDatabase extends GeneratedDatabase {
       sql.write(' WHERE ${conditions.join(' AND ')}');
     }
 
-    sql.write(
-      ' ORDER BY CASE WHEN r.is_featured = 1 THEN 0 ELSE 1 END, r.updated_at DESC, r.title COLLATE NOCASE ASC',
-    );
+    final orderBy = switch (sortMode) {
+      ResourceSortMode.recommended =>
+        'CASE WHEN r.is_featured = 1 THEN 0 ELSE 1 END, '
+            'CASE r.quality_tier '
+            "WHEN 'featured' THEN 0 "
+            "WHEN 'verified' THEN 1 "
+            "WHEN 'community' THEN 2 "
+            'ELSE 3 END, '
+            'r.quality_score DESC, r.updated_at DESC, r.title COLLATE NOCASE ASC',
+      ResourceSortMode.easiestToUse =>
+        'CASE r.difficulty '
+            "WHEN 'beginner' THEN 0 "
+            "WHEN 'intermediate' THEN 1 "
+            'ELSE 2 END, '
+            'r.quality_score DESC, r.updated_at DESC, r.title COLLATE NOCASE ASC',
+      ResourceSortMode.recentlyUsed =>
+        'CASE WHEN u.last_used_at IS NULL THEN 1 ELSE 0 END, '
+            'u.last_used_at DESC, r.quality_score DESC, r.updated_at DESC',
+    };
+    sql.write(' ORDER BY $orderBy');
     if (limit != null) {
       sql.write(' LIMIT $limit');
     }
@@ -257,11 +342,13 @@ class AppDatabase extends GeneratedDatabase {
 
   Future<List<ResourceCategory>> listAvailableCategories({
     required ResourceType type,
+    ResourceQualityTier? qualityTier,
     bool favoritesOnly = false,
     bool importedOnly = false,
   }) async {
     final resources = await listResources(
       type: type,
+      qualityTier: qualityTier,
       favoritesOnly: favoritesOnly,
       importedOnly: importedOnly,
     );
@@ -282,6 +369,7 @@ class AppDatabase extends GeneratedDatabase {
   Future<List<String>> listTopTags({
     required ResourceType type,
     ResourceCategory category = ResourceCategory.all,
+    ResourceQualityTier? qualityTier,
     bool favoritesOnly = false,
     bool importedOnly = false,
     int limit = 8,
@@ -289,6 +377,7 @@ class AppDatabase extends GeneratedDatabase {
     final resources = await listResources(
       type: type,
       category: category,
+      qualityTier: qualityTier,
       favoritesOnly: favoritesOnly,
       importedOnly: importedOnly,
     );
@@ -311,6 +400,27 @@ class AppDatabase extends GeneratedDatabase {
         return left.key.compareTo(right.key);
       });
     return sorted.take(limit).map((entry) => entry.key).toList();
+  }
+
+  Future<List<ResourceQualityTier>> listAvailableQualityTiers({
+    required ResourceType type,
+    bool favoritesOnly = false,
+    bool importedOnly = false,
+  }) async {
+    final resources = await listResources(
+      type: type,
+      favoritesOnly: favoritesOnly,
+      importedOnly: importedOnly,
+    );
+    final seen = <ResourceQualityTier>{};
+    final tiers = <ResourceQualityTier>[];
+    for (final tier in ResourceQualityTier.values) {
+      if (resources.any((resource) => resource.qualityTier == tier) &&
+          seen.add(tier)) {
+        tiers.add(tier);
+      }
+    }
+    return tiers;
   }
 
   Future<CollectionDetail?> getCollectionDetail(String collectionId) async {
@@ -374,6 +484,10 @@ class AppDatabase extends GeneratedDatabase {
       exampleOutput: row.read<String>('example_output'),
       supportedModels: _decodeStringList(
         row.read<String>('supported_models_json'),
+      ),
+      helperNotes: _decodeStringList(row.read<String>('helper_notes_json')),
+      requiredVariableNames: _decodeStringList(
+        row.read<String>('required_variable_names_json'),
       ),
     );
   }
@@ -457,6 +571,68 @@ class AppDatabase extends GeneratedDatabase {
     return MyLibrarySnapshot(favorites: favorites, importedResources: imported);
   }
 
+  Future<PromptUsageRecord?> loadPromptUsage(String resourceId) async {
+    final rows = await customSelect(
+      '''
+      SELECT resource_id, last_values_json, copied_at, last_used_at, use_count
+      FROM prompt_usage_records
+      WHERE resource_id = ?
+      LIMIT 1
+      ''',
+      variables: [Variable.withString(resourceId)],
+    ).get();
+    if (rows.isEmpty) {
+      return null;
+    }
+    final row = rows.first;
+    return PromptUsageRecord(
+      resourceId: row.read<String>('resource_id'),
+      lastValues: _decodeStringMap(row.read<String>('last_values_json')),
+      copiedAt: parseDateTimeOrNull(row.readNullable<String>('copied_at')),
+      lastUsedAt: parseDateTimeOrNull(row.readNullable<String>('last_used_at')),
+      useCount: row.read<int>('use_count'),
+    );
+  }
+
+  Future<void> savePromptUsage({
+    required String resourceId,
+    required Map<String, String> lastValues,
+    bool markCopied = false,
+  }) async {
+    final existing = await loadPromptUsage(resourceId);
+    final now = DateTime.now().toUtc().toIso8601String();
+    final useCount = markCopied
+        ? (existing?.useCount ?? 0) + 1
+        : (existing?.useCount ?? 0);
+    await customStatement(
+      '''
+      INSERT INTO prompt_usage_records (
+        resource_id, last_values_json, copied_at, last_used_at, use_count
+      ) VALUES (?, ?, ?, ?, ?)
+      ON CONFLICT(resource_id) DO UPDATE SET
+        last_values_json = excluded.last_values_json,
+        copied_at = excluded.copied_at,
+        last_used_at = excluded.last_used_at,
+        use_count = excluded.use_count
+      ''',
+      [
+        resourceId,
+        encodeJson(lastValues),
+        markCopied ? now : existing?.copiedAt?.toUtc().toIso8601String(),
+        now,
+        useCount,
+      ],
+    );
+  }
+
+  Future<List<CatalogResource>> listRecentlyUsedPrompts({int limit = 6}) {
+    return listResources(
+      type: ResourceType.prompt,
+      sortMode: ResourceSortMode.recentlyUsed,
+      limit: limit,
+    );
+  }
+
   Future<int> countImportedResources() async {
     final row = await customSelect(
       'SELECT COUNT(1) AS count FROM imported_resources',
@@ -512,8 +688,9 @@ class AppDatabase extends GeneratedDatabase {
           INSERT INTO catalog_resources (
             id, type, source, title, summary, scenario, primary_category,
             difficulty, tags_json, primary_action_label, is_featured,
-            created_at, updated_at
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            quality_tier, quality_score, quality_reasons_json, use_cases_json,
+            avoid_cases_json, verified_at, origin_resource_id, created_at, updated_at
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ''',
           [
             resource.id,
@@ -527,6 +704,13 @@ class AppDatabase extends GeneratedDatabase {
             encodeJson(resource.tags),
             resource.primaryActionLabel,
             resource.isFeatured ? 1 : 0,
+            resource.qualityTier.storageKey,
+            resource.qualityScore,
+            encodeJson(resource.qualityReasons),
+            encodeJson(resource.useCases),
+            encodeJson(resource.avoidCases),
+            resource.verifiedAt,
+            null,
             resource.createdAt,
             resource.updatedAt,
           ],
@@ -538,8 +722,9 @@ class AppDatabase extends GeneratedDatabase {
           '''
           INSERT INTO prompt_resource_details (
             resource_id, template_body, variables_json, when_to_use, avoid_when,
-            example_input, example_output, supported_models_json
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            example_input, example_output, supported_models_json,
+            helper_notes_json, required_variable_names_json
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ''',
           [
             detail.resourceId,
@@ -550,6 +735,8 @@ class AppDatabase extends GeneratedDatabase {
             detail.exampleInput,
             detail.exampleOutput,
             encodeJson(detail.supportedModels),
+            encodeJson(detail.helperNotes),
+            encodeJson(detail.requiredVariableNames),
           ],
         );
       }
@@ -669,9 +856,10 @@ class AppDatabase extends GeneratedDatabase {
       '''
       INSERT INTO catalog_resources (
         id, type, source, title, summary, scenario, primary_category,
-        difficulty, tags_json, primary_action_label, is_featured, created_at,
-        updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        difficulty, tags_json, primary_action_label, is_featured,
+        quality_tier, quality_score, quality_reasons_json, use_cases_json,
+        avoid_cases_json, verified_at, origin_resource_id, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ''',
       [
         id,
@@ -685,6 +873,13 @@ class AppDatabase extends GeneratedDatabase {
         encodeJson(tags),
         _primaryActionForType(draft.type),
         0,
+        ResourceQualityTier.community.storageKey,
+        62,
+        encodeJson(const ['本地导入资源，等待你继续打磨和验证。']),
+        encodeJson(_defaultUseCasesForType(draft.type)),
+        encodeJson(_defaultAvoidCasesForType(draft.type)),
+        null,
+        null,
         now,
         now,
       ],
@@ -701,8 +896,9 @@ class AppDatabase extends GeneratedDatabase {
           '''
           INSERT INTO prompt_resource_details (
             resource_id, template_body, variables_json, when_to_use, avoid_when,
-            example_input, example_output, supported_models_json
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            example_input, example_output, supported_models_json,
+            helper_notes_json, required_variable_names_json
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ''',
           [
             id,
@@ -717,6 +913,13 @@ class AppDatabase extends GeneratedDatabase {
             draft.listA.isNotEmpty ? draft.listA.first : '导入后可继续补充示例输入',
             draft.listA.length > 1 ? draft.listA[1] : '导入后可继续补充示例输出',
             encodeJson(const ['ChatGPT', 'Claude', 'Gemini']),
+            encodeJson(variables.map(_defaultPromptHelperNote).toList()),
+            encodeJson(
+              variables
+                  .where((value) => value.defaultValue.trim().isEmpty)
+                  .map((value) => value.name)
+                  .toList(),
+            ),
           ],
         );
       case ResourceType.skill:
@@ -777,10 +980,232 @@ class AppDatabase extends GeneratedDatabase {
     return id;
   }
 
+  Future<SkillEditorDraft?> getSkillEditorDraft(String resourceId) async {
+    final detail = await getSkillDetail(resourceId);
+    if (detail == null) {
+      return null;
+    }
+    return buildSkillEditorDraftFromDetail(detail);
+  }
+
+  Future<String> duplicateOfficialSkill(String resourceId) async {
+    final detail = await getSkillDetail(resourceId);
+    if (detail == null) {
+      throw StateError('Skill resource not found: $resourceId');
+    }
+    if (!detail.resource.isOfficial) {
+      throw StateError('Only official skills can be duplicated');
+    }
+
+    final now = DateTime.now().toUtc().toIso8601String();
+    final copiedId = 'skill-imported-${DateTime.now().millisecondsSinceEpoch}';
+
+    await transaction(() async {
+      await customStatement(
+        '''
+        INSERT INTO catalog_resources (
+          id, type, source, title, summary, scenario, primary_category,
+          difficulty, tags_json, primary_action_label, is_featured,
+          quality_tier, quality_score, quality_reasons_json, use_cases_json,
+          avoid_cases_json, verified_at, origin_resource_id, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''',
+        [
+          copiedId,
+          ResourceType.skill.name,
+          ResourceSource.imported.name,
+          detail.resource.title,
+          detail.resource.summary,
+          detail.resource.scenario,
+          detail.resource.primaryCategory.storageKey,
+          detail.resource.difficulty.name,
+          encodeJson(detail.resource.tags),
+          _primaryActionForType(ResourceType.skill),
+          0,
+          detail.resource.qualityTier.storageKey,
+          detail.resource.qualityScore,
+          encodeJson(detail.resource.qualityReasons),
+          encodeJson(detail.resource.useCases),
+          encodeJson(detail.resource.avoidCases),
+          detail.resource.verifiedAt?.toUtc().toIso8601String(),
+          resourceId,
+          now,
+          now,
+        ],
+      );
+      await customStatement(
+        'INSERT INTO imported_resources (resource_id, created_at) VALUES (?, ?)',
+        [copiedId, now],
+      );
+      await customStatement(
+        '''
+        INSERT INTO skill_resource_details (
+          resource_id, capability_summary, input_requirements_json, usage_steps_json,
+          supported_models_json, copy_payload, raw_schema_json,
+          provider_adapters_json, example_code, example_language
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''',
+        [
+          copiedId,
+          detail.capabilitySummary,
+          encodeJson(detail.inputRequirements),
+          encodeJson(detail.usageSteps),
+          encodeJson(detail.supportedModels),
+          detail.copyPayload,
+          encodeJson(detail.rawSchema),
+          encodeJson(buildProviderAdaptersForSchema(detail.rawSchema)),
+          detail.exampleCode,
+          detail.exampleLanguage,
+        ],
+      );
+    });
+
+    return copiedId;
+  }
+
+  Future<void> updateImportedSkill(SkillEditorDraft draft) async {
+    final resourceRows = await customSelect(
+      '''
+      SELECT source, type
+      FROM catalog_resources
+      WHERE id = ?
+      LIMIT 1
+      ''',
+      variables: [Variable.withString(draft.resourceId)],
+    ).get();
+    if (resourceRows.isEmpty) {
+      throw StateError('Skill resource not found: ${draft.resourceId}');
+    }
+    final resourceRow = resourceRows.first;
+    if (resourceRow.read<String>('source') != ResourceSource.imported.name ||
+        resourceRow.read<String>('type') != ResourceType.skill.name) {
+      throw StateError('Only imported skills can be updated');
+    }
+
+    final normalizedTags = draft.tags
+        .map((value) => value.trim())
+        .where((value) => value.isNotEmpty)
+        .toSet()
+        .toList();
+    final normalizedInputs = draft.inputRequirements
+        .map((value) => value.trim())
+        .where((value) => value.isNotEmpty)
+        .toList();
+    final normalizedSteps = draft.usageSteps
+        .map((value) => value.trim())
+        .where((value) => value.isNotEmpty)
+        .toList();
+    final normalizedModels = draft.supportedModels
+        .map((value) => value.trim())
+        .where((value) => value.isNotEmpty)
+        .toSet()
+        .toList();
+    final rawSchema = draft.advancedSchemaMode
+        ? jsonDecode(normalizeSchemaJson(draft.advancedSchemaJson))
+              as Map<String, dynamic>
+        : buildSkillSchemaFromFields(draft.schemaFields);
+    final providerAdapters = buildProviderAdaptersForSchema(rawSchema);
+    final now = DateTime.now().toUtc().toIso8601String();
+
+    await transaction(() async {
+      await customStatement(
+        '''
+        UPDATE catalog_resources
+        SET title = ?, summary = ?, scenario = ?, primary_category = ?,
+            tags_json = ?, updated_at = ?
+        WHERE id = ?
+        ''',
+        [
+          draft.title.trim(),
+          draft.summary.trim(),
+          draft.scenario.trim(),
+          draft.primaryCategory.storageKey,
+          encodeJson(normalizedTags),
+          now,
+          draft.resourceId,
+        ],
+      );
+      await customStatement(
+        '''
+        UPDATE skill_resource_details
+        SET capability_summary = ?, input_requirements_json = ?, usage_steps_json = ?,
+            supported_models_json = ?, copy_payload = ?, raw_schema_json = ?,
+            provider_adapters_json = ?, example_code = ?, example_language = ?
+        WHERE resource_id = ?
+        ''',
+        [
+          draft.capabilitySummary.trim(),
+          encodeJson(normalizedInputs),
+          encodeJson(normalizedSteps),
+          encodeJson(normalizedModels),
+          draft.copyPayload,
+          encodeJson(rawSchema),
+          encodeJson(providerAdapters),
+          draft.exampleCode,
+          draft.exampleLanguage.trim().isEmpty
+              ? 'json'
+              : draft.exampleLanguage.trim(),
+          draft.resourceId,
+        ],
+      );
+    });
+  }
+
   Future<void> _ensureCatalogResourceColumns() async {
     if (!await _columnExists('catalog_resources', 'primary_category')) {
       await customStatement(
         "ALTER TABLE catalog_resources ADD COLUMN primary_category TEXT NOT NULL DEFAULT 'other'",
+      );
+    }
+    if (!await _columnExists('catalog_resources', 'origin_resource_id')) {
+      await customStatement(
+        'ALTER TABLE catalog_resources ADD COLUMN origin_resource_id TEXT',
+      );
+    }
+    if (!await _columnExists('catalog_resources', 'quality_tier')) {
+      await customStatement(
+        "ALTER TABLE catalog_resources ADD COLUMN quality_tier TEXT NOT NULL DEFAULT 'community'",
+      );
+    }
+    if (!await _columnExists('catalog_resources', 'quality_score')) {
+      await customStatement(
+        'ALTER TABLE catalog_resources ADD COLUMN quality_score INTEGER NOT NULL DEFAULT 60',
+      );
+    }
+    if (!await _columnExists('catalog_resources', 'quality_reasons_json')) {
+      await customStatement(
+        "ALTER TABLE catalog_resources ADD COLUMN quality_reasons_json TEXT NOT NULL DEFAULT '[]'",
+      );
+    }
+    if (!await _columnExists('catalog_resources', 'use_cases_json')) {
+      await customStatement(
+        "ALTER TABLE catalog_resources ADD COLUMN use_cases_json TEXT NOT NULL DEFAULT '[]'",
+      );
+    }
+    if (!await _columnExists('catalog_resources', 'avoid_cases_json')) {
+      await customStatement(
+        "ALTER TABLE catalog_resources ADD COLUMN avoid_cases_json TEXT NOT NULL DEFAULT '[]'",
+      );
+    }
+    if (!await _columnExists('catalog_resources', 'verified_at')) {
+      await customStatement(
+        'ALTER TABLE catalog_resources ADD COLUMN verified_at TEXT',
+      );
+    }
+  }
+
+  Future<void> _ensurePromptDetailColumns() async {
+    if (!await _columnExists('prompt_resource_details', 'helper_notes_json')) {
+      await customStatement(
+        "ALTER TABLE prompt_resource_details ADD COLUMN helper_notes_json TEXT NOT NULL DEFAULT '[]'",
+      );
+    }
+    if (!await _columnExists(
+      'prompt_resource_details',
+      'required_variable_names_json',
+    )) {
+      await customStatement(
+        "ALTER TABLE prompt_resource_details ADD COLUMN required_variable_names_json TEXT NOT NULL DEFAULT '[]'",
       );
     }
   }
@@ -804,6 +1229,84 @@ class AppDatabase extends GeneratedDatabase {
       await customStatement(
         'UPDATE catalog_resources SET primary_category = ? WHERE id = ?',
         [category.storageKey, row.read<String>('id')],
+      );
+    }
+  }
+
+  Future<void> _backfillResourceQuality() async {
+    final rows = await customSelect('''
+      SELECT id, is_featured, difficulty
+      FROM catalog_resources
+      WHERE trim(COALESCE(quality_tier, '')) = ''
+         OR quality_score IS NULL
+         OR trim(COALESCE(quality_reasons_json, '')) = ''
+    ''').get();
+    for (final row in rows) {
+      final isFeatured = row.read<int>('is_featured') == 1;
+      final difficulty = resourceDifficultyFromString(
+        row.read<String>('difficulty'),
+      );
+      final tier = isFeatured
+          ? ResourceQualityTier.featured
+          : difficulty == ResourceDifficulty.beginner
+          ? ResourceQualityTier.verified
+          : ResourceQualityTier.community;
+      final score = switch (tier) {
+        ResourceQualityTier.featured => 90,
+        ResourceQualityTier.verified => 80,
+        ResourceQualityTier.community => 68,
+        ResourceQualityTier.experimental => 52,
+      };
+      await customStatement(
+        '''
+        UPDATE catalog_resources
+        SET quality_tier = ?, quality_score = ?, quality_reasons_json = ?,
+            use_cases_json = ?, avoid_cases_json = ?, verified_at = COALESCE(verified_at, updated_at)
+        WHERE id = ?
+        ''',
+        [
+          tier.storageKey,
+          score,
+          encodeJson(const ['已完成本地目录结构化整理']),
+          encodeJson(const ['适合先从当前任务入手筛选']),
+          encodeJson(const ['不建议在目标不清晰时直接照搬']),
+          row.read<String>('id'),
+        ],
+      );
+    }
+  }
+
+  Future<void> _backfillPromptDetails() async {
+    final rows = await customSelect('''
+      SELECT resource_id, variables_json, helper_notes_json, required_variable_names_json
+      FROM prompt_resource_details
+    ''').get();
+    for (final row in rows) {
+      final variables = _decodePromptVariables(
+        row.read<String>('variables_json'),
+      );
+      final helperNotes = row.read<String>('helper_notes_json');
+      final requiredNames = row.read<String>('required_variable_names_json');
+      final nextHelperNotes = helperNotes.trim().isEmpty || helperNotes == '[]'
+          ? variables.map(_defaultPromptHelperNote).toList()
+          : _decodeStringList(helperNotes);
+      final nextRequired = requiredNames.trim().isEmpty || requiredNames == '[]'
+          ? variables
+                .where((variable) => variable.defaultValue.trim().isEmpty)
+                .map((variable) => variable.name)
+                .toList()
+          : _decodeStringList(requiredNames);
+      await customStatement(
+        '''
+        UPDATE prompt_resource_details
+        SET helper_notes_json = ?, required_variable_names_json = ?
+        WHERE resource_id = ?
+        ''',
+        [
+          encodeJson(nextHelperNotes),
+          encodeJson(nextRequired),
+          row.read<String>('resource_id'),
+        ],
       );
     }
   }
@@ -868,6 +1371,17 @@ class AppDatabase extends GeneratedDatabase {
       primaryActionLabel: row.read<String>('primary_action_label'),
       isFeatured: row.read<int>('is_featured') == 1,
       isFavorite: row.read<int>('is_favorite') == 1,
+      qualityTier: resourceQualityTierFromString(
+        row.read<String>('quality_tier'),
+      ),
+      qualityScore: row.read<int>('quality_score'),
+      qualityReasons: _decodeStringList(
+        row.read<String>('quality_reasons_json'),
+      ),
+      useCases: _decodeStringList(row.read<String>('use_cases_json')),
+      avoidCases: _decodeStringList(row.read<String>('avoid_cases_json')),
+      verifiedAt: parseDateTimeOrNull(row.readNullable<String>('verified_at')),
+      originResourceId: row.readNullable<String>('origin_resource_id'),
       createdAt: parseDateTime(row.read<String>('created_at')),
       updatedAt: parseDateTime(row.read<String>('updated_at')),
     );
@@ -888,6 +1402,12 @@ class AppDatabase extends GeneratedDatabase {
     return (jsonDecode(rawJson) as List<dynamic>)
         .map((value) => value.toString())
         .toList();
+  }
+
+  Map<String, String> _decodeStringMap(String rawJson) {
+    return (jsonDecode(rawJson) as Map<String, dynamic>).map(
+      (key, value) => MapEntry(key, value.toString()),
+    );
   }
 
   List<PromptVariable> _decodePromptVariables(String rawJson) {
@@ -946,6 +1466,32 @@ class AppDatabase extends GeneratedDatabase {
       ResourceType.prompt => '填写变量后复制',
       ResourceType.skill => '复制技能内容',
       ResourceType.mcp => '复制配置模板',
+    };
+  }
+
+  List<String> _defaultUseCasesForType(ResourceType type) {
+    return switch (type) {
+      ResourceType.prompt => const ['适合先做出第一版结果', '适合按任务快速复制使用'],
+      ResourceType.skill => const ['适合沉淀重复任务方法', '适合后续同类任务直接复用'],
+      ResourceType.mcp => const ['适合连接外部工具和数据', '适合给 AI 增加实时上下文'],
+    };
+  }
+
+  List<String> _defaultAvoidCasesForType(ResourceType type) {
+    return switch (type) {
+      ResourceType.prompt => const ['不适合需求还没想清楚时直接套用'],
+      ResourceType.skill => const ['不适合还没稳定下来的工作流'],
+      ResourceType.mcp => const ['不适合还没有权限或网关时直接接入'],
+    };
+  }
+
+  String _defaultPromptHelperNote(PromptVariable variable) {
+    return switch (variable.type) {
+      PromptVariableType.code => '代码变量建议直接粘贴原始代码。',
+      PromptVariableType.enumeration => '枚举变量优先从给定选项里选，输出会更稳定。',
+      PromptVariableType.booleanType => '布尔变量只需要开或关，不需要额外解释。',
+      PromptVariableType.longText => '长文本变量尽量只保留必要上下文。',
+      PromptVariableType.text => '文本变量尽量具体，少用模糊描述。',
     };
   }
 }

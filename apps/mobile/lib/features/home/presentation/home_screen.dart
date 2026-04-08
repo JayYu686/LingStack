@@ -494,7 +494,8 @@ class _ExplorerHomeTabState extends ConsumerState<_ExplorerHomeTab> {
                         index: entry.key + 1,
                         child: ResourceCard(
                           resource: entry.value,
-                          onTap: () => openCatalogResource(context, entry.value),
+                          onTap: () =>
+                              openCatalogResource(context, entry.value),
                           onFavoriteToggle: () => toggleFavoriteAction(
                             context,
                             ref,
@@ -691,7 +692,6 @@ class _ExplorerHomeTabState extends ConsumerState<_ExplorerHomeTab> {
       ],
     );
   }
-
 }
 
 class _ResourceBrowseTab extends ConsumerStatefulWidget {
@@ -712,6 +712,8 @@ class _ResourceBrowseTabState extends ConsumerState<_ResourceBrowseTab> {
   Object? _error;
   ResourceCategory _selectedCategory = ResourceCategory.all;
   String _selectedTag = '';
+  ResourceQualityTier? _selectedQualityTier;
+  ResourceSortMode _selectedSortMode = ResourceSortMode.recommended;
   bool _favoritesOnly = false;
   bool _importedOnly = false;
   bool _isInitialLoading = true;
@@ -746,6 +748,8 @@ class _ResourceBrowseTabState extends ConsumerState<_ResourceBrowseTab> {
     query: _searchController.committedQuery,
     category: _selectedCategory,
     tag: _selectedTag,
+    qualityTier: _selectedQualityTier,
+    sortMode: _selectedSortMode,
     favoritesOnly: _favoritesOnly,
     importedOnly: _importedOnly,
   );
@@ -780,6 +784,11 @@ class _ResourceBrowseTabState extends ConsumerState<_ResourceBrowseTab> {
       if (_selectedTag.isNotEmpty &&
           !snapshot.availableTags.contains(_selectedTag)) {
         _selectedTag = '';
+        needsReload = true;
+      }
+      if (_selectedQualityTier != null &&
+          !snapshot.availableQualityTiers.contains(_selectedQualityTier)) {
+        _selectedQualityTier = null;
         needsReload = true;
       }
 
@@ -875,6 +884,21 @@ class _ResourceBrowseTabState extends ConsumerState<_ResourceBrowseTab> {
             ),
           ),
           const SizedBox(height: 16),
+          _QualityTierStrip(
+            available: browse.availableQualityTiers,
+            selected: _selectedQualityTier,
+            onSelected: (tier) {
+              if (tier == _selectedQualityTier) {
+                return;
+              }
+              setState(() {
+                _selectedQualityTier = tier;
+                _selectedTag = '';
+              });
+              unawaited(_loadBrowseSnapshot(searching: true));
+            },
+          ),
+          const SizedBox(height: 12),
           _CategoryFilterStrip(
             categories: browse.availableCategories,
             selectedCategory: _selectedCategory,
@@ -886,6 +910,18 @@ class _ResourceBrowseTabState extends ConsumerState<_ResourceBrowseTab> {
                 _selectedCategory = category;
                 _selectedTag = '';
               });
+              unawaited(_loadBrowseSnapshot(searching: true));
+            },
+          ),
+          const SizedBox(height: 12),
+          _SortModeStrip(
+            modes: _sortModesForType(widget.type),
+            selected: _selectedSortMode,
+            onSelected: (mode) {
+              if (mode == _selectedSortMode) {
+                return;
+              }
+              setState(() => _selectedSortMode = mode);
               unawaited(_loadBrowseSnapshot(searching: true));
             },
           ),
@@ -911,6 +947,7 @@ class _ResourceBrowseTabState extends ConsumerState<_ResourceBrowseTab> {
               FilterChip(
                 label: const Text('只看收藏'),
                 selected: _favoritesOnly,
+                materialTapTargetSize: MaterialTapTargetSize.padded,
                 onSelected: (value) {
                   setState(() => _favoritesOnly = value);
                   unawaited(_loadBrowseSnapshot(searching: true));
@@ -919,6 +956,7 @@ class _ResourceBrowseTabState extends ConsumerState<_ResourceBrowseTab> {
               FilterChip(
                 label: const Text('只看我导入的'),
                 selected: _importedOnly,
+                materialTapTargetSize: MaterialTapTargetSize.padded,
                 onSelected: (value) {
                   setState(() => _importedOnly = value);
                   unawaited(_loadBrowseSnapshot(searching: true));
@@ -994,7 +1032,6 @@ class _ResourceBrowseTabState extends ConsumerState<_ResourceBrowseTab> {
       ),
     );
   }
-
 }
 
 class _MyLibraryTab extends ConsumerWidget {
@@ -1323,18 +1360,24 @@ class _CategoryFilterStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 48,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         separatorBuilder: (context, index) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
           final category = categories[index];
-          return ChoiceChip(
-            label: Text(category.label),
+          return Semantics(
+            button: true,
             selected: category == selectedCategory,
-            showCheckmark: false,
-            onSelected: (_) => onSelected(category),
+            label: category.label,
+            child: ChoiceChip(
+              label: Text(category.label),
+              selected: category == selectedCategory,
+              showCheckmark: false,
+              materialTapTargetSize: MaterialTapTargetSize.padded,
+              onSelected: (_) => onSelected(category),
+            ),
           );
         },
       ),
@@ -1357,7 +1400,7 @@ class _TagFilterStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     final values = ['全部标签', ...tags];
     return SizedBox(
-      height: 36,
+      height: 48,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: values.length,
@@ -1365,11 +1408,97 @@ class _TagFilterStrip extends StatelessWidget {
         itemBuilder: (context, index) {
           final label = values[index];
           final resolvedTag = label == '全部标签' ? '' : label;
-          return ChoiceChip(
-            label: Text(label),
+          return Semantics(
+            button: true,
             selected: resolvedTag == selectedTag,
-            showCheckmark: false,
-            onSelected: (_) => onSelected(resolvedTag),
+            label: label,
+            child: ChoiceChip(
+              label: Text(label),
+              selected: resolvedTag == selectedTag,
+              showCheckmark: false,
+              materialTapTargetSize: MaterialTapTargetSize.padded,
+              onSelected: (_) => onSelected(resolvedTag),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _QualityTierStrip extends StatelessWidget {
+  const _QualityTierStrip({
+    required this.available,
+    required this.selected,
+    required this.onSelected,
+  });
+
+  final List<ResourceQualityTier> available;
+  final ResourceQualityTier? selected;
+  final ValueChanged<ResourceQualityTier?> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final values = <ResourceQualityTier?>[null, ...available];
+    return SizedBox(
+      height: 48,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: values.length,
+        separatorBuilder: (context, index) => const SizedBox(width: 8),
+        itemBuilder: (context, index) {
+          final tier = values[index];
+          final label = tier?.label ?? '全部质量';
+          return Semantics(
+            button: true,
+            selected: tier == selected,
+            label: label,
+            child: ChoiceChip(
+              label: Text(label),
+              selected: tier == selected,
+              showCheckmark: false,
+              materialTapTargetSize: MaterialTapTargetSize.padded,
+              onSelected: (_) => onSelected(tier),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _SortModeStrip extends StatelessWidget {
+  const _SortModeStrip({
+    required this.modes,
+    required this.selected,
+    required this.onSelected,
+  });
+
+  final List<ResourceSortMode> modes;
+  final ResourceSortMode selected;
+  final ValueChanged<ResourceSortMode> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 48,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: modes.length,
+        separatorBuilder: (context, index) => const SizedBox(width: 8),
+        itemBuilder: (context, index) {
+          final mode = modes[index];
+          return Semantics(
+            button: true,
+            selected: mode == selected,
+            label: mode.label,
+            child: ChoiceChip(
+              label: Text(mode.label),
+              selected: mode == selected,
+              showCheckmark: false,
+              materialTapTargetSize: MaterialTapTargetSize.padded,
+              onSelected: (_) => onSelected(mode),
+            ),
           );
         },
       ),
@@ -1510,7 +1639,7 @@ class _CompactFeedSection extends ConsumerWidget {
               child: ResourceCard(
                 resource: entry.value,
                 compact: compact,
-                        onTap: () => openCatalogResource(context, entry.value),
+                onTap: () => openCatalogResource(context, entry.value),
                 onFavoriteToggle: () =>
                     toggleFavoriteAction(context, ref, entry.value.id),
               ),
@@ -1519,7 +1648,6 @@ class _CompactFeedSection extends ConsumerWidget {
       ],
     );
   }
-
 }
 
 class _PreviewSection extends ConsumerWidget {
@@ -1563,7 +1691,6 @@ class _PreviewSection extends ConsumerWidget {
       ],
     );
   }
-
 }
 
 class _HomeLoadingState extends StatelessWidget {
@@ -1638,6 +1765,17 @@ String _typePageSubtitle(ResourceType type) {
     ResourceType.skill => '把常做的事整理成固定方法，后面同类任务直接复用。',
     ResourceType.mcp => '给 AI 接上 GitHub、文档、数据库这类外部工具。先从你已经在用的平台开始。',
   };
+}
+
+List<ResourceSortMode> _sortModesForType(ResourceType type) {
+  if (type == ResourceType.prompt) {
+    return const [
+      ResourceSortMode.recommended,
+      ResourceSortMode.easiestToUse,
+      ResourceSortMode.recentlyUsed,
+    ];
+  }
+  return const [ResourceSortMode.recommended, ResourceSortMode.easiestToUse];
 }
 
 String _typeFeaturedSubtitle(ResourceType type) {

@@ -236,6 +236,7 @@ class AppTheme {
           foregroundColor: textSecondary,
           hoverColor: accent.withValues(alpha: 0.08),
           focusColor: accent.withValues(alpha: 0.12),
+          minimumSize: const Size(48, 48),
         ),
       ),
       snackBarTheme: SnackBarThemeData(

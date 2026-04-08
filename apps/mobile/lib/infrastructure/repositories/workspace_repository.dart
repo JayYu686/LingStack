@@ -1,4 +1,5 @@
 import '../../domain/models.dart';
+import '../../domain/skill_editor_models.dart';
 import '../database/app_database.dart';
 import '../network/sync_api_client.dart';
 
@@ -14,8 +15,20 @@ class WorkspaceRepository {
       'starter-pack',
     );
     final featuredResourcesFuture = _database.listResources(
-      featuredOnly: true,
+      qualityTier: ResourceQualityTier.featured,
       limit: 9,
+    );
+    final verifiedResourcesFuture = _database.listResources(
+      qualityTier: ResourceQualityTier.verified,
+      limit: 9,
+    );
+    final promptQuickStartFuture = _database.listResources(
+      type: ResourceType.prompt,
+      sortMode: ResourceSortMode.easiestToUse,
+      limit: 6,
+    );
+    final recentPromptResourcesFuture = _database.listRecentlyUsedPrompts(
+      limit: 6,
     );
     final promptsFuture = _database.listResources(
       type: ResourceType.prompt,
@@ -43,6 +56,9 @@ class WorkspaceRepository {
     final featuredCollections = await featuredCollectionsFuture;
     final beginnerResources = await beginnerResourcesFuture;
     final featuredResources = await featuredResourcesFuture;
+    final verifiedResources = await verifiedResourcesFuture;
+    final promptQuickStartResources = await promptQuickStartFuture;
+    final recentPromptResources = await recentPromptResourcesFuture;
     final prompts = await promptsFuture;
     final skills = await skillsFuture;
     final mcps = await mcpsFuture;
@@ -58,6 +74,9 @@ class WorkspaceRepository {
       featuredCollections: featuredCollections,
       beginnerResources: beginnerResources?.resources ?? const [],
       featuredResources: featuredResources,
+      verifiedResources: verifiedResources,
+      promptQuickStartResources: promptQuickStartResources,
+      recentPromptResources: recentPromptResources,
       prompts: prompts,
       skills: skills,
       mcps: mcps,
@@ -75,6 +94,8 @@ class WorkspaceRepository {
       query: filter.query,
       category: filter.category,
       tag: filter.tag,
+      qualityTier: filter.qualityTier,
+      sortMode: filter.sortMode,
       favoritesOnly: filter.favoritesOnly,
       importedOnly: filter.importedOnly,
     );
@@ -88,17 +109,26 @@ class WorkspaceRepository {
       query: filter.query,
       category: filter.category,
       tag: filter.tag,
+      qualityTier: filter.qualityTier,
+      sortMode: filter.sortMode,
       favoritesOnly: filter.favoritesOnly,
       importedOnly: filter.importedOnly,
     );
     final availableCategoriesFuture = _database.listAvailableCategories(
       type: filter.type,
+      qualityTier: filter.qualityTier,
       favoritesOnly: filter.favoritesOnly,
       importedOnly: filter.importedOnly,
     );
     final availableTagsFuture = _database.listTopTags(
       type: filter.type,
       category: filter.category,
+      qualityTier: filter.qualityTier,
+      favoritesOnly: filter.favoritesOnly,
+      importedOnly: filter.importedOnly,
+    );
+    final availableQualityTiersFuture = _database.listAvailableQualityTiers(
+      type: filter.type,
       favoritesOnly: filter.favoritesOnly,
       importedOnly: filter.importedOnly,
     );
@@ -106,11 +136,13 @@ class WorkspaceRepository {
     final resources = await resourcesFuture;
     final availableCategories = await availableCategoriesFuture;
     final availableTags = await availableTagsFuture;
+    final availableQualityTiers = await availableQualityTiersFuture;
 
     return ResourceBrowseSnapshot(
       resources: resources,
       availableCategories: availableCategories,
       availableTags: availableTags,
+      availableQualityTiers: availableQualityTiers,
     );
   }
 
@@ -122,8 +154,28 @@ class WorkspaceRepository {
     return _database.getPromptDetail(resourceId);
   }
 
+  Future<PromptUsageRecord?> loadPromptUsage(String resourceId) {
+    return _database.loadPromptUsage(resourceId);
+  }
+
+  Future<void> savePromptUsage({
+    required String resourceId,
+    required Map<String, String> lastValues,
+    bool markCopied = false,
+  }) {
+    return _database.savePromptUsage(
+      resourceId: resourceId,
+      lastValues: lastValues,
+      markCopied: markCopied,
+    );
+  }
+
   Future<SkillResourceDetail?> loadSkillDetail(String resourceId) {
     return _database.getSkillDetail(resourceId);
+  }
+
+  Future<SkillEditorDraft?> loadSkillEditorDraft(String resourceId) {
+    return _database.getSkillEditorDraft(resourceId);
   }
 
   Future<McpResourceDetail?> loadMcpDetail(String resourceId) {
@@ -140,6 +192,14 @@ class WorkspaceRepository {
 
   Future<String> importResource(ImportResourceDraft draft) {
     return _database.importResource(draft);
+  }
+
+  Future<String> duplicateOfficialSkill(String resourceId) {
+    return _database.duplicateOfficialSkill(resourceId);
+  }
+
+  Future<void> updateImportedSkill(SkillEditorDraft draft) {
+    return _database.updateImportedSkill(draft);
   }
 
   Future<bool> refreshOfficialCatalog(SyncApiClient client) async {

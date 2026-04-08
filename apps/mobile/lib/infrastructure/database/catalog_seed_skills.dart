@@ -41,11 +41,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
     );
   }
 
-  const allAdapters = {
-    'openai': true,
-    'anthropic': true,
-    'gemini': true,
-  };
+  const allAdapters = {'openai': true, 'anthropic': true, 'gemini': true};
 
   return [
     skill(
@@ -57,11 +53,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       tags: const ['会议', '纪要', '结构化'],
       capabilitySummary: '适合把语音转写、聊天摘录和手写纪要快速整理成可执行版本。',
       inputRequirements: const ['会议原文', '如有则补充会议主题'],
-      usageSteps: const [
-        '粘贴会议原文或转写稿',
-        '补充会议主题与参与角色',
-        '让模型按结论、待办、负责人输出',
-      ],
+      usageSteps: const ['粘贴会议原文或转写稿', '补充会议主题与参与角色', '让模型按结论、待办、负责人输出'],
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'],
       copyPayload:
           '技能名：会议纪要结构化\n输入：meeting_text, meeting_topic\n输出：会议结论、待办事项、负责人、截止时间',
@@ -74,7 +66,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['meeting_text'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "meeting_text": "今天我们讨论首页改版...",\n  "meeting_topic": "资源库首页优化"\n}',
+      exampleCode:
+          '{\n  "meeting_text": "今天我们讨论首页改版...",\n  "meeting_topic": "资源库首页优化"\n}',
       exampleLanguage: 'json',
       featured: true,
     ),
@@ -87,14 +80,9 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       tags: const ['提示词', '评估', '优化'],
       capabilitySummary: '适合提示词迭代时做第一轮体检，减少模糊表达和输出不稳定。',
       inputRequirements: const ['提示词原文', '目标任务'],
-      usageSteps: const [
-        '粘贴原始提示词',
-        '补充任务目标或目标模型',
-        '查看评分、缺失项和建议改写',
-      ],
+      usageSteps: const ['粘贴原始提示词', '补充任务目标或目标模型', '查看评分、缺失项和建议改写'],
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini'],
-      copyPayload:
-          '技能名：提示词评分器\n输入：prompt_text, goal\n输出：清晰度评分、缺失项、建议改写',
+      copyPayload: '技能名：提示词评分器\n输入：prompt_text, goal\n输出：清晰度评分、缺失项、建议改写',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -119,8 +107,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['需求描述', '时间约束或上线目标'],
       usageSteps: const ['粘贴需求', '补充上线目标', '输出任务拆解与依赖顺序'],
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'],
-      copyPayload:
-          '技能名：需求转任务清单\n输入：requirement, deadline\n输出：功能拆解、依赖、风险、建议排期',
+      copyPayload: '技能名：需求转任务清单\n输入：requirement, deadline\n输出：功能拆解、依赖、风险、建议排期',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -130,7 +117,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['requirement'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "requirement": "把官方资源做成动态下发目录",\n  "deadline": "两周内可用"\n}',
+      exampleCode:
+          '{\n  "requirement": "把官方资源做成动态下发目录",\n  "deadline": "两周内可用"\n}',
       exampleLanguage: 'json',
       featured: true,
     ),
@@ -145,8 +133,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['标题', '正文或摘要'],
       usageSteps: const ['输入内容', '要求输出标签和主题', '人工确认后入库'],
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini'],
-      copyPayload:
-          '技能名：内容标签归类\n输入：title, content\n输出：主题标签、适用平台、内容类型',
+      copyPayload: '技能名：内容标签归类\n输入：title, content\n输出：主题标签、适用平台、内容类型',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -156,7 +143,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['content'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "title": "提示词、技能与 MCP 的区别",\n  "content": "本文解释三者差异..."\n}',
+      exampleCode:
+          '{\n  "title": "提示词、技能与 MCP 的区别",\n  "content": "本文解释三者差异..."\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -170,8 +158,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['用户原话'],
       usageSteps: const ['输入用户原话', '返回意图分类', '补充建议回复方向'],
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini'],
-      copyPayload:
-          '技能名：用户意图归因\n输入：message\n输出：意图分类、紧急程度、建议回复策略',
+      copyPayload: '技能名：用户意图归因\n输入：message\n输出：意图分类、紧急程度、建议回复策略',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -194,8 +181,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['接口定义', '目标读者'],
       usageSteps: const ['粘贴接口字段', '指定读者', '输出结构化文档'],
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini'],
-      copyPayload:
-          '技能名：接口文档生成器\n输入：api_contract, audience\n输出：用途、参数表、响应表、示例调用',
+      copyPayload: '技能名：接口文档生成器\n输入：api_contract, audience\n输出：用途、参数表、响应表、示例调用',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -205,7 +191,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['api_contract'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "api_contract": "GET /v1/catalog/resources",\n  "audience": "前端工程师"\n}',
+      exampleCode:
+          '{\n  "api_contract": "GET /v1/catalog/resources",\n  "audience": "前端工程师"\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -230,7 +217,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['raw_feedback'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "raw_feedback": "点我的页面一直转圈，什么都进不去",\n  "environment": "Windows 调试构建"\n}',
+      exampleCode:
+          '{\n  "raw_feedback": "点我的页面一直转圈，什么都进不去",\n  "environment": "Windows 调试构建"\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -250,13 +238,20 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'type': 'object',
         'properties': {
           'task_description': {'type': 'string'},
-          'inputs': {'type': 'array', 'items': {'type': 'string'}},
-          'outputs': {'type': 'array', 'items': {'type': 'string'}},
+          'inputs': {
+            'type': 'array',
+            'items': {'type': 'string'},
+          },
+          'outputs': {
+            'type': 'array',
+            'items': {'type': 'string'},
+          },
         },
         'required': ['task_description'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "task_description": "把会议记录整理成纪要",\n  "inputs": ["meeting_text"],\n  "outputs": ["summary", "todos"]\n}',
+      exampleCode:
+          '{\n  "task_description": "把会议记录整理成纪要",\n  "inputs": ["meeting_text"],\n  "outputs": ["summary", "todos"]\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -276,13 +271,20 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'type': 'object',
         'properties': {
           'goal': {'type': 'string'},
-          'flows': {'type': 'array', 'items': {'type': 'string'}},
-          'expected_outcomes': {'type': 'array', 'items': {'type': 'string'}},
+          'flows': {
+            'type': 'array',
+            'items': {'type': 'string'},
+          },
+          'expected_outcomes': {
+            'type': 'array',
+            'items': {'type': 'string'},
+          },
         },
         'required': ['goal', 'flows'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "goal": "验证首页首屏对新手是否友好",\n  "flows": ["进入首页", "点击新手合集", "查看详情页"]\n}',
+      exampleCode:
+          '{\n  "goal": "验证首页首屏对新手是否友好",\n  "flows": ["进入首页", "点击新手合集", "查看详情页"]\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -296,8 +298,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['仓库上下文', '目标操作'],
       usageSteps: const ['说明当前 PR/Issue', '选择操作目标', '生成标准命令与执行顺序'],
       supportedModels: const ['Claude', 'ChatGPT'],
-      copyPayload:
-          '技能名：GitHub 命令行工作流\n输入：repo_context, task\n输出：命令顺序、核对点、风险提示',
+      copyPayload: '技能名：GitHub 命令行工作流\n输入：repo_context, task\n输出：命令顺序、核对点、风险提示',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -307,7 +308,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['task'],
       },
       providerAdapters: const {'openai': true, 'anthropic': true},
-      exampleCode: '{\n  "repo_context": "处理一个被要求补测试的 PR",\n  "task": "查看未解决评论并生成修复步骤"\n}',
+      exampleCode:
+          '{\n  "repo_context": "处理一个被要求补测试的 PR",\n  "task": "查看未解决评论并生成修复步骤"\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -332,7 +334,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['schema_or_sql'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "schema_or_sql": "SELECT * FROM events WHERE created_at >= ?",\n  "issue": "查询高峰期超时"\n}',
+      exampleCode:
+          '{\n  "schema_or_sql": "SELECT * FROM events WHERE created_at >= ?",\n  "issue": "查询高峰期超时"\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -346,8 +349,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['产品目标', '技术约束'],
       usageSteps: const ['说明目标', '列约束', '输出阶段计划和验收点'],
       supportedModels: const ['Claude', 'ChatGPT', 'Gemini'],
-      copyPayload:
-          '技能名：跨端交付规划\n输入：goal, constraints\n输出：里程碑、风险、验收标准',
+      copyPayload: '技能名：跨端交付规划\n输入：goal, constraints\n输出：里程碑、风险、验收标准',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -357,7 +359,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['goal'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "goal": "做一款本地优先的 AI 资源库 App",\n  "constraints": "Flutter 前端，Go 后端，自托管同步"\n}',
+      exampleCode:
+          '{\n  "goal": "做一款本地优先的 AI 资源库 App",\n  "constraints": "Flutter 前端，Go 后端，自托管同步"\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -371,8 +374,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['SQL', '表结构（可选）'],
       usageSteps: const ['输入 SQL', '补充表结构', '输出逐段解释与风险提示'],
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini'],
-      copyPayload:
-          '技能名：SQL 解释与教学\n输入：sql, schema\n输出：逐段解释、瓶颈判断、改写建议',
+      copyPayload: '技能名：SQL 解释与教学\n输入：sql, schema\n输出：逐段解释、瓶颈判断、改写建议',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -382,7 +384,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['sql'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "sql": "SELECT u.id, COUNT(o.id) FROM users u LEFT JOIN orders o ON ...",\n  "schema": "users(id), orders(user_id, created_at)"\n}',
+      exampleCode:
+          '{\n  "sql": "SELECT u.id, COUNT(o.id) FROM users u LEFT JOIN orders o ON ...",\n  "schema": "users(id), orders(user_id, created_at)"\n}',
       exampleLanguage: 'sql',
     ),
     skill(
@@ -396,8 +399,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['论文内容或摘要', '阅读目标'],
       usageSteps: const ['输入论文内容', '指定阅读目标', '输出结构化摘要'],
       supportedModels: const ['Claude', 'ChatGPT', 'Gemini'],
-      copyPayload:
-          '技能名：论文速读技能\n输入：paper_text, reading_goal\n输出：问题、方法、实验、局限、启发',
+      copyPayload: '技能名：论文速读技能\n输入：paper_text, reading_goal\n输出：问题、方法、实验、局限、启发',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -407,7 +409,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['paper_text'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "paper_text": "The paper proposes...",\n  "reading_goal": "判断是否适合做资源检索增强"\n}',
+      exampleCode:
+          '{\n  "paper_text": "The paper proposes...",\n  "reading_goal": "判断是否适合做资源检索增强"\n}',
       exampleLanguage: 'markdown',
     ),
     skill(
@@ -421,8 +424,7 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
       inputRequirements: const ['原始经历', '目标岗位'],
       usageSteps: const ['粘贴经历', '补充目标岗位', '输出亮点与改写版本'],
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini'],
-      copyPayload:
-          '技能名：简历亮点提炼\n输入：experience, target_role\n输出：亮点摘要、关键词、改写建议',
+      copyPayload: '技能名：简历亮点提炼\n输入：experience, target_role\n输出：亮点摘要、关键词、改写建议',
       rawSchema: const {
         'type': 'object',
         'properties': {
@@ -432,7 +434,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['experience'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "experience": "负责资源目录重构与后端同步服务搭建",\n  "target_role": "全栈工程师"\n}',
+      exampleCode:
+          '{\n  "experience": "负责资源目录重构与后端同步服务搭建",\n  "target_role": "全栈工程师"\n}',
       exampleLanguage: 'json',
     ),
     skill(
@@ -457,7 +460,8 @@ List<SkillSeedBundle> buildSkillSeeds(String stamp) {
         'required': ['project_story'],
       },
       providerAdapters: allAdapters,
-      exampleCode: '{\n  "project_story": "从零设计一款本地优先的 AI 资源库 App",\n  "target_role": "产品技术负责人"\n}',
+      exampleCode:
+          '{\n  "project_story": "从零设计一款本地优先的 AI 资源库 App",\n  "target_role": "产品技术负责人"\n}',
       exampleLanguage: 'json',
     ),
   ];

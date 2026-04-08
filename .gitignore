@@ -3,6 +3,8 @@ Thumbs.db
 .idea/
 .vscode/
 .cache/
+.tooling/flutter-sdk/
+.tooling/*.zip
 __pycache__/
 
 apps/mobile/.dart_tool/
@@ -17,6 +19,7 @@ services/sync-api/coverage.out
 services/sync-api/data/
 
 .agent/
+.agents/
 .claude/
 .codebuddy/
 .codex/
@@ -42,3 +45,5 @@ apps/mobile/gradle_debug_info*.txt
 apps/mobile/android/gradle_debug_info*.txt
 apps/mobile/run*.txt
 services/sync-api/server*.txt
+skills-lock.json
+temp_hi.dart

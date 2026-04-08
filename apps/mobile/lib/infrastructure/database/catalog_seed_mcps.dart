@@ -48,7 +48,13 @@ List<McpSeedBundle> buildMcpSeeds(String stamp) {
       difficulty: ResourceDifficulty.intermediate,
       tags: const ['GitHub', '代码', '协作'],
       capabilitiesSummary: '适合代码审查、Issue 追踪、仓库导航和 PR 处理。',
-      supportedClients: const ['Claude Desktop', 'Cherry Studio', 'Cline', 'Continue', 'Cursor'],
+      supportedClients: const [
+        'Claude Desktop',
+        'Cherry Studio',
+        'Cline',
+        'Continue',
+        'Cursor',
+      ],
       requiredEnvVars: const ['GITHUB_TOKEN'],
       setupSteps: const [
         '准备最小权限的 GitHub Token',
@@ -117,11 +123,7 @@ List<McpSeedBundle> buildMcpSeeds(String stamp) {
       capabilitiesSummary: '适合读取网页正文、帮助文档和公开资料页面。',
       supportedClients: const ['Claude Desktop', 'Cherry Studio', 'Continue'],
       requiredEnvVars: const [],
-      setupSteps: const [
-        '启用 fetch server',
-        '限制允许访问的站点范围',
-        '先在测试目标站点上验证抓取格式',
-      ],
+      setupSteps: const ['启用 fetch server', '限制允许访问的站点范围', '先在测试目标站点上验证抓取格式'],
       configTemplate: r'''
 {
   "mcpServers": {
@@ -182,11 +184,7 @@ List<McpSeedBundle> buildMcpSeeds(String stamp) {
       capabilitiesSummary: '适合轻量库结构理解、查询验证和问题排查。',
       supportedClients: const ['Claude Desktop', 'Cherry Studio', 'Continue'],
       requiredEnvVars: const [],
-      setupSteps: const [
-        '确定数据库文件路径',
-        '为测试库先配置只读访问',
-        '验证表结构和简单查询',
-      ],
+      setupSteps: const ['确定数据库文件路径', '为测试库先配置只读访问', '验证表结构和简单查询'],
       configTemplate: r'''
 {
   "mcpServers": {
@@ -213,13 +211,14 @@ List<McpSeedBundle> buildMcpSeeds(String stamp) {
       difficulty: ResourceDifficulty.intermediate,
       tags: const ['Postgres', '数据库', '查询'],
       capabilitiesSummary: '适合调试查询、理解表关系和做数据验证。',
-      supportedClients: const ['Claude Desktop', 'Cherry Studio', 'Continue', 'Cursor'],
-      requiredEnvVars: const ['POSTGRES_DSN'],
-      setupSteps: const [
-        '准备只读数据库账号',
-        '配置连接串并限制访问库',
-        '先验证 schema 读取和简单查询',
+      supportedClients: const [
+        'Claude Desktop',
+        'Cherry Studio',
+        'Continue',
+        'Cursor',
       ],
+      requiredEnvVars: const ['POSTGRES_DSN'],
+      setupSteps: const ['准备只读数据库账号', '配置连接串并限制访问库', '先验证 schema 读取和简单查询'],
       configTemplate: r'''
 {
   "mcpServers": {
@@ -248,11 +247,7 @@ List<McpSeedBundle> buildMcpSeeds(String stamp) {
       capabilitiesSummary: '适合沉淀用户偏好、长期项目背景和重复约定。',
       supportedClients: const ['Claude Desktop', 'Cherry Studio', 'Continue'],
       requiredEnvVars: const [],
-      setupSteps: const [
-        '启用 memory server',
-        '先定义允许写入的记忆类型',
-        '周期性清理过期或错误记忆',
-      ],
+      setupSteps: const ['启用 memory server', '先定义允许写入的记忆类型', '周期性清理过期或错误记忆'],
       configTemplate: r'''
 {
   "mcpServers": {
@@ -377,11 +372,7 @@ List<McpSeedBundle> buildMcpSeeds(String stamp) {
       capabilitiesSummary: '适合项目文档检索、共享文件汇总和知识沉淀。',
       supportedClients: const ['Claude Desktop', 'Cherry Studio', 'Continue'],
       requiredEnvVars: const ['GOOGLE_OAUTH_TOKEN'],
-      setupSteps: const [
-        '准备 Google OAuth 凭据',
-        '只共享必要文件夹或文档',
-        '验证文档读取和权限范围',
-      ],
+      setupSteps: const ['准备 Google OAuth 凭据', '只共享必要文件夹或文档', '验证文档读取和权限范围'],
       configTemplate: r'''
 {
   "mcpServers": {
@@ -441,12 +432,12 @@ List<McpSeedBundle> buildMcpSeeds(String stamp) {
       tags: const ['AWS', '云平台', '运维'],
       capabilitiesSummary: '适合查看云资源、总结配置和分析部署问题。',
       supportedClients: const ['Claude Desktop', 'Cherry Studio', 'Cursor'],
-      requiredEnvVars: const ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_REGION'],
-      setupSteps: const [
-        '准备最小权限 AWS 凭据',
-        '按业务域选择具体 AWS MCP 服务',
-        '优先做只读查询验证',
+      requiredEnvVars: const [
+        'AWS_ACCESS_KEY_ID',
+        'AWS_SECRET_ACCESS_KEY',
+        'AWS_REGION',
       ],
+      setupSteps: const ['准备最小权限 AWS 凭据', '按业务域选择具体 AWS MCP 服务', '优先做只读查询验证'],
       configTemplate: r'''
 {
   "mcpServers": {

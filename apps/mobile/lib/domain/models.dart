@@ -21,6 +21,10 @@ enum ResourceCategory {
   other,
 }
 
+enum ResourceQualityTier { featured, verified, community, experimental }
+
+enum ResourceSortMode { recommended, easiestToUse, recentlyUsed }
+
 class PromptVariable {
   const PromptVariable({
     required this.name,
@@ -76,6 +80,13 @@ class CatalogResource {
     required this.primaryActionLabel,
     required this.isFeatured,
     required this.isFavorite,
+    required this.qualityTier,
+    required this.qualityScore,
+    required this.qualityReasons,
+    required this.useCases,
+    required this.avoidCases,
+    this.verifiedAt,
+    this.originResourceId,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -92,6 +103,13 @@ class CatalogResource {
   final String primaryActionLabel;
   final bool isFeatured;
   final bool isFavorite;
+  final ResourceQualityTier qualityTier;
+  final int qualityScore;
+  final List<String> qualityReasons;
+  final List<String> useCases;
+  final List<String> avoidCases;
+  final DateTime? verifiedAt;
+  final String? originResourceId;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -133,6 +151,8 @@ class PromptResourceDetail {
     required this.exampleInput,
     required this.exampleOutput,
     required this.supportedModels,
+    required this.helperNotes,
+    required this.requiredVariableNames,
   });
 
   final CatalogResource resource;
@@ -143,6 +163,8 @@ class PromptResourceDetail {
   final String exampleInput;
   final String exampleOutput;
   final List<String> supportedModels;
+  final List<String> helperNotes;
+  final List<String> requiredVariableNames;
 }
 
 class SkillResourceDetail {
@@ -195,6 +217,22 @@ class McpResourceDetail {
   final String baseUrl;
 }
 
+class PromptUsageRecord {
+  const PromptUsageRecord({
+    required this.resourceId,
+    required this.lastValues,
+    this.copiedAt,
+    this.lastUsedAt,
+    this.useCount = 0,
+  });
+
+  final String resourceId;
+  final Map<String, String> lastValues;
+  final DateTime? copiedAt;
+  final DateTime? lastUsedAt;
+  final int useCount;
+}
+
 class HomeSnapshot {
   const HomeSnapshot({
     required this.query,
@@ -202,6 +240,9 @@ class HomeSnapshot {
     required this.featuredCollections,
     required this.beginnerResources,
     required this.featuredResources,
+    required this.verifiedResources,
+    required this.promptQuickStartResources,
+    required this.recentPromptResources,
     required this.prompts,
     required this.skills,
     required this.mcps,
@@ -217,6 +258,9 @@ class HomeSnapshot {
   final List<ResourceCollection> featuredCollections;
   final List<CatalogResource> beginnerResources;
   final List<CatalogResource> featuredResources;
+  final List<CatalogResource> verifiedResources;
+  final List<CatalogResource> promptQuickStartResources;
+  final List<CatalogResource> recentPromptResources;
   final List<CatalogResource> prompts;
   final List<CatalogResource> skills;
   final List<CatalogResource> mcps;
@@ -257,6 +301,8 @@ class ResourceBrowseFilter {
     this.query = '',
     this.category = ResourceCategory.all,
     this.tag = '',
+    this.qualityTier,
+    this.sortMode = ResourceSortMode.recommended,
     this.favoritesOnly = false,
     this.importedOnly = false,
   });
@@ -265,6 +311,8 @@ class ResourceBrowseFilter {
   final String query;
   final ResourceCategory category;
   final String tag;
+  final ResourceQualityTier? qualityTier;
+  final ResourceSortMode sortMode;
   final bool favoritesOnly;
   final bool importedOnly;
 
@@ -275,13 +323,23 @@ class ResourceBrowseFilter {
         other.query == query &&
         other.category == category &&
         other.tag == tag &&
+        other.qualityTier == qualityTier &&
+        other.sortMode == sortMode &&
         other.favoritesOnly == favoritesOnly &&
         other.importedOnly == importedOnly;
   }
 
   @override
-  int get hashCode =>
-      Object.hash(type, query, category, tag, favoritesOnly, importedOnly);
+  int get hashCode => Object.hash(
+    type,
+    query,
+    category,
+    tag,
+    qualityTier,
+    sortMode,
+    favoritesOnly,
+    importedOnly,
+  );
 }
 
 class ResourceBrowseSnapshot {
@@ -289,11 +347,13 @@ class ResourceBrowseSnapshot {
     required this.resources,
     required this.availableCategories,
     required this.availableTags,
+    required this.availableQualityTiers,
   });
 
   final List<CatalogResource> resources;
   final List<ResourceCategory> availableCategories;
   final List<String> availableTags;
+  final List<ResourceQualityTier> availableQualityTiers;
 }
 
 class ImportResourceDraft {
@@ -346,13 +406,13 @@ extension ResourceTypeX on ResourceType {
   String get shortDescription => switch (this) {
     ResourceType.prompt => '现成指令模板，适合先把结果做出来。',
     ResourceType.skill => '把做事方法写清楚，适合同类任务反复复用。',
-    ResourceType.mcp => '让 AI 读外部资料、连外部工具，适合需要上下文和实时数据时用。',
+    ResourceType.mcp => '让 AI 连接外部工具和资料，适合需要上下文和实时数据时使用。',
   };
 
   String get beginnerGuide => switch (this) {
-    ResourceType.prompt => '先挑一个最接近你手头任务的模板，填几处关键信息就能直接用。',
+    ResourceType.prompt => '先挑一条最接近当前任务的模板，补几个关键信息就能直接复制使用。',
     ResourceType.skill => '如果你总在重复做同一类事，就先找一条技能，把步骤固定下来。',
-    ResourceType.mcp => '先接你已经在用的平台，不要一开始就同时配很多服务。',
+    ResourceType.mcp => '先连接你已经在用的平台，不要一开始就同时接很多服务。',
   };
 }
 
@@ -366,7 +426,7 @@ extension ResourceDifficultyX on ResourceDifficulty {
 
 extension ResourceSourceX on ResourceSource {
   String get label => switch (this) {
-    ResourceSource.official => '官方精选',
+    ResourceSource.official => '官方资源',
     ResourceSource.imported => '我的导入',
   };
 }
@@ -399,9 +459,47 @@ extension ResourceCategoryX on ResourceCategory {
   };
 }
 
+extension ResourceQualityTierX on ResourceQualityTier {
+  String get storageKey => switch (this) {
+    ResourceQualityTier.featured => 'featured',
+    ResourceQualityTier.verified => 'verified',
+    ResourceQualityTier.community => 'community',
+    ResourceQualityTier.experimental => 'experimental',
+  };
+
+  String get label => switch (this) {
+    ResourceQualityTier.featured => '精选',
+    ResourceQualityTier.verified => '已验证',
+    ResourceQualityTier.community => '社区整理',
+    ResourceQualityTier.experimental => '实验性',
+  };
+}
+
+extension ResourceSortModeX on ResourceSortMode {
+  String get storageKey => switch (this) {
+    ResourceSortMode.recommended => 'recommended',
+    ResourceSortMode.easiestToUse => 'easiest_to_use',
+    ResourceSortMode.recentlyUsed => 'recently_used',
+  };
+
+  String get label => switch (this) {
+    ResourceSortMode.recommended => '推荐优先',
+    ResourceSortMode.easiestToUse => '适合直接上手',
+    ResourceSortMode.recentlyUsed => '最近用过',
+  };
+}
+
 String encodeJson(Object? value) => jsonEncode(value);
 
 DateTime parseDateTime(String raw) => DateTime.parse(raw).toLocal();
+
+DateTime? parseDateTimeOrNull(String? raw) {
+  final resolved = raw?.trim() ?? '';
+  if (resolved.isEmpty) {
+    return null;
+  }
+  return DateTime.parse(resolved).toLocal();
+}
 
 String prettyJson(Object? value) {
   const encoder = JsonEncoder.withIndent('  ');
@@ -433,6 +531,20 @@ ResourceCategory resourceCategoryFromString(String raw) {
   return ResourceCategory.values.firstWhere(
     (value) => value.storageKey == raw || value.name == raw,
     orElse: () => ResourceCategory.other,
+  );
+}
+
+ResourceQualityTier resourceQualityTierFromString(String raw) {
+  return ResourceQualityTier.values.firstWhere(
+    (value) => value.storageKey == raw || value.name == raw,
+    orElse: () => ResourceQualityTier.community,
+  );
+}
+
+ResourceSortMode resourceSortModeFromString(String raw) {
+  return ResourceSortMode.values.firstWhere(
+    (value) => value.storageKey == raw || value.name == raw,
+    orElse: () => ResourceSortMode.recommended,
   );
 }
 

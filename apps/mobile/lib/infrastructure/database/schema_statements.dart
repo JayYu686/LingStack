@@ -8,10 +8,17 @@ const List<String> schemaStatements = [
     summary TEXT NOT NULL,
     scenario TEXT NOT NULL,
     primary_category TEXT NOT NULL DEFAULT 'other',
+    origin_resource_id TEXT,
     difficulty TEXT NOT NULL,
     tags_json TEXT NOT NULL,
     primary_action_label TEXT NOT NULL,
     is_featured INTEGER NOT NULL,
+    quality_tier TEXT NOT NULL DEFAULT 'community',
+    quality_score INTEGER NOT NULL DEFAULT 60,
+    quality_reasons_json TEXT NOT NULL DEFAULT '[]',
+    use_cases_json TEXT NOT NULL DEFAULT '[]',
+    avoid_cases_json TEXT NOT NULL DEFAULT '[]',
+    verified_at TEXT,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
   )
@@ -25,7 +32,9 @@ const List<String> schemaStatements = [
     avoid_when TEXT NOT NULL,
     example_input TEXT NOT NULL,
     example_output TEXT NOT NULL,
-    supported_models_json TEXT NOT NULL
+    supported_models_json TEXT NOT NULL,
+    helper_notes_json TEXT NOT NULL DEFAULT '[]',
+    required_variable_names_json TEXT NOT NULL DEFAULT '[]'
   )
   ''',
   '''
@@ -91,6 +100,15 @@ const List<String> schemaStatements = [
     version TEXT NOT NULL,
     source TEXT NOT NULL,
     last_synced_at TEXT NOT NULL
+  )
+  ''',
+  '''
+  CREATE TABLE IF NOT EXISTS prompt_usage_records (
+    resource_id TEXT PRIMARY KEY,
+    last_values_json TEXT NOT NULL,
+    copied_at TEXT,
+    last_used_at TEXT,
+    use_count INTEGER NOT NULL DEFAULT 0
   )
   ''',
 ];

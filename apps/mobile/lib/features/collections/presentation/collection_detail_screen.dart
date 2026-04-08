@@ -97,7 +97,6 @@ class CollectionDetailScreen extends ConsumerWidget {
       ),
     );
   }
-
 }
 
 class _CollectionHero extends StatelessWidget {

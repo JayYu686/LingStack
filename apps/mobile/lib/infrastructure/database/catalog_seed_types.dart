@@ -135,6 +135,12 @@ class SeedCatalogResource {
     required this.tags,
     required this.primaryActionLabel,
     required this.isFeatured,
+    this.qualityTier = ResourceQualityTier.community,
+    this.qualityScore = 60,
+    this.qualityReasons = const [],
+    this.useCases = const [],
+    this.avoidCases = const [],
+    this.verifiedAt,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -149,8 +155,56 @@ class SeedCatalogResource {
   final List<String> tags;
   final String primaryActionLabel;
   final bool isFeatured;
+  final ResourceQualityTier qualityTier;
+  final int qualityScore;
+  final List<String> qualityReasons;
+  final List<String> useCases;
+  final List<String> avoidCases;
+  final String? verifiedAt;
   final String createdAt;
   final String updatedAt;
+
+  SeedCatalogResource copyWith({
+    String? id,
+    ResourceType? type,
+    String? title,
+    String? summary,
+    String? scenario,
+    ResourceCategory? primaryCategory,
+    ResourceDifficulty? difficulty,
+    List<String>? tags,
+    String? primaryActionLabel,
+    bool? isFeatured,
+    ResourceQualityTier? qualityTier,
+    int? qualityScore,
+    List<String>? qualityReasons,
+    List<String>? useCases,
+    List<String>? avoidCases,
+    String? verifiedAt,
+    String? createdAt,
+    String? updatedAt,
+  }) {
+    return SeedCatalogResource(
+      id: id ?? this.id,
+      type: type ?? this.type,
+      title: title ?? this.title,
+      summary: summary ?? this.summary,
+      scenario: scenario ?? this.scenario,
+      primaryCategory: primaryCategory ?? this.primaryCategory,
+      difficulty: difficulty ?? this.difficulty,
+      tags: tags ?? this.tags,
+      primaryActionLabel: primaryActionLabel ?? this.primaryActionLabel,
+      isFeatured: isFeatured ?? this.isFeatured,
+      qualityTier: qualityTier ?? this.qualityTier,
+      qualityScore: qualityScore ?? this.qualityScore,
+      qualityReasons: qualityReasons ?? this.qualityReasons,
+      useCases: useCases ?? this.useCases,
+      avoidCases: avoidCases ?? this.avoidCases,
+      verifiedAt: verifiedAt ?? this.verifiedAt,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 
   factory SeedCatalogResource.fromMap(Map<String, dynamic> map) {
     return SeedCatalogResource(
@@ -170,6 +224,20 @@ class SeedCatalogResource {
           .toList(),
       primaryActionLabel: map['primaryActionLabel'] as String? ?? '',
       isFeatured: map['isFeatured'] as bool? ?? false,
+      qualityTier: resourceQualityTierFromString(
+        map['qualityTier'] as String? ?? 'community',
+      ),
+      qualityScore: (map['qualityScore'] as num?)?.toInt() ?? 60,
+      qualityReasons: (map['qualityReasons'] as List<dynamic>? ?? const [])
+          .map((value) => value.toString())
+          .toList(),
+      useCases: (map['useCases'] as List<dynamic>? ?? const [])
+          .map((value) => value.toString())
+          .toList(),
+      avoidCases: (map['avoidCases'] as List<dynamic>? ?? const [])
+          .map((value) => value.toString())
+          .toList(),
+      verifiedAt: map['verifiedAt'] as String?,
       createdAt: map['createdAt'] as String? ?? '',
       updatedAt: map['updatedAt'] as String? ?? '',
     );
@@ -186,6 +254,12 @@ class SeedCatalogResource {
     'tags': tags,
     'primaryActionLabel': primaryActionLabel,
     'isFeatured': isFeatured,
+    'qualityTier': qualityTier.storageKey,
+    'qualityScore': qualityScore,
+    'qualityReasons': qualityReasons,
+    'useCases': useCases,
+    'avoidCases': avoidCases,
+    'verifiedAt': verifiedAt,
     'createdAt': createdAt,
     'updatedAt': updatedAt,
   };
@@ -201,6 +275,8 @@ class SeedPromptDetail {
     required this.exampleInput,
     required this.exampleOutput,
     required this.supportedModels,
+    this.helperNotes = const [],
+    this.requiredVariableNames = const [],
   });
 
   final String resourceId;
@@ -211,6 +287,8 @@ class SeedPromptDetail {
   final String exampleInput;
   final String exampleOutput;
   final List<String> supportedModels;
+  final List<String> helperNotes;
+  final List<String> requiredVariableNames;
 
   factory SeedPromptDetail.fromMap(Map<String, dynamic> map) {
     return SeedPromptDetail(
@@ -229,6 +307,13 @@ class SeedPromptDetail {
       supportedModels: (map['supportedModels'] as List<dynamic>? ?? const [])
           .map((value) => value.toString())
           .toList(),
+      helperNotes: (map['helperNotes'] as List<dynamic>? ?? const [])
+          .map((value) => value.toString())
+          .toList(),
+      requiredVariableNames:
+          (map['requiredVariableNames'] as List<dynamic>? ?? const [])
+              .map((value) => value.toString())
+              .toList(),
     );
   }
 
@@ -241,6 +326,8 @@ class SeedPromptDetail {
     'exampleInput': exampleInput,
     'exampleOutput': exampleOutput,
     'supportedModels': supportedModels,
+    'helperNotes': helperNotes,
+    'requiredVariableNames': requiredVariableNames,
   };
 }
 
@@ -466,6 +553,8 @@ PromptSeedBundle buildPromptSeed({
   required String exampleOutput,
   required String stamp,
   bool featured = false,
+  List<String> helperNotes = const [],
+  List<String> requiredVariableNames = const [],
 }) {
   return PromptSeedBundle(
     resource: SeedCatalogResource(
@@ -493,6 +582,8 @@ PromptSeedBundle buildPromptSeed({
       exampleInput: exampleInput,
       exampleOutput: exampleOutput,
       supportedModels: const ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'],
+      helperNotes: helperNotes,
+      requiredVariableNames: requiredVariableNames,
     ),
   );
 }

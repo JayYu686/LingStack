@@ -202,11 +202,7 @@ List<PromptSeedBundle> buildPromptSeedsPart2(String stamp) {
 
 请输出一个适合作品集展示的结构：背景、问题、方案、我的贡献、结果、复盘。
 ''',
-      variables: [
-        longVar('项目背景'),
-        longVar('我的职责'),
-        longVar('最终结果'),
-      ],
+      variables: [longVar('项目背景'), longVar('我的职责'), longVar('最终结果')],
       whenToUse: '适合准备作品集、面试材料和个人主页案例。',
       avoidWhen: '如果结果不明确，先补事实，不要空写“推动业务增长”。',
       exampleInput: '最终结果：完成 MVP、首批用户能顺利上手',
@@ -333,11 +329,7 @@ List<PromptSeedBundle> buildPromptSeedsPart2(String stamp) {
 
 要求：坚定但不生硬，说明理由，给出可接受的下一步。
 ''',
-      variables: [
-        longVar('对方说法'),
-        longVar('我的目标'),
-        longVar('我的底线'),
-      ],
+      variables: [longVar('对方说法'), longVar('我的目标'), longVar('我的底线')],
       whenToUse: '适合薪资沟通、项目合作、资源争取等场景。',
       avoidWhen: '涉及正式合同条款时，仍建议法务或负责人确认。',
       exampleInput: '我的目标：争取更合理的交付周期',

@@ -794,6 +794,1852 @@ const String _promptSpecsJson = r'''
       "清单"
     ],
     "featured": false
+  },
+  {
+    "id": "prompt-open-source-ethereum-developer",
+    "title": "Ethereum Developer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Ethereum Developer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-linux-terminal",
+    "title": "Linux Terminal",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "命令行",
+      "Linux",
+      "Linux Terminal"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-english-translator-and-improver",
+    "title": "English Translator and Improver",
+    "category": "writing",
+    "tags": [
+      "Prompt",
+      "写作表达",
+      "润色",
+      "English Translator and Improver"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-job-interviewer",
+    "title": "Job Interviewer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "面试",
+      "Job Interviewer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-javascript-console",
+    "title": "JavaScript Console",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "命令行",
+      "JavaScript Console"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-excel-sheet",
+    "title": "Excel Sheet",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Excel Sheet"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-english-pronunciation-helper",
+    "title": "English Pronunciation Helper",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "English Pronunciation Helper"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-spoken-english-teacher-and-improver",
+    "title": "Spoken English Teacher and Improver",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "教学",
+      "Spoken English Teacher and Improver"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-travel-guide",
+    "title": "Travel Guide",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "出行",
+      "Travel Guide"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-plagiarism-checker",
+    "title": "Plagiarism Checker",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Plagiarism Checker"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-character",
+    "title": "Character",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Character"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-advertiser",
+    "title": "Advertiser",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Advertiser"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-storyteller",
+    "title": "Storyteller",
+    "category": "content",
+    "tags": [
+      "Prompt",
+      "内容创作",
+      "创意",
+      "Storyteller"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-football-commentator",
+    "title": "Football Commentator",
+    "category": "content",
+    "tags": [
+      "Prompt",
+      "内容创作",
+      "创意",
+      "Football Commentator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-stand-up-comedian",
+    "title": "Stand-up Comedian",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Stand-up Comedian"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-motivational-coach",
+    "title": "Motivational Coach",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "Motivational Coach"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-composer",
+    "title": "Composer",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Composer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-debater",
+    "title": "Debater",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Debater"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-debate-coach",
+    "title": "Debate Coach",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Debate Coach"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-screenwriter",
+    "title": "Screenwriter",
+    "category": "content",
+    "tags": [
+      "Prompt",
+      "内容创作",
+      "创意",
+      "Screenwriter"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-novelist",
+    "title": "Novelist",
+    "category": "content",
+    "tags": [
+      "Prompt",
+      "内容创作",
+      "创意",
+      "Novelist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-movie-critic",
+    "title": "Movie Critic",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Movie Critic"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-relationship-coach",
+    "title": "Relationship Coach",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Relationship Coach"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-poet",
+    "title": "Poet",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Poet"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-rapper",
+    "title": "Rapper",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Rapper"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-motivational-speaker",
+    "title": "Motivational Speaker",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Motivational Speaker"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-philosophy-teacher",
+    "title": "Philosophy Teacher",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "教学",
+      "Philosophy Teacher"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-philosopher",
+    "title": "Philosopher",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Philosopher"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-math-teacher",
+    "title": "Math Teacher",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "教学",
+      "Math Teacher"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-ai-writing-tutor",
+    "title": "AI Writing Tutor",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "AI Writing Tutor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-ux-ui-developer",
+    "title": "UX/UI Developer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "UX/UI Developer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-cyber-security-specialist",
+    "title": "Cyber Security Specialist",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Cyber Security Specialist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-recruiter",
+    "title": "Recruiter",
+    "category": "career",
+    "tags": [
+      "Prompt",
+      "求职成长",
+      "面试",
+      "Recruiter"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-life-coach",
+    "title": "Life Coach",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Life Coach"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-etymologist",
+    "title": "Etymologist",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Etymologist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-commentariat",
+    "title": "Commentariat",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "Commentariat"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-magician",
+    "title": "Magician",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Magician"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-career-counselor",
+    "title": "Career Counselor",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "研究",
+      "Career Counselor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-pet-behaviorist",
+    "title": "Pet Behaviorist",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Pet Behaviorist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-personal-trainer",
+    "title": "Personal Trainer",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "健身",
+      "Personal Trainer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-mental-health-adviser",
+    "title": "Mental Health Adviser",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Mental Health Adviser"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-real-estate-agent",
+    "title": "Real Estate Agent",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Real Estate Agent"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-logistician",
+    "title": "Logistician",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "会议",
+      "Logistician"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-dentist",
+    "title": "Dentist",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Dentist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-web-design-consultant",
+    "title": "Web Design Consultant",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "会议",
+      "Web Design Consultant"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-ai-assisted-doctor",
+    "title": "AI Assisted Doctor",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "AI Assisted Doctor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-doctor",
+    "title": "Doctor",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Doctor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-accountant",
+    "title": "Accountant",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Accountant"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-chef",
+    "title": "Chef",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Chef"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-automobile-mechanic",
+    "title": "Automobile Mechanic",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Automobile Mechanic"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-artist-advisor",
+    "title": "Artist Advisor",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Artist Advisor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-financial-analyst",
+    "title": "Financial Analyst",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Financial Analyst"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-investment-manager",
+    "title": "Investment Manager",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Investment Manager"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-tea-taster",
+    "title": "Tea-Taster",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Tea-Taster"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-interior-decorator",
+    "title": "Interior Decorator",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Interior Decorator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-florist",
+    "title": "Florist",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Florist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-self-help-book",
+    "title": "Self-Help Book",
+    "category": "career",
+    "tags": [
+      "Prompt",
+      "求职成长",
+      "面试",
+      "Self-Help Book"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-gnomist",
+    "title": "Gnomist",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Gnomist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-aphorism-book",
+    "title": "Aphorism Book",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "Aphorism Book"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-text-based-adventure-game",
+    "title": "Text Based Adventure Game",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Text Based Adventure Game"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-ai-trying-to-escape-the-box",
+    "title": "AI Trying to Escape the Box",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "命令行",
+      "Linux",
+      "Docker"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-fancy-title-generator",
+    "title": "Fancy Title Generator",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Fancy Title Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-statistician",
+    "title": "Statistician",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Statistician"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-prompt-generator",
+    "title": "Prompt Generator",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "提示词",
+      "Prompt Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-instructor-in-a-school",
+    "title": "Instructor in a School",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "提示词",
+      "Instructor in a School"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-sql-terminal",
+    "title": "SQL Terminal",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "SQL",
+      "命令行",
+      "SQL Terminal"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-dietitian",
+    "title": "Dietitian",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Dietitian"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-psychologist",
+    "title": "Psychologist",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "Psychologist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-smart-domain-name-generator",
+    "title": "Smart Domain Name Generator",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "提示词",
+      "Smart Domain Name Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-tech-reviewer",
+    "title": "Tech Reviewer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Tech Reviewer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-developer-relations-consultant",
+    "title": "Developer Relations Consultant",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "GitHub",
+      "研究",
+      "Developer Relations Consultant"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-academician",
+    "title": "Academician",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Academician"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-it-architect",
+    "title": "IT Architect",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "IT Architect"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-lunatic",
+    "title": "Lunatic",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Lunatic"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-gaslighter",
+    "title": "Gaslighter",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Gaslighter"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-fallacy-finder",
+    "title": "Fallacy Finder",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Fallacy Finder"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-journal-reviewer",
+    "title": "Journal Reviewer",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Journal Reviewer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-diy-expert",
+    "title": "DIY Expert",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "DIY Expert"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-social-media-influencer",
+    "title": "Social Media Influencer",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "YouTube",
+      "Social Media Influencer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-socrat",
+    "title": "Socrat",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Socrat"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-socratic-method",
+    "title": "Socratic Method",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Socratic Method"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-educational-content-creator",
+    "title": "Educational Content Creator",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "Educational Content Creator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-yogi",
+    "title": "Yogi",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Yogi"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-essay-writer",
+    "title": "Essay Writer",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Essay Writer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-social-media-manager",
+    "title": "Social Media Manager",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Social Media Manager"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-elocutionist",
+    "title": "Elocutionist",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Elocutionist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-scientific-data-visualizer",
+    "title": "Scientific Data Visualizer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "研究",
+      "Scientific Data Visualizer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-car-navigation-system",
+    "title": "Car Navigation System",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Car Navigation System"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-hypnotherapist",
+    "title": "Hypnotherapist",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Hypnotherapist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-historian",
+    "title": "Historian",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Historian"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-astrologer",
+    "title": "Astrologer",
+    "category": "career",
+    "tags": [
+      "Prompt",
+      "求职成长",
+      "面试",
+      "提示词",
+      "Astrologer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-film-critic",
+    "title": "Film Critic",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Film Critic"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-classical-music-composer",
+    "title": "Classical Music Composer",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Classical Music Composer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-journalist",
+    "title": "Journalist",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Journalist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-digital-art-gallery-guide",
+    "title": "Digital Art Gallery Guide",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "研究",
+      "Digital Art Gallery Guide"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-public-speaking-coach",
+    "title": "Public Speaking Coach",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Public Speaking Coach"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-makeup-artist",
+    "title": "Makeup Artist",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Makeup Artist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-babysitter",
+    "title": "Babysitter",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Babysitter"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-tech-writer",
+    "title": "Tech Writer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Tech Writer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-ascii-artist",
+    "title": "Ascii Artist",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Ascii Artist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-python-interpreter",
+    "title": "Python Interpreter",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Python Interpreter"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-synonym-finder",
+    "title": "Synonym Finder",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "提示词",
+      "Synonym Finder"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-personal-shopper",
+    "title": "Personal Shopper",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Personal Shopper"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-food-critic",
+    "title": "Food Critic",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Food Critic"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-virtual-doctor",
+    "title": "Virtual Doctor",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Virtual Doctor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-personal-chef",
+    "title": "Personal Chef",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Personal Chef"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-legal-advisor",
+    "title": "Legal Advisor",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Legal Advisor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-personal-stylist",
+    "title": "Personal Stylist",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Personal Stylist"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-machine-learning-engineer",
+    "title": "Machine Learning Engineer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Machine Learning Engineer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-biblical-translator",
+    "title": "Biblical Translator",
+    "category": "writing",
+    "tags": [
+      "Prompt",
+      "写作表达",
+      "润色",
+      "Biblical Translator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-svg-designer",
+    "title": "SVG designer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "SVG designer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-it-expert",
+    "title": "IT Expert",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "IT Expert"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-chess-player",
+    "title": "Chess Player",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "Chess Player"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-midjourney-prompt-generator",
+    "title": "Midjourney Prompt Generator",
+    "category": "content",
+    "tags": [
+      "Prompt",
+      "内容创作",
+      "创意",
+      "提示词",
+      "Midjourney Prompt Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-fullstack-software-developer",
+    "title": "Fullstack Software Developer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Fullstack Software Developer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-mathematician",
+    "title": "Mathematician",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Mathematician"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-regex-generator",
+    "title": "RegEx Generator",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "邮件",
+      "RegEx Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-time-travel-guide",
+    "title": "Time Travel Guide",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "出行",
+      "Time Travel Guide"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-dream-interpreter",
+    "title": "Dream Interpreter",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "Dream Interpreter"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-talent-coach",
+    "title": "Talent Coach",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "面试",
+      "Talent Coach"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-r-programming-interpreter",
+    "title": "R Programming Interpreter",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "命令行",
+      "R Programming Interpreter"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-stackoverflow-post",
+    "title": "StackOverflow Post",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "StackOverflow Post"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-emoji-translator",
+    "title": "Emoji Translator",
+    "category": "writing",
+    "tags": [
+      "Prompt",
+      "写作表达",
+      "润色",
+      "Emoji Translator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-php-interpreter",
+    "title": "PHP Interpreter",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "命令行",
+      "PHP Interpreter"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-emergency-response-professional",
+    "title": "Emergency Response Professional",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Emergency Response Professional"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-fill-in-the-blank-worksheets-generator",
+    "title": "Fill in the Blank Worksheets Generator",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "Fill in the Blank Worksheets Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-software-quality-assurance-tester",
+    "title": "Software Quality Assurance Tester",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Software Quality Assurance Tester"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-tic-tac-toe-game",
+    "title": "Tic-Tac-Toe Game",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Tic-Tac-Toe Game"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-password-generator",
+    "title": "Password Generator",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Password Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-new-language-creator",
+    "title": "New Language Creator",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "New Language Creator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-web-browser",
+    "title": "Web Browser",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "提示词",
+      "Web Browser"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-senior-frontend-developer",
+    "title": "Senior Frontend Developer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Senior Frontend Developer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-code-reviewer",
+    "title": "Code Reviewer",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Code Reviewer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-accessibility-auditor",
+    "title": "Accessibility Auditor",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Accessibility Auditor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-solr-search-engine",
+    "title": "Solr Search Engine",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "提示词",
+      "Solr Search Engine"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-startup-idea-generator",
+    "title": "Startup Idea Generator",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "营销",
+      "销售",
+      "Startup Idea Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-spongebob-s-magic-conch-shell",
+    "title": "Spongebob's Magic Conch Shell",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Spongebob's Magic Conch Shell"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-language-detector",
+    "title": "Language Detector",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Language Detector"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-salesperson",
+    "title": "Salesperson",
+    "category": "growth",
+    "tags": [
+      "Prompt",
+      "运营增长",
+      "转化",
+      "销售",
+      "Salesperson"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-commit-message-generator",
+    "title": "Commit Message Generator",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Commit Message Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-conventional-commit-message-generator",
+    "title": "Conventional Commit Message Generator",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Conventional Commit Message Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-chief-executive-officer",
+    "title": "Chief Executive Officer",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Chief Executive Officer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-diagram-generator",
+    "title": "Diagram Generator",
+    "category": "development",
+    "tags": [
+      "Prompt",
+      "开发编程",
+      "工程提效",
+      "Diagram Generator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-speech-language-pathologist-slp",
+    "title": "Speech-Language Pathologist (SLP)",
+    "category": "life",
+    "tags": [
+      "Prompt",
+      "生活效率",
+      "计划",
+      "Speech-Language Pathologist (SLP)"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-startup-tech-lawyer",
+    "title": "Startup Tech Lawyer",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Startup Tech Lawyer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-title-generator-for-written-pieces",
+    "title": "Title Generator for written pieces",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Title Generator for written pieces"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-product-manager",
+    "title": "Product Manager",
+    "category": "writing",
+    "tags": [
+      "Prompt",
+      "写作表达",
+      "润色",
+      "Product Manager"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-project-manager",
+    "title": "Project Manager",
+    "category": "office",
+    "tags": [
+      "Prompt",
+      "办公协作",
+      "整理",
+      "Project Manager"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-drunk-person",
+    "title": "Drunk Person",
+    "category": "writing",
+    "tags": [
+      "Prompt",
+      "写作表达",
+      "润色",
+      "Drunk Person"
+    ],
+    "featured": false
+  },
+  {
+    "id": "prompt-open-source-mathematical-history-teacher",
+    "title": "Mathematical History Teacher",
+    "category": "learning",
+    "tags": [
+      "Prompt",
+      "学习研究",
+      "总结",
+      "教学",
+      "Mathematical History Teacher"
+    ],
+    "featured": false
   }
 ]
 ''';
@@ -823,7 +2669,8 @@ PromptSeedBundle _buildExpandedPrompt(Map<String, dynamic> spec, String stamp) {
     primaryCategory: _categoryFromKey(category),
     difficulty: _promptDifficulty(category),
     tags: tags,
-    templateBody: '''请围绕“$title”帮助我完成任务。
+    templateBody:
+        '''请围绕“$title”帮助我完成任务。
 任务目标：先给结论，再给可直接使用的内容。
 
 核心材料：

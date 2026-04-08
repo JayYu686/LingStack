@@ -1,49 +1,53 @@
-# LingStack / 灵感栈
+# LingStack
 
-灵感栈是一款面向个人开发者与知识工作者的本地优先 AI 资源库应用，用来统一管理三类高频资产：
+LingStack 是一个本地优先的 AI 资源库，主要用来整理三类高频资产：
 
 - Prompt：可以直接复制使用的提示词模板
-- Skill：可复用的方法、能力定义和工具说明
-- MCP：连接 GitHub、文档、数据库等外部系统的配置模板与接入说明
+- Skill：可复用的方法、流程和工具定义
+- MCP：连接 GitHub、文档、数据库等外部系统的配置模板和接入说明
 
-当前仓库采用单仓结构，包含 Flutter 移动端、Go 目录/同步服务、共享合同与品牌资产。
+这个项目的出发点很简单：当 Prompt、Skill、MCP 越积越多时，真正麻烦的不是“没有资源”，而是“找不到、筛不准、用起来不顺手、沉淀不下来”。LingStack 想先把这几个基础问题做扎实。
 
-## 项目目标
+## 为什么做这个项目
 
-这个项目不是单纯的“提示词笔记本”，而是一个面向真实使用场景的 AI 资源管理工具：
+我希望有一个能长期自己用下去的工具，而不是另一个只适合演示的 AI 壳子应用。它应该满足几件事：
 
-- 用资源库而不是杂乱备忘录的方式组织 Prompt、Skill 和 MCP
-- 本地优先，可离线浏览、搜索、收藏、导入
-- 官方资源可通过轻量 Go 服务动态下发
-- 用户自己的收藏和导入保留在本地，优先保护隐私与可控性
-- 界面强调小白友好，先讲用途，再讲步骤，最后才讲技术细节
+- 资源统一收口，避免散落在笔记、聊天记录、浏览器书签和仓库里
+- 手机上也能快速检索、筛选、复制、收藏和补充自己的版本
+- 本地优先，离线可用，敏感配置尽量留在设备侧
+- 官方目录可以更新，但用户自己的内容不会被轻易覆盖
+- 架构保持克制，先把个人使用场景做稳，再考虑更重的协作能力
 
-## 当前能力
+## 当前做到的能力
 
 ### 资源库
 
-- 官方资源目录已内置到本地数据库，并支持通过 Go 服务增量刷新
-- 三类资源当前规模均已超过 100 条
-- 支持精选合集、热门资源、收藏、本地导入
-- 支持按大类与标签筛选
-- 支持中文输入法友好的搜索防抖与提交查询
+- 支持 Prompt、Skill、MCP 三类资源统一浏览
+- 内置官方资源目录，并支持本地收藏、导入和精选合集
+- 支持按资源类型、大类、标签、质量级别筛选
+- 支持搜索、最近使用、精选合集和我的资源
+- 资源详情页会展示适用场景、不适用场景、质量级别、验证状态等信息
 
-### 移动端
+### Prompt 工作台
 
-- Flutter 构建，支持 Windows 调试与 Android 安装测试
-- 本地 SQLite 持久化
-- 冷静简洁的 AI-Native 风格 UI
-- Prompt / Skill / MCP 分别采用适合自身的详情页信息结构
-- Android 已接入 launcher icon、adaptive icon、splash 资源链路
+- Prompt 详情页已经做成“填写 -> 预览 -> 复制”的工作台
+- 支持 `text / longText / enum / code / boolean` 五类变量
+- 必填变量没填完时，不允许复制看起来已经完成的结果
+- 本地会记录最近使用、上次填写值、复制时间和使用次数
 
-### 服务端
+### Skill / MCP
 
-- Go 实现轻量目录与同步服务
-- 支持官方目录下发
-- 预留同步、MCP 探测、AI 摘要/分类等接口骨架
-- 使用 SQLite，适合个人部署与轻量自托管
+- 官方 Skill 保持只读，可以先复制成“我的版本”再编辑
+- MCP 支持远程 HTTP 测试页，可以探测、列出 `tools/resources/prompts`，也可以做自定义 JSON-RPC 调用
+- Token 和 Header 存在安全存储中，不写进 SQLite
 
-## 技术栈
+### 客户端与服务端
+
+- Flutter 客户端支持 Windows 调试和 Android 安装测试
+- Go 服务负责官方目录下发和同步骨架
+- Android 端已经补了正式签名、包名、版本号、图标和启动页资源
+
+## 技术架构
 
 ### 前端
 
@@ -51,62 +55,46 @@
 - Riverpod
 - go_router
 - Drift + sqlite3
-- Dio
 - flutter_secure_storage
 - flutter_svg
 
 ### 后端
 
 - Go 1.26.x
-- 原生 HTTP/JSON API
+- 原生 HTTP / JSON API
 - SQLite
 
-### 资源与合同
+### 分层方式
 
-- OpenAPI 合同位于 `contracts/openapi`
-- 官方目录 JSON 位于 `contracts/catalog` 与 `services/sync-api/internal/catalog`
-- 品牌与商店素材位于 `docs/branding`
+代码按比较克制的 layered 结构组织：
 
-## Android 发布信息
+- Presentation：页面和纯展示组件
+- Application：Prompt 工作台、Skill 编辑、MCP 测试等状态控制器
+- Domain：资源模型、渲染规则、Schema 编解码
+- Infrastructure：数据库、网络、安全存储、仓储实现
 
-- 正式包名：`com.jayyu.lingstack`
-- 应用名：`灵感栈`
-- 当前版本：`1.0.1+2`
-
-### Android 签名配置
-
-项目已经支持正式 release 签名，配置方式如下：
-
-- 示例配置文件：`apps/mobile/android/key.properties.example`
-- 本地实际配置：`apps/mobile/android/key.properties`
-- 本地 keystore：`apps/mobile/android/keystore/lingstack-upload.jks`
-
-说明：
-
-- `key.properties` 和 `*.jks` 已被 git 忽略，不会推送到公开仓库
-- release 构建会强校验签名配置，缺失时会直接失败，不会再偷偷退回 debug 签名
-- 你需要自行备份 `lingstack-upload.jks`，否则以后无法安全升级同一应用
+原则上 Widget 只负责展示和交互转发，不在页面里继续堆业务逻辑。
 
 ## 仓库结构
 
 ```text
 .
 ├─ apps/
-│  └─ mobile/                 Flutter 移动端
+│  └─ mobile/                  Flutter 客户端
 ├─ services/
-│  └─ sync-api/               Go 目录与同步服务
+│  └─ sync-api/                Go 目录与同步服务
 ├─ contracts/
-│  ├─ catalog/                官方资源目录导出
-│  └─ openapi/                OpenAPI 合同
+│  ├─ catalog/                 官方资源目录导出
+│  └─ openapi/                 OpenAPI 合同
 ├─ docs/
-│  ├─ branding/               图标、启动页、商店展示素材
-│  └─ app-summary.zh-CN.md    产品总结
+│  ├─ branding/                图标、启动页、商店展示素材
+│  └─ app-summary.zh-CN.md     产品总结
 └─ README.md
 ```
 
 ## 本地运行
 
-### 1. 运行 Flutter 客户端
+### Flutter 客户端
 
 ```powershell
 cd apps/mobile
@@ -114,129 +102,88 @@ flutter pub get
 flutter run -d windows
 ```
 
-如果要跑 Android：
+Android 调试：
 
 ```powershell
 cd apps/mobile
-flutter run -d android
+flutter run
 ```
 
-### 2. 运行 Go 服务
-
-在当前网络环境下，建议显式指定 Go 代理：
+### Go 服务
 
 ```powershell
 cd services/sync-api
-$env:GOPROXY='https://goproxy.cn,direct'
-$env:GOSUMDB='off'
-$env:GOCACHE='D:\PROJECTS\AIdeveloper\.cache\go-build'
-$env:GOMODCACHE='D:\PROJECTS\AIdeveloper\.cache\gopath\pkg\mod'
 go run ./cmd/sync-api
 ```
 
-默认监听：
+默认情况下，客户端即使不连后端，也能依赖本地目录正常浏览和使用。
 
-```text
-http://127.0.0.1:8080
-```
+## 质量检查
 
-Android 模拟器默认目录地址可通过 `SYNC_API_BASE_URL` 覆盖。
-
-## 测试与质量检查
-
-### Flutter
+我当前主要用下面这些命令做回归：
 
 ```powershell
 cd apps/mobile
 flutter analyze
-flutter test
+flutter build apk --release
+flutter build windows --release
 ```
-
-### Go
 
 ```powershell
 cd services/sync-api
-$env:GOPROXY='https://goproxy.cn,direct'
-$env:GOSUMDB='off'
-$env:GOCACHE='D:\PROJECTS\AIdeveloper\.cache\go-build'
-$env:GOMODCACHE='D:\PROJECTS\AIdeveloper\.cache\gopath\pkg\mod'
 go test ./...
 ```
 
-## Android APK
+说明：
 
-### 打包
+- 这台 Windows 机器上的 `flutter test` 曾经遇到过 Dart worker 挂住的问题，所以当前我更依赖 `flutter analyze`、目标构建和针对性的 smoke test。
+- Android 真机会做基本安装和页面流转验证，目前主要覆盖 Xiaomi 13。
 
-```powershell
-cd apps/mobile
-flutter build apk --release
-```
+## Android 发布信息
 
-### 输出路径
+- 应用名：灵感栈
+- 包名：`com.jayyu.lingstack`
+- 当前版本：`1.1.0+3`
 
-```text
-apps/mobile/build/app/outputs/flutter-apk/app-release.apk
-```
+构建产物默认输出到：
 
-### 安装到真机
+- APK：`apps/mobile/build/app/outputs/flutter-apk/app-release.apk`
+- AAB：`apps/mobile/build/app/outputs/bundle/release/app-release.aab`
+- Windows EXE：`apps/mobile/build/windows/x64/runner/Release/mobile.exe`
 
-```powershell
-adb install -r "D:\PROJECTS\AIdeveloper\apps\mobile\build\app\outputs\flutter-apk\app-release.apk"
-```
+## 设计取舍
 
-## 图标与品牌资源
+这个项目里有几条我会比较坚持的取舍：
 
-品牌主标识源文件：
+- 本地优先比多端同步更优先
+- 目录质量比单纯堆数量更重要
+- Prompt、Skill、MCP 的体验重点不是“展示”，而是“能不能马上用”
+- 不急着做重型 Agent 平台，先把资源管理、筛选、使用闭环做稳
 
-```text
-apps/mobile/assets/branding/lingstack-mark.svg
-```
+## 当前边界
 
-资源生成脚本：
+目前还没有做这些能力：
 
-```text
-apps/mobile/tool/generate_brand_assets.py
-```
+- 团队协作和权限体系
+- 完整的云同步冲突处理
+- MCP 本地 `stdio` 拉起
+- Skill 在线真实调试调用
+- 复杂语义搜索和向量检索
 
-脚本会生成：
+这些能力不是不做，而是当前阶段没必要先引进复杂度。
 
-- Android launcher icon / round icon / adaptive icon 前景资源
-- iOS App Icon
-- Windows icon
-- 启动页预览图
-- 商店展示图导出
+## 下一步
 
-## 设计原则
+接下来最值得继续做的是：
 
-- 本地优先：优先保证离线可用、加载稳定、数据私密
-- 小白友好：先说明“这是什么”，再说明“下一步怎么用”
-- 内容优先：资源卡片和详情页优先服务于快速使用，而不是展示技术字段
-- 平滑升级：v1 先解决个人资源库场景，不提前为团队协作和复杂编排付出过高复杂度
+1. 把资源质量体系继续做细，提升精选、验证、去重和合集组织能力
+2. 把 Prompt 工作台继续打磨成真正的高频使用入口
+3. 把 Skill 可视化编辑和 MCP 测试补到“够日常使用”的程度
+4. 把同步、历史版本和冲突处理做稳
+5. 完善移动端发布、埋点和问题定位链路
 
-## 当前已知边界
-
-- Android 目前输出的是测试签名包，不适合正式分发
-- 服务端仍然是轻量目录/同步骨架，不是完整商业化后台
-- MCP 以“目录、说明、配置模板”方式为主，尚未内置复杂运行时编排
-- 官方资源质量已经达到原型可用标准，但仍需要持续人工筛选与迭代
-
-## 适合谁
-
-- 想系统管理提示词、工具配置和 MCP 说明的开发者
-- 经常需要反复复用 AI 工作流的人
-- 需要在手机上快速查、快速复制、快速收藏的人
-- 想要一套可本地掌控、可自托管演进的 AI 资产库的人
-
-## 后续方向
-
-- 继续扩充高质量资源，并引入审核与版本机制
-- 增加职业入口与任务入口，而不仅是资源类型入口
-- 完善同步冲突处理与用户侧版本历史
-- 增加更强的 Prompt 变量填写和渲染体验
-- 增加 Skill 的 JSON Schema 可视化编辑与真实调试能力
-- 完善 MCP 连接测试、客户端兼容说明和风险提示
-
-## 仓库名称
+## 命名
 
 - 中文名：灵感栈
-- GitHub 仓库名：LingStack
+- 英文名：LingStack
+

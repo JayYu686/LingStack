@@ -1,4 +1,4 @@
-package domain
+﻿package domain
 
 type CatalogBootstrap struct {
 	Version         string                 `json:"version"`
@@ -22,6 +22,12 @@ type CatalogResource struct {
 	Tags               []string `json:"tags"`
 	PrimaryActionLabel string   `json:"primaryActionLabel"`
 	IsFeatured         bool     `json:"isFeatured"`
+	QualityTier        string   `json:"qualityTier"`
+	QualityScore       int      `json:"qualityScore"`
+	QualityReasons     []string `json:"qualityReasons"`
+	UseCases           []string `json:"useCases"`
+	AvoidCases         []string `json:"avoidCases"`
+	VerifiedAt         string   `json:"verifiedAt,omitempty"`
 	CreatedAt          string   `json:"createdAt"`
 	UpdatedAt          string   `json:"updatedAt"`
 }
@@ -35,14 +41,16 @@ type PromptVariable struct {
 }
 
 type PromptResourceDetail struct {
-	ResourceID      string           `json:"resourceId"`
-	TemplateBody    string           `json:"templateBody"`
-	Variables       []PromptVariable `json:"variables"`
-	WhenToUse       string           `json:"whenToUse"`
-	AvoidWhen       string           `json:"avoidWhen"`
-	ExampleInput    string           `json:"exampleInput"`
-	ExampleOutput   string           `json:"exampleOutput"`
-	SupportedModels []string         `json:"supportedModels"`
+	ResourceID            string           `json:"resourceId"`
+	TemplateBody          string           `json:"templateBody"`
+	Variables             []PromptVariable `json:"variables"`
+	WhenToUse             string           `json:"whenToUse"`
+	AvoidWhen             string           `json:"avoidWhen"`
+	ExampleInput          string           `json:"exampleInput"`
+	ExampleOutput         string           `json:"exampleOutput"`
+	SupportedModels       []string         `json:"supportedModels"`
+	HelperNotes           []string         `json:"helperNotes"`
+	RequiredVariableNames []string         `json:"requiredVariableNames"`
 }
 
 type SkillResourceDetail struct {
@@ -91,3 +99,4 @@ type CatalogResourceEnvelope struct {
 	SkillDetail  *SkillResourceDetail  `json:"skillDetail,omitempty"`
 	MCPDetail    *MCPResourceDetail    `json:"mcpDetail,omitempty"`
 }
+

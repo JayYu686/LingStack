@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../domain/models.dart';
 import 'database/app_database.dart';
 import 'network/sync_api_client.dart';
+import 'repositories/mcp_test_repository.dart';
 import 'repositories/workspace_repository.dart';
 import 'security/secure_secret_store.dart';
 
@@ -23,6 +24,13 @@ final syncApiClientProvider = Provider<SyncApiClient>((ref) => SyncApiClient());
 final secureSecretStoreProvider = Provider<SecureSecretStore>(
   (ref) => const SecureSecretStore(FlutterSecureStorage()),
 );
+
+final mcpTestRepositoryProvider = Provider<McpTestRepository>((ref) {
+  return McpTestRepository(
+    ref.watch(syncApiClientProvider),
+    ref.watch(secureSecretStoreProvider),
+  );
+});
 
 final catalogRefreshTickProvider =
     NotifierProvider<CatalogRefreshTickNotifier, int>(

@@ -131,11 +131,21 @@ func (s *Service) ProbeMCP(ctx context.Context, req domain.McpProbeRequest) (dom
 
 	var decoded struct {
 		Result struct {
-			Capabilities map[string]any `json:"capabilities"`
+			Capabilities    map[string]any `json:"capabilities"`
+			ServerInfo      map[string]any `json:"serverInfo"`
+			ProtocolVersion string         `json:"protocolVersion"`
 		} `json:"result"`
 	}
-	if err := json.Unmarshal(payload, &decoded); err == nil && len(decoded.Result.Capabilities) > 0 {
-		result.Capabilities = decoded.Result.Capabilities
+	if err := json.Unmarshal(payload, &decoded); err == nil {
+		if len(decoded.Result.Capabilities) > 0 {
+			result.Capabilities = decoded.Result.Capabilities
+		}
+		if len(decoded.Result.ServerInfo) > 0 {
+			result.ServerInfo = decoded.Result.ServerInfo
+		}
+		if strings.TrimSpace(decoded.Result.ProtocolVersion) != "" {
+			result.ProtocolVersion = decoded.Result.ProtocolVersion
+		}
 	}
 
 	return result, nil

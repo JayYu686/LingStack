@@ -50,9 +50,9 @@ class BrandBadge extends StatelessWidget {
               ),
               Text(
                 'LingStack',
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: tokens.textMuted,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(color: tokens.textMuted),
               ),
             ],
           ),

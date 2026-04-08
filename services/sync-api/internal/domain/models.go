@@ -113,6 +113,8 @@ type McpProbeResponse struct {
 	StatusCode   int            `json:"statusCode"`
 	BodyPreview  string         `json:"bodyPreview,omitempty"`
 	Capabilities map[string]any `json:"capabilities,omitempty"`
+	ServerInfo   map[string]any `json:"serverInfo,omitempty"`
+	ProtocolVersion string      `json:"protocolVersion,omitempty"`
 	Error        string         `json:"error,omitempty"`
 }
 

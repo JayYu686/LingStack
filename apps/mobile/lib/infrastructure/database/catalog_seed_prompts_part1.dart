@@ -643,10 +643,7 @@ SQL：
 3. 风险提示
 4. 建议下一步验证动作
 ''',
-      variables: [
-        longVar('数据说明'),
-        longVar('业务背景'),
-      ],
+      variables: [longVar('数据说明'), longVar('业务背景')],
       whenToUse: '适合周会汇报、复盘分析和经营数据快读。',
       avoidWhen: '不要把相关性直接说成因果，仍需结合业务验证。',
       exampleInput: '数据说明：注册上涨 20%，付费率下降 5%',

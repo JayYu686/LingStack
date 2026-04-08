@@ -1628,6 +1628,805 @@ const String _mcpSpecsJson = r'''
       "GITHUB_TOKEN"
     ],
     "featured": false
+  },
+  {
+    "id": "mcp-echarts",
+    "title": "ECharts MCP",
+    "category": "development",
+    "tags": [
+      "ECharts",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/hustcc/mcp-echarts",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-mermaid",
+    "title": "Mermaid MCP",
+    "category": "development",
+    "tags": [
+      "Mermaid",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/hustcc/mcp-mermaid",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-unified-diff-mcp",
+    "title": "unified-diff-mcp MCP",
+    "category": "development",
+    "tags": [
+      "unified-diff-mcp",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/gorosun/unified-diff-mcp",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-keycloak",
+    "title": "Keycloak MCP",
+    "category": "development",
+    "tags": [
+      "Keycloak",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/ChristophEnglisch/keycloak-model-context-protocol",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "KEYCLOAK_BASE_URL",
+      "KEYCLOAK_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-semgrep",
+    "title": "Semgrep MCP",
+    "category": "development",
+    "tags": [
+      "Semgrep",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/semgrep/mcp",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-microsoft-entra-id",
+    "title": "Microsoft Entra ID MCP",
+    "category": "development",
+    "tags": [
+      "Microsoft Entra ID",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/hieuttmmo/entraid-mcp-server",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "SERVICE_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-osv",
+    "title": "OSV MCP",
+    "category": "development",
+    "tags": [
+      "OSV",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/StacklokLabs/osv-mcp",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-cdsp",
+    "title": "CDSP MCP",
+    "category": "development",
+    "tags": [
+      "CDSP",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/sanyambassi/ciphertrust-manager-mcp-server",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-cakm",
+    "title": "CAKM MCP",
+    "category": "development",
+    "tags": [
+      "CAKM",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/sanyambassi/thales-cdsp-cakm-mcp-server",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-crdp",
+    "title": "CRDP MCP",
+    "category": "development",
+    "tags": [
+      "CRDP",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/sanyambassi/thales-cdsp-crdp-mcp-server",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-csm",
+    "title": "CSM MCP",
+    "category": "development",
+    "tags": [
+      "CSM",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/sanyambassi/thales-cdsp-csm-mcp-server",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-coreflux-mqtt",
+    "title": "Coreflux MQTT MCP",
+    "category": "development",
+    "tags": [
+      "Coreflux MQTT",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/CorefluxCommunity/CorefluxMCPServer",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-mcp-open-library",
+    "title": "MCP Open Library MCP",
+    "category": "development",
+    "tags": [
+      "MCP Open Library",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/8enSmith/mcp-open-library",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "SERVICE_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-mercado-libre",
+    "title": "Mercado Libre MCP",
+    "category": "development",
+    "tags": [
+      "Mercado Libre",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://mcp.mercadolibre.com/",
+    "transport": "streamable_http",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-bagel",
+    "title": "Bagel MCP",
+    "category": "development",
+    "tags": [
+      "Bagel",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/Extelligence-ai/bagel",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-https-mcp-1mcpserver-com-mcp",
+    "title": "https://mcp.1mcpserver.com/mcp/ MCP",
+    "category": "development",
+    "tags": [
+      "https://mcp.1mcpserver.com/mcp/",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://mcp.1mcpserver.com/mcp/",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-e2b",
+    "title": "E2B MCP",
+    "category": "development",
+    "tags": [
+      "E2B",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://e2b.dev",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-element-fm",
+    "title": "ELEMENT.FM MCP",
+    "category": "development",
+    "tags": [
+      "ELEMENT.FM",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://element.fm",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-exa",
+    "title": "Exa MCP",
+    "category": "development",
+    "tags": [
+      "Exa",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://exa.ai",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-fewsats",
+    "title": "Fewsats MCP",
+    "category": "development",
+    "tags": [
+      "Fewsats",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://fewsats.com",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-firecrawl",
+    "title": "Firecrawl MCP",
+    "category": "development",
+    "tags": [
+      "Firecrawl",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://firecrawl.dev",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-inbox-zero",
+    "title": "Inbox Zero MCP",
+    "category": "development",
+    "tags": [
+      "Inbox Zero",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://www.getinboxzero.com",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-ref-tools",
+    "title": "ref.tools MCP",
+    "category": "development",
+    "tags": [
+      "ref.tools",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://ref.tools/",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-riza",
+    "title": "Riza MCP",
+    "category": "development",
+    "tags": [
+      "Riza",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://riza.io",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-scrapezy",
+    "title": "Scrapezy MCP",
+    "category": "development",
+    "tags": [
+      "Scrapezy",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://scrapezy.com",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-screenshotone",
+    "title": "ScreenshotOne MCP",
+    "category": "development",
+    "tags": [
+      "ScreenshotOne",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://screenshotone.com/",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-supadata",
+    "title": "Supadata MCP",
+    "category": "growth",
+    "tags": [
+      "Supadata",
+      "MCP",
+      "增长",
+      "工具接入"
+    ],
+    "baseUrl": "https://supadata.ai",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-starrocks",
+    "title": "StarRocks MCP",
+    "category": "development",
+    "tags": [
+      "StarRocks",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://www.starrocks.io/",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-thirdweb",
+    "title": "Thirdweb MCP",
+    "category": "development",
+    "tags": [
+      "Thirdweb",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://thirdweb.com/",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-tl-dv",
+    "title": "tl;dv MCP",
+    "category": "development",
+    "tags": [
+      "tl;dv",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://tldv.io",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-trade-agent",
+    "title": "Trade Agent MCP",
+    "category": "development",
+    "tags": [
+      "Trade Agent",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://thetradeagent.ai/",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-unifai-network",
+    "title": "UnifAI Network MCP",
+    "category": "development",
+    "tags": [
+      "UnifAI Network",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://unifai.network",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-urldna",
+    "title": "urlDNA MCP",
+    "category": "development",
+    "tags": [
+      "urlDNA",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://urlDNA.io",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-allinonemcp",
+    "title": "AllInOneMCP MCP",
+    "category": "development",
+    "tags": [
+      "AllInOneMCP",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/particlefuture/MCPDiscovery",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-schemaflow",
+    "title": "SchemaFlow MCP",
+    "category": "development",
+    "tags": [
+      "SchemaFlow",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://schemaflow.dev",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-searxng",
+    "title": "SearXNG MCP",
+    "category": "development",
+    "tags": [
+      "SearXNG",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://docs.searxng.org",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "GITHUB_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-spotify-player",
+    "title": "Spotify Player MCP",
+    "category": "development",
+    "tags": [
+      "Spotify Player",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/vsaez/mcp-spotify-player",
+    "transport": "stdio",
+    "requiredEnvVars": [
+      "SPOTIFY_TOKEN"
+    ],
+    "featured": false
+  },
+  {
+    "id": "mcp-awesome-mcp-clients",
+    "title": "awesome-mcp-clients MCP",
+    "category": "development",
+    "tags": [
+      "awesome-mcp-clients",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/punkpeye/awesome-mcp-clients/",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-ai-gateway",
+    "title": "AI gateway MCP",
+    "category": "development",
+    "tags": [
+      "AI gateway",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://glama.ai/gateway",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-quickstart-to-mcp",
+    "title": "Quickstart to MCP MCP",
+    "category": "development",
+    "tags": [
+      "Quickstart to MCP",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://glama.ai/blog/2024-11-25-model-context-protocol-quickstart",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-reddit-r-mcp",
+    "title": "Reddit: r/mcp MCP",
+    "category": "development",
+    "tags": [
+      "Reddit: r/mcp",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://www.reddit.com/r/mcp",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-microsoft-playwright-mcp",
+    "title": "microsoft/playwright-mcp MCP",
+    "category": "development",
+    "tags": [
+      "microsoft/playwright-mcp",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/microsoft/playwright-mcp",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-flux159-mcp-server-kubernetes",
+    "title": "flux159/mcp-server-kubernetes MCP",
+    "category": "development",
+    "tags": [
+      "flux159/mcp-server-kubernetes",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/Flux159/mcp-server-kubernetes",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-hardik-id-azure-resource-graph-mcp-server",
+    "title": "hardik-id/azure-resource-graph-mcp-server MCP",
+    "category": "development",
+    "tags": [
+      "hardik-id/azure-resource-graph-mcp-server",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/hardik-id/azure-resource-graph-mcp-server",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-jdubois-azure-cli-mcp",
+    "title": "jdubois/azure-cli-mcp MCP",
+    "category": "development",
+    "tags": [
+      "jdubois/azure-cli-mcp",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/jdubois/azure-cli-mcp",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-manusa-kubernetes-mcp-server",
+    "title": "manusa/Kubernetes MCP Server MCP",
+    "category": "development",
+    "tags": [
+      "manusa/Kubernetes MCP Server",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/manusa/kubernetes-mcp-server",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-nwiizo-tfmcp",
+    "title": "nwiizo/tfmcp MCP",
+    "category": "development",
+    "tags": [
+      "nwiizo/tfmcp",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/nwiizo/tfmcp",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-rohitg00-kubectl-mcp-server",
+    "title": "rohitg00/kubectl-mcp-server MCP",
+    "category": "development",
+    "tags": [
+      "rohitg00/kubectl-mcp-server",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/rohitg00/kubectl-mcp-server",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-strowk-mcp-k8s-go",
+    "title": "strowk/mcp-k8s-go MCP",
+    "category": "development",
+    "tags": [
+      "strowk/mcp-k8s-go",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/strowk/mcp-k8s-go",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
+  },
+  {
+    "id": "mcp-thunderboltsid-mcp-nutanix",
+    "title": "thunderboltsid/mcp-nutanix MCP",
+    "category": "development",
+    "tags": [
+      "thunderboltsid/mcp-nutanix",
+      "MCP",
+      "开发",
+      "工具接入"
+    ],
+    "baseUrl": "https://github.com/thunderboltsid/mcp-nutanix",
+    "transport": "stdio",
+    "requiredEnvVars": [],
+    "featured": false
   }
 ]
 ''';
@@ -1641,8 +2440,9 @@ List<McpSeedBundle> buildMcpSeedsExpanded(String stamp) {
 
 McpSeedBundle _buildExpandedMcp(Map<String, dynamic> spec, String stamp) {
   final category = spec['category'] as String? ?? 'development';
-  final envs =
-      List<String>.from(spec['requiredEnvVars'] as List<dynamic>? ?? const []);
+  final envs = List<String>.from(
+    spec['requiredEnvVars'] as List<dynamic>? ?? const [],
+  );
 
   return buildMcpSeed(
     id: spec['id'] as String? ?? '',
@@ -1751,8 +2551,8 @@ String _mcpConfig(Map<String, dynamic> spec, List<String> envs) {
     final headerBlock = envs.isEmpty
         ? ''
         : ',\n      "headers": {\n        "Authorization": "Bearer ' +
-            placeholder +
-            '"\n      }';
+              placeholder +
+              '"\n      }';
     return '''{
   "mcpServers": {
     "$serverKey": {
@@ -1766,12 +2566,10 @@ String _mcpConfig(Map<String, dynamic> spec, List<String> envs) {
   final envBlock = envs.isEmpty
       ? ''
       : ',\n      "env": {\n' +
-          envs
-              .map(
-                (env) => '        "' + env + '": "' + r'${' + env + '}"',
-              )
-              .join(',\n') +
-          '\n      }';
+            envs
+                .map((env) => '        "' + env + '": "' + r'${' + env + '}"')
+                .join(',\n') +
+            '\n      }';
 
   return '''{
   "mcpServers": {

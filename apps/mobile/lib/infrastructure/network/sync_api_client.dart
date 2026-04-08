@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../domain/mcp_test_models.dart';
 import '../database/catalog_seed_types.dart';
 
 class SyncApiClient {
@@ -30,7 +31,9 @@ class SyncApiClient {
   }
 
   Future<OfficialCatalogSeed> fetchCatalogBootstrap() async {
-    final response = await _dio.get<Map<String, dynamic>>('/v1/catalog/bootstrap');
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/v1/catalog/bootstrap',
+    );
     return OfficialCatalogSeed.fromMap(response.data ?? const {});
   }
 
@@ -66,11 +69,19 @@ class SyncApiClient {
     return response.data ?? const {};
   }
 
-  Future<Map<String, dynamic>> probeMcp(Map<String, dynamic> payload) async {
+  Future<McpProbeResult> probeMcp(Map<String, dynamic> payload) async {
     final response = await _dio.post<Map<String, dynamic>>(
       '/v1/mcp/probe',
       data: payload,
     );
-    return response.data ?? const {};
+    return McpProbeResult.fromMap(response.data ?? const {});
+  }
+
+  Future<McpInvokeResult> invokeMcpTest(Map<String, dynamic> payload) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      '/v1/mcp/invoke-test',
+      data: payload,
+    );
+    return McpInvokeResult.fromMap(response.data ?? const {});
   }
 }

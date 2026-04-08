@@ -275,7 +275,7 @@ class _AiCommandBarState extends State<AiCommandBar> {
       return IconButton(
         key: const ValueKey('clear'),
         visualDensity: VisualDensity.compact,
-        tooltip: '清空搜索',
+        tooltip: '娓呯┖鎼滅储',
         onPressed: () {
           widget.controller.clear();
           _focusNode.requestFocus();

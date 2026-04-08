@@ -8,3 +8,11 @@ String renderPromptTemplate(String body, Map<String, String> values) {
     return replacement;
   });
 }
+
+String sanitizeRenderedPrompt(String text) {
+  final withoutPlaceholders = text.replaceAll(RegExp(r'{{\s*[^}]+\s*}}'), '');
+  return withoutPlaceholders
+      .replaceAll(RegExp(r'\n{3,}'), '\n\n')
+      .replaceAll(RegExp(r'[ \t]+\n'), '\n')
+      .trim();
+}

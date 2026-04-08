@@ -1002,6 +1002,1247 @@ const String _skillSpecsJson = r'''
       "增长"
     ],
     "featured": false
+  },
+  {
+    "id": "skill-azure-hosted-copilot-sdk",
+    "title": "Azure Hosted Copilot Sdk",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Azure",
+      "GitHub",
+      "Azure Hosted Copilot Sdk"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-azure-compute",
+    "title": "Azure Compute",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Azure",
+      "Azure Compute"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-azure-cloud-migrate",
+    "title": "Azure Cloud Migrate",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Azure",
+      "Azure Cloud Migrate"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-azure-quotas",
+    "title": "Azure Quotas",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Azure",
+      "Azure Quotas"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-vercel-react-native-skills",
+    "title": "Vercel React Native Skills",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "React",
+      "Vercel",
+      "Agent"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-azure-upgrade",
+    "title": "Azure Upgrade",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Azure",
+      "Azure Upgrade"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-supabase-postgres-best-practices",
+    "title": "Supabase Postgres Best Practices",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Supabase Postgres Best Practices"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-receiving-code-review",
+    "title": "Receiving Code Review",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Receiving Code Review"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-analytics-tracking",
+    "title": "Analytics Tracking",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Analytics Tracking"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-azure-enterprise-infra-planner",
+    "title": "Azure Enterprise Infra Planner",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Azure",
+      "Azure Enterprise Infra Planner"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-canvas-design",
+    "title": "Canvas Design",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Canvas Design"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-writing-skills",
+    "title": "Writing Skills",
+    "category": "writing",
+    "tags": [
+      "Skill",
+      "写作表达",
+      "方法",
+      "Writing Skills"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-launch-strategy",
+    "title": "Launch Strategy",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Launch Strategy"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-schema-markup",
+    "title": "Schema Markup",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Schema Markup"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-email-sequence",
+    "title": "Email Sequence",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Email Sequence"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-paid-ads",
+    "title": "Paid Ads",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Paid Ads"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-competitor-alternatives",
+    "title": "Competitor Alternatives",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Competitor Alternatives"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-using-git-worktrees",
+    "title": "Using Git Worktrees",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Using Git Worktrees"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-onboarding-cro",
+    "title": "Onboarding Cro",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Onboarding Cro"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-dispatching-parallel-agents",
+    "title": "Dispatching Parallel Agents",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Dispatching Parallel Agents"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-form-cro",
+    "title": "Form Cro",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Form Cro"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-tailwind-design-system",
+    "title": "Tailwind Design System",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "设计",
+      "Tailwind Design System"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-referral-program",
+    "title": "Referral Program",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Referral Program"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-free-tool-strategy",
+    "title": "Free Tool Strategy",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Free Tool Strategy"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-react-3acomponents",
+    "title": "React%3acomponents",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "React",
+      "React%3acomponents"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-signup-flow-cro",
+    "title": "Signup Flow Cro",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Signup Flow Cro"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-ab-test-setup",
+    "title": "Ab Test Setup",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Ab Test Setup"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-paywall-upgrade-cro",
+    "title": "Paywall Upgrade Cro",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Paywall Upgrade Cro"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-popup-cro",
+    "title": "Popup Cro",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Popup Cro"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-finishing-a-development-branch",
+    "title": "Finishing A Development Branch",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Finishing A Development Branch"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-design-md",
+    "title": "Design Md",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Design Md"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-building-native-ui",
+    "title": "Building Native UI",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Building Native UI"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-stitch-loop",
+    "title": "Stitch Loop",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Stitch Loop"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-enhance-prompt",
+    "title": "Enhance Prompt",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Enhance Prompt"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-algorithmic-art",
+    "title": "Algorithmic Art",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Algorithmic Art"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-web-artifacts-builder",
+    "title": "Web Artifacts Builder",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Web Artifacts Builder"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-doc-coauthoring",
+    "title": "Doc Coauthoring",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "鉴权",
+      "Doc Coauthoring"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-theme-factory",
+    "title": "Theme Factory",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Theme Factory"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-firecrawl",
+    "title": "Firecrawl",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Firecrawl"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-ai-seo",
+    "title": "AI SEO",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "SEO",
+      "AI SEO"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-shadcn-ui",
+    "title": "Shadcn UI",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Shadcn UI"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-brand-guidelines",
+    "title": "Brand Guidelines",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Brand Guidelines"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-self-improving-agent",
+    "title": "Self Improving Agent",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Self Improving Agent"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-git-commit",
+    "title": "Git Commit",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "GitHub",
+      "Git Commit"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-typescript-advanced-types",
+    "title": "Typescript Advanced Types",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Typescript Advanced Types"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-cold-email",
+    "title": "Cold Email",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Cold Email"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-ad-creative",
+    "title": "Ad Creative",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Ad Creative"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-seo-geo",
+    "title": "SEO Geo",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "SEO",
+      "SEO Geo"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-churn-prevention",
+    "title": "Churn Prevention",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Churn Prevention"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-internal-comms",
+    "title": "Internal Comms",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Internal Comms"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-playwright-best-practices",
+    "title": "Playwright Best Practices",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Playwright Best Practices"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-deploy-to-vercel",
+    "title": "Deploy To Vercel",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Vercel",
+      "Agent",
+      "Deploy To Vercel"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-arrange",
+    "title": "Arrange",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Arrange"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-native-data-fetching",
+    "title": "Native Data Fetching",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Native Data Fetching"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-typeset",
+    "title": "Typeset",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Typeset"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-web-search",
+    "title": "Web Search",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Web Search"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-slack-gif-creator",
+    "title": "Slack Gif Creator",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Slack Gif Creator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-template-skill",
+    "title": "Template Skill",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Template Skill"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-overdrive",
+    "title": "Overdrive",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Overdrive"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-site-architecture",
+    "title": "Site Architecture",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Site Architecture"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-azure-kubernetes",
+    "title": "Azure Kubernetes",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Azure",
+      "Azure Kubernetes"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-sales-enablement",
+    "title": "Sales Enablement",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Sales Enablement"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-baoyu-post-to-wechat",
+    "title": "Baoyu Post To Wechat",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Baoyu Post To Wechat"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-revops",
+    "title": "Revops",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "Revops"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-pexo-agent",
+    "title": "Pexo Agent",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Pexo Agent"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-upgrading-expo",
+    "title": "Upgrading Expo",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Upgrading Expo"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-dogfood",
+    "title": "Dogfood",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Vercel",
+      "Agent",
+      "浏览器"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-baoyu-image-gen",
+    "title": "Baoyu Image Gen",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "图片",
+      "Baoyu Image Gen"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-neon-postgres",
+    "title": "Neon Postgres",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Neon Postgres"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-gh-cli",
+    "title": "Gh CLI",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "GitHub",
+      "Gh CLI"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-expo-tailwind-setup",
+    "title": "Expo Tailwind Setup",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Expo Tailwind Setup"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-python-executor",
+    "title": "Python Executor",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Python Executor"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-ai-sdk",
+    "title": "AI Sdk",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Vercel",
+      "AI Sdk"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-backlink-analyzer",
+    "title": "Backlink Analyzer",
+    "category": "growth",
+    "tags": [
+      "Skill",
+      "运营增长",
+      "策略",
+      "SEO",
+      "Backlink Analyzer"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-security-best-practices",
+    "title": "Security Best Practices",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Security Best Practices"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-python-sdk",
+    "title": "Python Sdk",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Python Sdk"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-chat-ui",
+    "title": "Chat UI",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Chat UI"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-javascript-sdk",
+    "title": "Javascript Sdk",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Javascript Sdk"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-agent-ui",
+    "title": "Agent UI",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Agent UI"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-widgets-ui",
+    "title": "Widgets UI",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Widgets UI"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-tools-ui",
+    "title": "Tools UI",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Tools UI"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-data-analysis",
+    "title": "Data Analysis",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Data Analysis"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-turborepo",
+    "title": "Turborepo",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Vercel",
+      "Turborepo"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-baoyu-cover-image",
+    "title": "Baoyu Cover Image",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "图片",
+      "Baoyu Cover Image"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-remotion",
+    "title": "Remotion",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "Remotion"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-baoyu-xhs-images",
+    "title": "Baoyu Xhs Images",
+    "category": "content",
+    "tags": [
+      "Skill",
+      "内容创作",
+      "设计",
+      "图片",
+      "Baoyu Xhs Images"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-baoyu-article-illustrator",
+    "title": "Baoyu Article Illustrator",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Baoyu Article Illustrator"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-expo-dev-client",
+    "title": "Expo Dev Client",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Expo Dev Client"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-vue-best-practices",
+    "title": "Vue Best Practices",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Vue Best Practices"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-expo-deployment",
+    "title": "Expo Deployment",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Expo Deployment"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-baoyu-slide-deck",
+    "title": "Baoyu Slide Deck",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Baoyu Slide Deck"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-expo-cicd-workflows",
+    "title": "Expo Cicd Workflows",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Expo Cicd Workflows"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-next-cache-components",
+    "title": "Next Cache Components",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Next.js",
+      "Vercel",
+      "Next Cache Components"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-api-design-principles",
+    "title": "API Design Principles",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "设计",
+      "API Design Principles"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-expo-api-routes",
+    "title": "Expo API Routes",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Expo API Routes"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-python-performance-optimization",
+    "title": "Python Performance Optimization",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Python Performance Optimization"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-nodejs-backend-patterns",
+    "title": "Node.js Backend Patterns",
+    "category": "development",
+    "tags": [
+      "Skill",
+      "开发编程",
+      "工作流",
+      "Agent",
+      "Node.js Backend Patterns"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-vue",
+    "title": "Vue",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Vue"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-baoyu-infographic",
+    "title": "Baoyu Infographic",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Baoyu Infographic"
+    ],
+    "featured": false
+  },
+  {
+    "id": "skill-baoyu-post-to-x",
+    "title": "Baoyu Post To X",
+    "category": "office",
+    "tags": [
+      "Skill",
+      "办公协作",
+      "复用",
+      "Baoyu Post To X"
+    ],
+    "featured": false
   }
 ]
 ''';
@@ -1028,13 +2269,10 @@ SkillSeedBundle _buildExpandedSkill(Map<String, dynamic> spec, String stamp) {
     tags: tags,
     capabilitySummary: _skillSummary(title, category),
     inputRequirements: _skillInputs(category),
-    usageSteps: const [
-      '先确认任务目标和边界',
-      '贴入原始材料并补充限制条件',
-      '先复核结果，再沉淀成自己的版本',
-    ],
+    usageSteps: const ['先确认任务目标和边界', '贴入原始材料并补充限制条件', '先复核结果，再沉淀成自己的版本'],
     supportedModels: const ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'],
-    copyPayload: '''技能名：$title
+    copyPayload:
+        '''技能名：$title
 适用场景：${_skillScenario(category)}
 用途：${_skillSummary(title, category)}
 推荐输入：context, materials, goal
@@ -1102,7 +2340,9 @@ String _skillScenario(String category) {
 
 ResourceDifficulty _skillDifficulty(String category, String title) {
   final advanced =
-      title.contains('Azure') || title.contains('MCP') || title.contains('Agent');
+      title.contains('Azure') ||
+      title.contains('MCP') ||
+      title.contains('Agent');
   if (advanced || category == 'development' || category == 'growth') {
     return ResourceDifficulty.intermediate;
   }
